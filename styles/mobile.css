@@ -1,0 +1,61 @@
+/* ==========================================================================
+   Responsive & Mobile 9:16 Stylesheet
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .book-viewport {
+    height: calc(100vh - 122px);
+    max-width: 100%;
+    padding: 0 8px;
+  }
+
+  .book-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 42% 58%;
+    height: 100%;
+  }
+
+  .book-spine {
+    display: none;
+  }
+
+  .book-page-right {
+    grid-row: 1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .book-page-left {
+    grid-row: 2;
+    padding: 20px 22px;
+  }
+
+  .side-nav-btn {
+    display: none;
+  }
+
+  .app-header-nav {
+    padding: 0 16px;
+    height: 56px;
+  }
+
+  .brand-title {
+    font-size: 1rem;
+  }
+
+  .brand-subtitle {
+    display: none;
+  }
+
+  .floating-audio-bar {
+    padding: 0 16px;
+    height: 52px;
+  }
+
+  .progress-track-wrapper {
+    margin: 0 12px;
+  }
+
+  .toc-grid-container {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+}

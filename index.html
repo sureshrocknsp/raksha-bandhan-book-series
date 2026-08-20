@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+  <title>రక్షాబంధన్ — ఒక దారం చెప్పే మాట | 3D సినిమాటిక్ కథా పుస్తకం</title>
+  
+  <meta name="description" content="రక్షాబంధన్: ఒక దారం చెప్పే మాట — భావోద్వేగ 3D సినిమాటిక్ తెలుగు డిజిటల్ కథా పుస్తకం (రచన: సురేష్ తోట)." />
+  <meta property="og:title" content="రక్షాబంధన్ — ఒక దారం చెప్పే మాట" />
+  <meta property="og:description" content="భావోద్వేగ 3D సినిమాటిక్ తెలుగు డిజిటల్ కథా పుస్తకం" />
+  <meta property="og:type" content="book" />
+
+  <!-- Google Fonts: Noto Serif Telugu, Noto Sans Telugu, Cinzel, Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Noto+Sans+Telugu:wght@400;500;600;700;800&family=Noto+Serif+Telugu:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <!-- Three.js for Real-time 3D Particle & Parallax Cinema Engine -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <style>
+    /* ==========================================================================
+       CSS Variables & Design Tokens
+       ========================================================================== */
+    :root {
+      --font-serif: "Noto Serif Telugu", Georgia, serif;
+      --font-sans: "Noto Sans Telugu", -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-ui: "Outfit", "Noto Sans Telugu", sans-serif;
+      --font-display: "Cinzel", "Noto Serif Telugu", serif;
+
+      --gold-primary: #f59e0b;
+      --gold-light: #fef08a;
+      --gold-glow: #fcd34d;
+      --gold-dark: #b45309;
+      --saffron-red: #dc2626;
+      --saffron-orange: #ea580c;
+
+      --bg-space: #06070a;
+      --bg-card: #0d121f;
+      --text-primary: #f8fafc;
+      --text-secondary: #e2e8f0;
+      --text-muted: #94a3b8;
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 24px;
+      --radius-full: 9999px;
+
+      --sat: env(safe-area-inset-top, 0px);
+      --sab: env(safe-area-inset-bottom, 0px);
+      --sal: env(safe-area-inset-left, 0px);
+      --sar: env(safe-area-inset-right, 0px);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: var(--bg-space);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      overflow-x: hidden;
+      user-select: none;
+    }
+
+    /* Outer Application Container */
+    .app {
+      min-height: 100vh;
+      min-height: -webkit-fill-available;
+      position: relative;
+      background: radial-gradient(circle at 75% 30%, #2e1a0b 0%, #120e14 45%, #050608 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow-x: hidden;
+    }
+
+    /* Ambient Background Layer */
+    .bg {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(4,5,7,.96) 0%, rgba(4,5,7,.82) 40%, rgba(4,5,7,.3) 78%, rgba(4,5,7,.6) 100%),
+                  radial-gradient(circle at 75% 50%, rgba(245, 158, 11, .25), transparent 42%);
+      transition: background 0.8s ease;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Floating Golden Particles */
+    .particles {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #f6d79a;
+      opacity: 0.35;
+      animation: float 8s infinite ease-in-out;
+    }
+    @keyframes float {
+      50% { transform: translateY(-50px); opacity: 0.75; }
+      100% { transform: translateY(0); opacity: 0.25; }
+    }
+
+    /* Top Navigation Header */
+    .top-bar {
+      position: relative;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: calc(14px + var(--sat)) calc(5vw + var(--sar)) 0 calc(5vw + var(--sal));
+      gap: 12px;
+      flex-wrap: nowrap;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+    .brand-icon {
+      width: 30px;
+      height: 30px;
+      min-width: 30px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-primary), var(--saffron-red));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      box-shadow: 0 0 16px rgba(245, 158, 11, 0.6);
+      flex-shrink: 0;
+    }
+    .brand-title-group {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .brand-title {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: #fffbeb;
+      letter-spacing: 0.5px;
+    }
+    .brand-author {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      color: var(--gold-glow);
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    /* Universal Button Styles */
+    button {
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      background: rgba(20, 20, 25, 0.75);
+      color: #fff;
+      padding: 9px 18px;
+      border-radius: var(--radius-full);
+      font-family: var(--font-ui);
+      font-size: 0.88rem;
+      font-weight: 500;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      touch-action: manipulation;
+    }
+    button:hover {
+      background: rgba(245, 158, 11, 0.22);
+      border-color: var(--gold-primary);
+      color: var(--gold-light);
+      transform: translateY(-1px);
+    }
+    button:active {
+      transform: scale(0.97);
+    }
+    button:disabled {
+      opacity: 0.25;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* ==========================================================================
+       Main Content Grid
+       ========================================================================== */
+    .content {
+      position: relative;
+      z-index: 10;
+      flex: 1;
+      display: grid;
+      grid-template-columns: 46% 54%;
+      gap: 3.5%;
+      padding: 2vh calc(5vw + var(--sar)) 2vh calc(5vw + var(--sal));
+      align-items: center;
+      max-width: 1560px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Left Column: Telugu Story Narrative */
+    .text {
+      align-self: center;
+      max-height: 75vh;
+      overflow-y: auto;
+      padding-right: 2vw;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(245, 158, 11, 0.3) transparent;
+    }
+    .text::-webkit-scrollbar { width: 4px; }
+    .text::-webkit-scrollbar-thumb { background: rgba(245, 158, 11, 0.3); border-radius: 4px; }
+
+    .kicker {
+      font-family: var(--font-ui);
+      font-size: 0.88rem;
+      letter-spacing: 0.15em;
+      color: #f2c98c;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+    }
+    h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 3vw, 3.4rem);
+      line-height: 1.25;
+      margin: 0 0 0.8rem;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.6);
+    }
+    .lead {
+      font-family: var(--font-serif);
+      font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+      color: #fbd38d;
+      font-weight: 600;
+      margin: 0.6rem 0 1.2rem 0;
+      line-height: 1.5;
+    }
+    p {
+      font-family: var(--font-serif);
+      font-size: clamp(1rem, 1.2vw, 1.18rem);
+      line-height: 1.9;
+      margin: 0.45rem 0;
+      color: var(--text-secondary);
+    }
+    .quote {
+      font-family: var(--font-serif);
+      font-size: clamp(1.12rem, 1.55vw, 1.55rem);
+      font-weight: 700;
+      color: #ffd996;
+      margin: 1.2rem 0;
+      padding: 14px 20px;
+      background: rgba(245, 158, 11, 0.08);
+      border-left: 3.5px solid var(--gold-primary);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      line-height: 1.65;
+    }
+
+    /* Right Column: 3D Cinematic Scene Card */
+    .scene {
+      align-self: center;
+      height: 74vh;
+      min-height: 440px;
+      border-radius: var(--radius-lg);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(245, 158, 11, 0.28);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.75), 0 0 35px rgba(245, 158, 11, 0.12);
+      background: #07090e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .scene-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.4s ease, transform 0.6s ease;
+      z-index: 1;
+    }
+
+    .three-canvas-container {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .scene-overlay-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, transparent 40%, rgba(0,0,0,0.65) 100%);
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .scene-label {
+      position: absolute;
+      bottom: 20px;
+      left: 22px;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(4, 6, 12, 0.78);
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #f5d49f;
+      font-size: 0.82rem;
+      font-family: var(--font-ui);
+      backdrop-filter: blur(10px);
+    }
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold-primary);
+      box-shadow: 0 0 8px var(--gold-primary);
+    }
+
+    .prompt-btn {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      z-index: 4;
+      padding: 6px 14px;
+      font-size: 0.8rem;
+      background: rgba(245, 158, 11, 0.2);
+      border-color: rgba(245, 158, 11, 0.4);
+    }
+
+    /* Bottom Navigation Bar */
+    .nav {
+      position: relative;
+      z-index: 20;
+      padding: 0 calc(5vw + var(--sar)) calc(20px + var(--sab)) calc(5vw + var(--sal));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1560px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .progress-track {
+      flex: 1;
+      max-width: 440px;
+      margin: 0 20px;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold-primary), var(--saffron-orange));
+      width: 0%;
+      transition: width 0.35s ease;
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.6);
+    }
+    .page-indicator {
+      font-family: var(--font-ui);
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      font-weight: 600;
+      min-width: 85px;
+      text-align: center;
+    }
+
+    .hint {
+      position: absolute;
+      bottom: calc(62px + var(--sab));
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 15;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-family: var(--font-ui);
+      letter-spacing: 0.5px;
+      pointer-events: none;
+    }
+
+    /* ==========================================================================
+       Modals (TOC & Prompt Inspector)
+       ========================================================================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(3, 5, 10, 0.85);
+      backdrop-filter: blur(14px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      z-index: 100;
+    }
+    .modal-overlay.active { display: flex; }
+
+    .modal-card {
+      width: 100%;
+      max-width: 740px;
+      max-height: 84vh;
+      background: #0f172a;
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: var(--radius-md);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.85);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .modal-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .modal-header h3 {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      color: #fffbeb;
+    }
+    .modal-close {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: transparent;
+      color: var(--text-muted);
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+    .modal-close:hover { background: var(--saffron-red); color: #fff; border-color: var(--saffron-red); }
+
+    .modal-body {
+      padding: 22px 24px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 14px;
+    }
+    .toc-item {
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .toc-item:hover, .toc-item.active {
+      background: rgba(245, 158, 11, 0.15);
+      border-color: var(--gold-primary);
+      transform: translateY(-2px);
+    }
+    .toc-item img {
+      width: 100%;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .toc-item-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #f8fafc;
+      line-height: 1.3;
+      font-family: var(--font-serif);
+    }
+    .toc-item-page {
+      font-size: 0.72rem;
+      color: var(--gold-primary);
+      font-family: var(--font-ui);
+      font-weight: 600;
+    }
+
+    .prompt-box {
+      margin-bottom: 16px;
+    }
+    .prompt-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      font-size: 0.82rem;
+      color: var(--gold-glow);
+      font-family: var(--font-ui);
+    }
+    .prompt-textarea {
+      width: 100%;
+      padding: 12px;
+      background: #030712;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-sm);
+      color: var(--text-secondary);
+      font-family: monospace;
+      font-size: 0.82rem;
+      line-height: 1.5;
+      resize: none;
+    }
+
+    /* ==========================================================================
+       RESPONSIVE BREAKPOINTS (Intentional Device Layouts)
+       ========================================================================== */
+
+    /* 1. Large Desktop (1440px and above) */
+    @media (min-width: 1440px) {
+      .content {
+        grid-template-columns: 45% 55%;
+        gap: 4%;
+        padding-top: 3vh;
+        padding-bottom: 3vh;
+      }
+      .scene {
+        height: 76vh;
+        max-height: 720px;
+      }
+      .text {
+        max-height: 76vh;
+      }
+      h1 { font-size: 3.2rem; }
+      p { font-size: 1.18rem; line-height: 1.95; }
+    }
+
+    /* 2. Laptop (1024px to 1439px) */
+    @media (min-width: 1024px) and (max-width: 1439px) {
+      .content {
+        grid-template-columns: 47% 53%;
+        gap: 3%;
+      }
+      .scene {
+        height: 72vh;
+        min-height: 420px;
+      }
+      h1 { font-size: 2.5rem; }
+      p { font-size: 1.05rem; }
+    }
+
+    /* 3. Tablet Landscape (768px to 1023px) */
+    @media (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {
+      .content {
+        grid-template-columns: 46% 54%;
+        gap: 2.5%;
+        padding: 1vh calc(4vw + var(--sar)) 1vh calc(4vw + var(--sal));
+      }
+      .scene {
+        height: 70vh;
+        min-height: 380px;
+      }
+      .text {
+        max-height: 70vh;
+      }
+      h1 { font-size: 2rem; }
+      .lead { font-size: 1.15rem; }
+      p { font-size: 0.98rem; line-height: 1.75; }
+      .top-bar { padding-top: 8px; }
+      .nav { padding-bottom: 12px; }
+    }
+
+    /* 4. Tablet Portrait (600px to 767px or Portrait Tablet) */
+    @media (min-width: 600px) and (max-width: 1023px) and (orientation: portrait), (min-width: 600px) and (max-width: 767px) {
+      body { overflow-y: auto; }
+      .app { height: auto; min-height: 100vh; }
+      .content {
+        grid-template-columns: 1fr;
+        padding: 1.5vh calc(5vw + var(--sar)) 100px calc(5vw + var(--sal));
+        gap: 24px;
+      }
+      .scene {
+        height: 48vh;
+        min-height: 380px;
+        order: 1;
+      }
+      .text {
+        max-height: none;
+        order: 2;
+        padding-right: 0;
+      }
+      .hint { display: none; }
+      .nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(3, 7, 18, 0.88);
+        backdrop-filter: blur(16px);
+        padding: 12px calc(5vw + var(--sar)) calc(12px + var(--sab)) calc(5vw + var(--sal));
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+    }
+
+    /* 5. Mobile (390px to 599px) */
+    @media (max-width: 599px) {
+      body { overflow-y: auto; }
+      .app { height: auto; min-height: 100vh; }
+      
+      .top-bar {
+        padding: calc(10px + var(--sat)) calc(4vw + var(--sar)) 0 calc(4vw + var(--sal));
+      }
+      .brand-author { display: none; }
+      .brand-title { font-size: 1rem; }
+      .brand-icon { width: 26px; height: 26px; font-size: 13px; }
+
+      .content {
+        grid-template-columns: 1fr;
+        padding: 1.5vh calc(4vw + var(--sar)) calc(90px + var(--sab)) calc(4vw + var(--sal));
+        gap: 18px;
+      }
+      
+      /* Mobile Story Order: Scene -> Title -> Story Text -> Bottom Nav */
+      .scene {
+        height: 45vh;
+        min-height: 300px;
+        border-radius: 18px;
+        order: 1;
+      }
+      .text {
+        max-height: none;
+        order: 2;
+        padding-right: 0;
+      }
+
+      .kicker { font-size: 0.78rem; margin-bottom: 0.5rem; }
+      h1 { font-size: 1.8rem; line-height: 1.3; }
+      .lead { font-size: 1.15rem; margin: 0.4rem 0 0.9rem; }
+      p { font-size: 1rem; line-height: 1.8; margin: 0.4rem 0; }
+      .quote { font-size: 1.12rem; padding: 12px 14px; margin: 1rem 0; }
+
+      .hint { display: none; }
+
+      .nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(4, 6, 12, 0.9);
+        backdrop-filter: blur(18px);
+        padding: 10px calc(4vw + var(--sar)) calc(10px + var(--sab)) calc(4vw + var(--sal));
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .nav button {
+        padding: 8px 14px;
+        font-size: 0.84rem;
+      }
+      .progress-track { margin: 0 10px; }
+      .page-indicator { font-size: 0.82rem; min-width: 70px; }
+
+      .toc-grid {
+        grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+        gap: 10px;
+      }
+      .toc-item img { height: 80px; }
+    }
+
+    /* 6. Small Mobile (below 390px — e.g. iPhone SE 375px, Galaxy 360px) */
+    @media (max-width: 389px) {
+      .content {
+        padding: 1vh 3.5vw calc(85px + var(--sab)) 3.5vw;
+        gap: 14px;
+      }
+      .scene {
+        height: 40vh;
+        min-height: 260px;
+        border-radius: 14px;
+      }
+      h1 { font-size: 1.55rem; }
+      .lead { font-size: 1.05rem; }
+      p { font-size: 0.95rem; line-height: 1.75; }
+      .quote { font-size: 1rem; padding: 10px 12px; }
+
+      .top-actions button {
+        padding: 6px 10px;
+        font-size: 0.78rem;
+      }
+      .nav button {
+        padding: 7px 10px;
+        font-size: 0.78rem;
+      }
+      .page-indicator { font-size: 0.78rem; min-width: 62px; }
+    }
+
+    /* Accessibility: Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      .particle { animation: none; }
+      .scene-img, .progress-fill { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="app">
+  <div class="bg" id="bg"></div>
+  <div class="particles" id="particles"></div>
+
+  <!-- Top Navigation Header -->
+  <header class="top-bar">
+    <div class="brand">
+      <div class="brand-icon">✤</div>
+      <div class="brand-title-group">
+        <span class="brand-title">రక్షాబంధన్</span>
+        <span class="brand-author">• ఒక దారం చెప్పే మాట</span>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button onclick="toggleTOC()" aria-label="విషయ సూచిక చూడండి">📑 <span class="btn-text-full">విషయ సూచిక</span></button>
+      <button id="audioBtn" onclick="toggleAudio()" aria-label="సంగీతం ఆన్ లేదా ఆఫ్ చేయండి">🎵 <span class="btn-text-full">సంగీతం</span></button>
+      <button onclick="toggleFullscreen()" aria-label="పూర్తి స్క్రీన్">⛶</button>
+    </div>
+  </header>
+
+  <!-- Main Responsive Grid -->
+  <main class="content">
+    <section class="text" id="text" aria-live="polite"></section>
+    
+    <section class="scene" id="sceneContainer">
+      <img id="sceneImg" class="scene-img" src="assets/images/page_1.png" alt="3D Cinematic Animated Illustration" />
+      <div class="three-canvas-container" id="threeCanvasMount"></div>
+      <div class="scene-overlay-gradient"></div>
+      <div class="scene-label">
+        <span class="badge-dot"></span>
+        <span id="sceneLabel">3D సినిమాటిక్ దృశ్యం • పేజీ 1</span>
+      </div>
+      <button class="prompt-btn" onclick="openPromptModal()" aria-label="3D AI ప్రాంప్ట్ చూడండి">✨ 3D ప్రాంప్ట్</button>
+    </section>
+  </main>
+
+  <!-- Bottom Navigation HUD -->
+  <nav class="nav" aria-label="పుస్తక పేజీల నావిగేషన్">
+    <button id="prev" onclick="move(-1)" aria-label="మునుపటి పేజీ">← ముందు</button>
+    <div class="progress-track" onclick="handleTrackClick(event)" title="పేజీకి వెళ్లడానికి క్లిక్ చేయండి">
+      <div class="progress-fill" id="progress"></div>
+    </div>
+    <span class="page-indicator" id="page">పేజీ 1 / 26</span>
+    <button id="next" onclick="move(1)" aria-label="తర్వాతి పేజీ">తర్వాత →</button>
+  </nav>
+  
+  <div class="hint">← → keys / touch swipe to navigate pages</div>
+</div>
+
+<!-- Table of Contents Modal -->
+<div class="modal-overlay" id="tocModal" role="dialog" aria-modal="true" aria-label="విషయ సూచిక">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3>📑 విషయ సూచిక (26 అధ్యాయాలు)</h3>
+      <button class="modal-close" onclick="toggleTOC()" aria-label="మూసివేయండి">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="toc-grid" id="tocGrid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 3D AI Prompt Inspector Modal -->
+<div class="modal-overlay" id="promptModal" role="dialog" aria-modal="true" aria-label="3D AI ప్రాంప్ట్ ఇన్‌స్పెక్టర్">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 id="promptModalTitle">✨ 3D AI ప్రాంప్ట్ ఇన్‌స్పెక్టర్</h3>
+      <button class="modal-close" onclick="closePromptModal()" aria-label="మూసివేయండి">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="prompt-box">
+        <div class="prompt-header">
+          <span>3D సినిమాటిక్ ఇమేజ్ ప్రాంప్ట్ (Page Prompt)</span>
+          <button onclick="copyPrompt()">📋 కాపీ చేయండి</button>
+        </div>
+        <textarea class="prompt-textarea" id="promptText" rows="6" readonly></textarea>
+      </div>
+
+      <div class="prompt-box">
+        <div class="prompt-header">
+          <span>గ్లోబల్ నెగెటివ్ ప్రాంప్ట్ (Negative Prompt)</span>
+          <button onclick="copyNegPrompt()">📋 కాపీ చేయండి</button>
+        </div>
+        <textarea class="prompt-textarea" id="negPromptText" rows="4" readonly></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const GLOBAL_NEGATIVE_PROMPT = "flat 2D illustration, cheap cartoon, anime, childish cartoon, plastic skin, deformed face, distorted eyes, bad anatomy, extra fingers, missing fingers, distorted hands, duplicate characters, inconsistent faces, inconsistent age, incorrect Indian clothing, incorrect cultural elements, blurry image, low resolution, oversaturated colors, excessive dramatic effects, war violence, blood, gore, graphic injury, political propaganda, text, letters, subtitles, watermark, logo";
+
+const pages = [
+  {
+    title: "రక్షాబంధన్",
+    subtitle: "ఒక దారం చెప్పే మాట",
+    text: ["బంధం అంటే రక్షించడం మాత్రమే కాదు…", "తోడుగా ఉండడం."],
+    img: "assets/images/page_1.png",
+    prompt: "Premium cinematic 3D animated storybook scene of a young Indian brother and sister celebrating Raksha Bandhan inside a warm traditional Indian home. Sister holding a handmade rakhi, puja thali with flowers, kumkum, rice, sweets and diya, subtle marigold decorations, golden morning sunlight, realistic Indian characters, expressive faces, detailed clothing, volumetric light, cinematic depth of field, high-end animated feature film quality, 4K, no text, no watermark."
+  },
+  {
+    title: "రాఖీ కట్టిన తర్వాత ఏమవుతుంది?",
+    subtitle: "మన బాధ్యతను గుర్తు చేస్తుందా?",
+    text: ["రాఖీ కట్టారు.", "తిలకం పెట్టారు.", "మిఠాయి తినిపించారు.", "బహుమతులు ఇచ్చారు.", "ఫోటోలు తీసుకున్నారు.", "అందరూ నవ్వుకున్నారు.", "కానీ...", "రాఖీ కట్టిన తర్వాత ఆ దారం ఏం చేస్తుంది?", "అది నిజంగా ఎవరినైనా రక్షిస్తుందా?", "లేదా...", "మనకు మన బాధ్యతను గుర్తు చేస్తుందా?"],
+    img: "assets/images/page_2.png",
+    prompt: "Close cinematic 3D shot of an Indian sister tying a colorful traditional rakhi around her older brother's wrist. Tilak, sweets, flowers, diya and family softly blurred behind. Focus on hands, rakhi and emotional faces, warm indoor light, realistic Indian family home, premium animated feature-film quality, 4K, no text."
+  },
+  {
+    title: "రక్షణ అంటే కేవలం కాపాడటమేనా?",
+    subtitle: "రక్షణ అంటే అండగా ఉండటం",
+    text: ["మన చిన్నతనంలో...", "“అన్నయ్య చెల్లిని కాపాడాలి”", "అని వింటూ పెరిగి ఉండవచ్చు.", "అది రక్షాబంధన్లోని ఒక సాంప్రదాయ భావన.", "కానీ మనం పెద్దవాళ్లమయ్యాక జీవితం మనకు మరో విషయం నేర్పుతుంది.", "కొన్నిసార్లు...", "అన్నయ్యకు చెల్లి అవసరం అవుతుంది.", "చెల్లికి అన్నయ్య అవసరం అవుతుంది.", "ఇద్దరికీ ఒకరి మాట మరొకరికి అవసరం అవుతుంది.", "అందుకే...", "రక్షణ అనేది కేవలం బలం కాదు.", "రక్షణ అంటే అండగా ఉండటం."],
+    img: "assets/images/page_3.png",
+    prompt: "Emotional cinematic 3D scene showing an Indian brother and sister supporting each other equally. Brother gently supports sister while sister holds his hand and comforts him. Symbolic warm protective glow, traditional Indian home, sunset light, realistic expressive characters, premium cinematic 3D animation, 4K, no text."
+  },
+  {
+    title: "చెల్లి కూడా రక్షించగలదు",
+    subtitle: "అతని కష్టంలో ధైర్యం చెప్పడం",
+    text: ["ఒక అన్నయ్య బయట ప్రపంచంతో పోరాడుతూ ఉండవచ్చు.", "కానీ ఇంటికి వచ్చినప్పుడు...", "తన చెల్లితో మాట్లాడవచ్చు.", "ఆమె మాట వినవచ్చు.", "తన బాధను పంచుకోవచ్చు.", "అలాగే...", "ఒక చెల్లి తన అన్నయ్య కష్టాల్లో ఉన్నప్పుడు అతనికి ధైర్యం చెప్పవచ్చు.", "అతని వైఫల్యంలో అతనితో ఉండవచ్చు.", "అతని విజయాన్ని తన విజయంలా ఆనందించవచ్చు.", "అది కూడా ఒక రకమైన రక్షణే."],
+    img: "assets/images/page_4.png",
+    prompt: "Quiet emotional cinematic 3D animated scene inside an Indian home. Older brother returns after a difficult day and sits quietly; younger sister listens and gently places her hand on his shoulder. Warm evening light, family photographs, subtle expressions, realistic Indian characters, premium animated film quality, 4K, no text."
+  },
+  {
+    title: "బంధం అంటే బాధ్యత",
+    subtitle: "బంధం యొక్క అసలు విలువ",
+    text: ["ప్రేమ అనేది ఒక భావన.", "కానీ బంధం...", "బాధ్యతను కూడా తీసుకువస్తుంది.", "“అతను నా అన్నయ్య.”", "“ఆమె నా చెల్లి.”", "అని చెప్పడం మాత్రమే కాదు.", "అవసరమైనప్పుడు:", "“నేను ఏమి చేయగలను?”", "అని ఆలోచించడం.", "అదే బంధం యొక్క అసలు విలువ."],
+    img: "assets/images/page_5.png",
+    prompt: "Cinematic 3D scene of Indian brother and sister helping each other at home, communicating love, responsibility and trust. Authentic Indian interior, warm daylight, realistic clothing, detailed environment, premium animated movie quality, no text."
+  },
+  {
+    title: "జీవితంలో దూరం వచ్చినప్పుడు",
+    subtitle: "దూరాలు దాటిన బాల్య బంధం",
+    text: ["ఒకప్పుడు అన్నాచెల్లెళ్లు ఒకే ఇంట్లో పెరిగారు.", "ఒకే గదిలో ఆడుకున్నారు.", "చిన్న విషయాల మీద గొడవపడ్డారు.", "ఒకరి వస్తువులు మరొకరు తీసుకున్నారు.", "అమ్మ దగ్గర ఒకరిపై ఒకరు ఫిర్యాదు చేశారు.", "తర్వాత...", "చదువు కోసం ఒకరు వేరే నగరానికి వెళ్లారు.", "ఉద్యోగం కోసం మరొకరు మరో నగరానికి వెళ్లారు.", "పెళ్లి తర్వాత ఇంకొకరు ఇంకో ఇంటికి వెళ్లారు.", "జీవితం అందరినీ వేర్వేరు దారుల్లోకి తీసుకెళ్లింది.", "కానీ...", "బాల్యంలో ఏర్పడిన బంధం మాత్రం మిగిలిపోయింది."],
+    img: "assets/images/page_6.png",
+    prompt: "Cinematic split-scene 3D illustration of Indian brother and sister living in different cities, with soft childhood memories between them: playing, laughing, arguing, sharing food. A glowing golden thread connects them. Emotional premium animated-film quality, 4K, no text."
+  },
+  {
+    title: "రాఖీ — ఒక రిమైండర్",
+    subtitle: "సంబంధాలకు సమయం & శ్రద్ధ",
+    text: ["ప్రతి సంవత్సరం రక్షాబంధన్ వచ్చి ఒక చిన్న ప్రశ్న అడుగుతుంది:", "“నువ్వు నీ వాళ్లను చివరిసారి ఎప్పుడు మాట్లాడావు?”", "కొన్నిసార్లు ఒక ఫోన్ కాల్ సరిపోతుంది.", "కొన్నిసార్లు ఒక చిన్న సందేశం.", "కొన్నిసార్లు కలిసి భోజనం చేయడం.", "మరికొన్నిసార్లు...", "ఏమీ చెప్పకుండా పక్కన కూర్చోవడం.", "రాఖీ మనకు గుర్తు చేసేది:", "సంబంధాలకు కూడా శ్రద్ధ అవసరం."],
+    img: "assets/images/page_7.png",
+    prompt: "Warm cinematic 3D scene of Indian sister video-calling her brother during Raksha Bandhan. Decorated rakhi thali beside her, brother smiling from another city on smartphone, warm evening light, realistic Indian home, emotional connection, premium 3D animation, no text."
+  },
+  {
+    title: "బహుమతి కంటే గొప్పది",
+    subtitle: "తోడుగా ఉన్న జ్ఞాపకం",
+    text: ["రాఖీ రోజు అన్నయ్య చెల్లికి బహుమతి ఇస్తాడు.", "బట్టలు కావచ్చు.", "డబ్బు కావచ్చు.", "ఇంకేదైనా కావచ్చు.", "కానీ సంవత్సరాలు గడిచిన తర్వాత...", "మనకు గుర్తుండిపోయేది బహుమతి విలువ కాదు.", "గుర్తుండేది...", "“ఆ రోజు అతను నా పక్కన ఉన్నాడు.”", "“ఆమె నన్ను గుర్తు పెట్టుకుంది.”", "“మేమంతా కలిసి కూర్చున్నాం.”", "అదే కుటుంబ జ్ఞాపకం."],
+    img: "assets/images/page_8.png",
+    prompt: "Warm cinematic 3D animated Indian family sitting together around a dining table during Raksha Bandhan. Brother, sister, parents and grandparents, sweets and food, focus on togetherness rather than gifts. Golden indoor light, realistic characters, premium animated-film quality, 4K, no text."
+  },
+  {
+    title: "పిల్లలకు రక్షాబంధన్ ఎందుకు అవసరం?",
+    subtitle: "తరాల సంస్కృతి & విలువలు",
+    text: ["పిల్లలు పండుగలను కేవలం చూస్తూ నేర్చుకోరు.", "వారు చేస్తూ నేర్చుకుంటారు.", "రాఖీ కట్టేటప్పుడు...", "వారు ఒక ఆచారాన్ని చూస్తారు.", "మిఠాయి పంచేటప్పుడు...", "వారు పంచుకోవడం నేర్చుకుంటారు.", "అన్నాచెల్లెళ్లు ఒకరినొకరు ఆశీర్వదించేటప్పుడు...", "వారు బంధం విలువను నేర్చుకుంటారు.", "తాతయ్య, అమ్మమ్మ కథలు చెప్పేటప్పుడు...", "వారు తమ కుటుంబ చరిత్రను తెలుసుకుంటారు.", "అందుకే పండుగలు...", "ఒక తరం నుంచి మరో తరానికి విలువలను తీసుకెళ్లే మార్గాలు."],
+    img: "assets/images/page_9.png",
+    prompt: "Beautiful 3D animated Indian grandparents teaching young children about Raksha Bandhan. Grandmother and grandfather tell stories, children listen with curiosity, rakhi, sweets and family photos nearby, warm traditional home, golden afternoon light, realistic expressive characters, premium animated film quality, 4K, no text."
+  },
+  {
+    title: "రాఖీ కేవలం కుటుంబానికేనా?",
+    subtitle: "నమ్మకం, బాధ్యత, ఆప్యాయత",
+    text: ["మనము ఇప్పటివరకు కుటుంబం గురించి మాట్లాడుకున్నాం.", "కానీ భారతీయ సంప్రదాయంలో బంధం అనే భావన కొన్నిసార్లు కుటుంబ సరిహద్దులను దాటి వెళ్తుంది.", "ఒక రాఖీ...", "ఒక వ్యక్తిని “అన్నయ్య”గా గుర్తించవచ్చు.", "ఒక సంబంధాన్ని కొత్తగా నిర్వచించవచ్చు.", "ఒకరిపై ఒకరికి బాధ్యతను గుర్తు చేయవచ్చు.", "అందుకే...", "బంధం అంటే కేవలం రక్తం కాదు.", "నమ్మకం కూడా.", "బాధ్యత కూడా.", "ఆప్యాయత కూడా."],
+    img: "assets/images/page_10.png",
+    prompt: "Cinematic 3D Indian community scene showing Raksha Bandhan beyond immediate family. A young girl respectfully ties a rakhi on a trusted community member while families and elders watch warmly. Authentic Indian neighborhood, warm sunlight, diverse generations, premium cinematic 3D animation, 4K, no text."
+  },
+  {
+    title: "రక్షణకు మరో రూపం",
+    subtitle: "ఇంటి రక్షణ నుండి దేశ రక్షణ వరకు",
+    text: ["ఇప్పుడు...", "మన కుటుంబం బయటికి చూద్దాం.", "మన నగరాలు ప్రశాంతంగా ఉన్నాయి.", "మన పిల్లలు పాఠశాలకు వెళ్తున్నారు.", "మన కుటుంబాలు పండుగలు జరుపుకుంటున్నాయి.", "మన ఇళ్లలో దీపాలు వెలుగుతున్నాయి.", "కానీ...", "దేశం మరో చివరలో ఎవరో తమ విధిలో ఉన్నారు.", "వారికి పండుగ రోజు కూడా డ్యూటీ ఉంటుంది.", "వారికి కుటుంబం గుర్తొస్తుంది.", "కానీ బాధ్యత ముందుంటుంది.", "వారు మన భారత సైనికులు."],
+    img: "assets/images/page_11.png",
+    prompt: "Cinematic transition from peaceful Indian family celebrating Raksha Bandhan at home to an Indian soldier standing on duty at a remote border. Warm family foreground transitions into vast landscape, respectful military portrayal, volumetric light, premium 3D animation, 4K, no text."
+  },
+  {
+    title: "పండుగ రోజున కూడా విధి",
+    subtitle: "సరిహద్దుల్లో కర్తవ్య దీక్ష",
+    text: ["ఒక సైనికుడికి రక్షాబంధన్ రోజు...", "ఇంట్లో ఉండి రాఖీ కట్టించుకునే రోజు కాకపోవచ్చు.", "అతను సరిహద్దులో ఉండవచ్చు.", "మంచుతో నిండిన ప్రాంతంలో ఉండవచ్చు.", "ఎడారి ప్రాంతంలో ఉండవచ్చు.", "సముద్రంలో ఉండవచ్చు.", "అత్యంత కఠినమైన పరిస్థితుల్లో విధి నిర్వహిస్తూ ఉండవచ్చు.", "అతని కుటుంబం మాత్రం...", "ఇంట్లో అతని కోసం ఎదురుచూస్తూ ఉండవచ్చు."],
+    img: "assets/images/page_12.png",
+    prompt: "Powerful cinematic 3D scene of a young Indian soldier standing on duty in a remote snowy high-altitude border during Raksha Bandhan, holding a small family photograph. Snow mountains, gentle particles, realistic uniform, quiet emotion, no combat or violence, premium animated feature quality, 4K, no text."
+  },
+  {
+    title: "ఒక తల్లి ఎదురుచూపు",
+    subtitle: "మాతృ హృదయం",
+    text: ["ఒక తల్లి తన కొడుకు చేతికి ప్రతి సంవత్సరం రాఖీ కట్టేది.", "ఈ సంవత్సరం...", "ఆమె చేతిలో రాఖీ ఉంది.", "కానీ కొడుకు ఇంట్లో లేడు.", "ఆమె రాఖీని జాగ్రత్తగా ఉంచుతుంది.", "ఫోన్ చేస్తుంది.", "“జాగ్రత్తగా ఉండు బిడ్డా.”", "అని చెబుతుంది.", "ఆ ఒక్క వాక్యంలో...", "ఒక తల్లి ప్రేమ ఉంది.", "ఒక కుటుంబం భయం ఉంది.", "ఒక దేశం మీద నమ్మకం ఉంది."],
+    img: "assets/images/page_13.png",
+    prompt: "Deeply emotional 3D scene inside an Indian home. Mother holds a rakhi and video-calls her soldier son. Son appears in military uniform on smartphone. Family photo and festive decorations nearby, warm evening light, realistic faces, premium cinematic animation, 4K, no text."
+  },
+  {
+    title: "సరిహద్దులో ఒక రాఖీ",
+    subtitle: "కోట్లాది చెల్లెళ్ల రక్ష",
+    text: ["ఇంకో వైపు...", "ఒక సైనికుడి చేతికి ఒక రాఖీ కట్టబడుతోంది.", "అది అతని సొంత చెల్లి కట్టిన రాఖీ కాకపోవచ్చు.", "కానీ ఆ రాఖీ ఒక సందేశాన్ని తీసుకువస్తుంది:", "“మీరు మా కోసం నిలబడి ఉన్నారు.”", "“మేము మిమ్మల్ని మర్చిపోలేదు.”", "భారతదేశంలోని వివిధ ప్రాంతాల్లో రక్షాబంధన్ సందర్భంగా సైనికులు, సాయుధ దళాలు మరియు ఇతర భద్రతా సిబ్బందికి రాఖీలు కట్టే కార్యక్రమాలు నిర్వహించబడ్డాయి.", "ఇది కుటుంబ బంధాన్ని దేశ సేవతో ప్రతీకాత్మకంగా కలుపుతుంది."],
+    img: "assets/images/page_14.png",
+    prompt: "Respectful cinematic 3D scene of Indian soldiers receiving handmade rakhis during a Raksha Bandhan event. Young Indian girl ties rakhi on a soldier's wrist, other soldiers smile warmly, Indian flag subtle in background, dignified and emotional, realistic uniforms, premium animated-film quality, 4K, no text."
+  },
+  {
+    title: "కానీ ఒక రాఖీ వారి త్యాగాన్ని కొలవగలదా?",
+    subtitle: "నిస్వార్థ త్యాగం",
+    text: ["లేదు.", "ఒక రాఖీ...", "ఒక పుష్పగుచ్ఛం...", "ఒక ధన్యవాదం...", "వారి త్యాగం యొక్క పూర్తి విలువను కొలవలేవు.", "ఎందుకంటే ఒక సైనికుడి వెనుక...", "ఒక కుటుంబం ఉంటుంది.", "అతను విధిలో ఉన్నప్పుడు...", "తల్లి ఎదురుచూస్తుంది.", "తండ్రి ఎదురుచూస్తాడు.", "భార్య లేదా భర్త ఎదురుచూస్తారు.", "పిల్లలు ఎదురుచూస్తారు.", "అన్నాచెల్లెళ్లు ఎదురుచూస్తారు."],
+    img: "assets/images/page_15.png",
+    prompt: "Quiet emotional 3D scene inside an Indian military family home. Rakhi, flowers and framed soldier photograph on wooden table, mother, father, spouse, child and sibling sitting quietly nearby. Soft sunlight, dignity, remembrance, no violence, premium cinematic 3D animation, 4K, no text."
+  },
+  {
+    title: "కొందరు తిరిగి రారు",
+    subtitle: "అమరవీరుల స్మరణ",
+    text: ["ఇది రక్షాబంధన్ కథలో అత్యంత నిశ్శబ్దమైన భాగం.", "కొంతమంది సైనికులు...", "తమ కుటుంబాల దగ్గరకు తిరిగి రారు.", "వారి చివరి ప్రయాణం...", "ఒక కుటుంబం జీవితాన్ని శాశ్వతంగా మార్చేస్తుంది.", "ఒక తల్లి తన కొడుకును కోల్పోతుంది.", "ఒక చెల్లి తన అన్నయ్యను కోల్పోతుంది.", "ఒక భార్య తన భర్తను కోల్పోతుంది.", "ఒక పిల్లవాడు తన తండ్రిని కోల్పోతాడు.", "ఒక సైనికుడి త్యాగం...", "అతని కుటుంబం కూడా మోసే త్యాగమే."],
+    img: "assets/images/page_16.png",
+    prompt: "Respectful memorial-style cinematic 3D scene of Indian military family remembering a fallen soldier. Mother, father, spouse, young child and sibling beside framed photograph, rakhi placed beside it, soft morning light, restrained grief, no graphic imagery, premium 3D animated storybook, 4K, no text."
+  },
+  {
+    title: "దేశం అంటే ఎవరు?",
+    subtitle: "మహా భారతం — జాతి సమైక్యత",
+    text: ["దేశం అంటే కేవలం ఒక మ్యాప్ కాదు.", "దేశం అంటే...", "మన ఇళ్లు.", "మన కుటుంబాలు.", "మన పిల్లలు.", "మన పాఠశాలలు.", "మన పొలాలు.", "మన నగరాలు.", "మన దేవాలయాలు, మసీదులు, చర్చిలు, గురుద్వారాలు.", "మన భాషలు.", "మన సంస్కృతులు.", "మన జ్ఞాపకాలు.", "ఈ జీవితం సురక్షితంగా కొనసాగేందుకు...", "ఎవరో తమ జీవితాన్ని బాధ్యతగా తీసుకుంటారు."],
+    img: "assets/images/page_17.png",
+    prompt: "Epic cinematic panoramic 3D representation of India through everyday life: homes, families, children, schools, farms, cities, temples, mosques, churches, gurudwaras and diverse Indian cultures. Peaceful shared life, warm sunlight, realistic environments, premium animated feature quality, 4K, no text."
+  },
+  {
+    title: "“రక్ష” — ఒక కుటుంబం నుంచి ఒక దేశం వరకు",
+    subtitle: "అఖండ రక్షా ప్రవాహం",
+    text: ["ఒక చెల్లి:", "“నా అన్నయ్య సురక్షితంగా ఉండాలి.”", "అని కోరుతుంది.", "ఒక తల్లి:", "“నా బిడ్డ సురక్షితంగా ఉండాలి.”", "అని కోరుతుంది.", "ఒక కుటుంబం:", "“మా వాళ్లు సురక్షితంగా ఉండాలి.”", "అని కోరుతుంది.", "ఒక దేశం:", "“మన దేశం సురక్షితంగా ఉండాలి.”", "అని కోరుతుంది.", "ఇక్కడ...", "రక్ష అనే భావన కుటుంబం నుంచి దేశం వరకు విస్తరిస్తుంది."],
+    img: "assets/images/page_18.png",
+    prompt: "Epic emotional 3D sequence: sister ties rakhi on brother, mother blesses child, family stands together, community helps one another, Indian soldier stands on duty. One glowing golden thread connects every scene, symbolizing Raksha from family to nation, premium cinematic 3D animation, 4K, no text."
+  },
+  {
+    title: "కానీ సైనికులు కూడా ఎవరికో సోదరులే",
+    subtitle: "యూనిఫాం వెనుక మనిషి",
+    text: ["ఇది మనం మర్చిపోకూడని విషయం.", "సైనికుడు ముందుగా...", "ఒక మనిషి.", "అతను ఎవరికో:", "అన్నయ్య.", "తమ్ముడు.", "కొడుకు.", "భర్త.", "తండ్రి.", "స్నేహితుడు.", "అతను యూనిఫాం వేసుకున్నప్పుడు మనం అతని బాధ్యతను చూస్తాం.", "కానీ అతని కుటుంబం...", "అతని మనసును చూస్తుంది.", "అందుకే సైనికుడి త్యాగాన్ని గుర్తు చేసుకోవడం అంటే...", "అతని కుటుంబాన్ని కూడా గుర్తు చేసుకోవడం."],
+    img: "assets/images/page_19.png",
+    prompt: "Cinematic close-up of a young Indian soldier holding a family photograph showing sister, parents, spouse and child. Subtle memory scenes of sister tying rakhi and mother blessing him appear behind. Human emotion behind the uniform, warm soft light, realistic 3D animation, 4K, no text."
+  },
+  {
+    title: "నిజమైన కృతజ్ఞత",
+    subtitle: "సేవను గౌరవించడం",
+    text: ["రక్షాబంధన్ రోజున సైనికుడికి రాఖీ కట్టడం అందమైన సంప్రదాయం.", "కానీ నిజమైన కృతజ్ఞత...", "ఒక్కరోజు ఫోటోతో ముగియకూడదు.", "వారి సేవను గౌరవించడం.", "వారి కుటుంబాల త్యాగాన్ని గుర్తించడం.", "దేశ భద్రత కోసం పనిచేసే ప్రతి ఒక్కరి సేవను విలువైనదిగా చూడడం.", "అదే నిజమైన కృతజ్ఞత."],
+    img: "assets/images/page_20.png",
+    prompt: "Heartwarming cinematic 3D scene of Indian citizens respectfully expressing gratitude to soldiers. Children, parents and elders offer handmade rakhis and flowers, soldiers respond humbly, subtle Indian flag, warm sunrise light, realistic characters, premium animated feature quality, 4K, no text."
+  },
+  {
+    title: "రాఖీ మనకు నేర్పేది",
+    subtitle: "5 దివ్య జీవన పాఠాలు",
+    text: ["రాఖీ మనకు ఐదు విషయాలు గుర్తు చేస్తుంది.", "1. ప్రేమను వ్యక్తం చేయాలి.", "మనసులో ప్రేమ ఉన్నా...", "దాన్ని చెప్పడం కూడా ముఖ్యం.", "2. సంబంధాలకు సమయం ఇవ్వాలి.", "బంధం స్వయంగా బలంగా ఉండదు.", "దాన్ని మనమే కాపాడాలి.", "3. బాధ్యత తీసుకోవాలి.", "మన వాళ్లు కష్టంలో ఉన్నప్పుడు...", "మన వంతు చేయాలి.", "4. దూరం బంధాన్ని ముగించదు.", "నగరం మారవచ్చు.", "దేశం మారవచ్చు.", "కానీ ప్రేమ కొనసాగవచ్చు.", "5. రక్షణ పరస్పరం.", "ఒకరు మాత్రమే కాదు...", "మనమంతా ఒకరికొకరం అండగా ఉండవచ్చు."],
+    img: "assets/images/page_21.png",
+    prompt: "Elegant cinematic 3D composition representing five lessons of Raksha Bandhan through connected emotional moments: love, time, responsibility, distance, mutual protection. One glowing rakhi thread connects the scenes. Sophisticated cinematic storytelling, realistic Indian characters, warm light, premium 3D animation, 4K, no text."
+  },
+  {
+    title: "రాఖీ తెగిపోతే?",
+    subtitle: "బంధం మనసులో ఉంది",
+    text: ["ఒక చిన్న ప్రయోగం.", "ఒక రాఖీని చేతిలో తీసుకోండి.", "దాన్ని లాగండి.", "అది తెగిపోవచ్చు.", "అప్పుడు మనం ఏమి కోల్పోతాం?", "ఒక దారం.", "అంతే.", "ఎందుకంటే...", "బంధం దారంలో లేదు.", "బంధం మనసులో ఉంది.", "రాఖీ ఒక గుర్తు మాత్రమే.", "ప్రేమే అసలు బంధం."],
+    img: "assets/images/page_22.png",
+    prompt: "Extreme cinematic macro shot of a traditional rakhi gently breaking apart. As the thread breaks, glowing memories of Indian brother and sister appear behind: childhood laughter, festivals, shared meals, support. Broken thread transforms into glowing connection between hearts. Magical realism plus premium realistic 3D animation, 4K, no text."
+  },
+  {
+    title: "ఒక మాట…",
+    subtitle: "‘నేను నీకు తోడుగా ఉంటాను’",
+    text: ["రక్షాబంధన్ రోజున...", "మీ అన్నయ్యకు ఒక మాట చెప్పండి.", "మీ చెల్లికి ఒక మాట చెప్పండి.", "మీ కుటుంబానికి ఒక మాట చెప్పండి.", "అది పెద్ద ప్రసంగం కావాల్సిన అవసరం లేదు.", "కేవలం:", "“నేను నీకు తోడుగా ఉంటాను.”", "అంతే.", "కొన్నిసార్లు...", "ఒక చిన్న మాట...", "ఒక జీవితానికి ధైర్యం ఇస్తుంది."],
+    img: "assets/images/page_23.png",
+    prompt: "Intimate cinematic 3D scene of Indian brother and sister sitting together during Raksha Bandhan. Sister has tied rakhi, brother gently holds her hand, sincere affectionate eye contact, warm golden light, festive background softly blurred, realistic faces and hands, premium animated feature quality, 4K, no text."
+  },
+  {
+    title: "దూరంలో ఉన్నవారికి",
+    subtitle: "దూరాలను గెలిచిన ప్రేమ",
+    text: ["మీ అన్నయ్య విదేశంలో ఉండవచ్చు.", "మీ చెల్లి మరో నగరంలో ఉండవచ్చు.", "మీ కుటుంబం వేరే రాష్ట్రంలో ఉండవచ్చు.", "రాఖీని పోస్టులో పంపవచ్చు.", "వీడియో కాల్ చేయవచ్చు.", "ఒక ఫోటో పంపవచ్చు.", "లేదా...", "కేవలం ఒక ఫోన్ కాల్ చేయవచ్చు.", "ఎందుకంటే రక్షాబంధన్ యొక్క అసలు విలువ...", "దగ్గరగా ఉండటంలో కాదు.", "బంధాన్ని గుర్తు పెట్టుకోవడంలో ఉంది."],
+    img: "assets/images/page_24.png",
+    prompt: "Emotional modern 3D scene of Indian brother and sister living far apart. Sister in warm Indian home holding rakhi, brother on video call from another city or country, family photographs and festive decorations nearby, glowing golden thread connecting phone and rakhi, premium cinematic animation, 4K, no text."
+  },
+  {
+    title: "చివరి ప్రశ్న",
+    subtitle: "రక్షాబంధన్ ఎందుకు జరుపుకుంటాం?",
+    text: ["“రక్షాబంధన్ ఎందుకు జరుపుకుంటాం?”", "ఇప్పుడు సమాధానం మనకు కొంచెం స్పష్టంగా ఉంది.", "కేవలం రాఖీ కోసం కాదు.", "కేవలం బహుమతుల కోసం కాదు.", "కేవలం ఒక సంప్రదాయం కోసం కాదు.", "మన సంబంధాలను గుర్తు చేసుకోవడానికి.", "మన ప్రేమను వ్యక్తం చేయడానికి.", "మన బాధ్యతను గుర్తు చేసుకోవడానికి.", "మన కుటుంబాన్ని దగ్గర చేయడానికి.", "మరియు...", "రక్షణ కోసం నిలబడే వారిని గుర్తు చేసుకోవడానికి."],
+    img: "assets/images/page_25.png",
+    prompt: "Epic cinematic 3D montage of the entire Raksha Bandhan journey: brother and sister, family, children, grandparents, distant siblings, soldiers, military families and peaceful India. One glowing golden thread connects every scene. Warm golden light, premium animated feature-film quality, 4K, no text."
+  },
+  {
+    title: "ఒక దారం చెప్పే మాట",
+    subtitle: "రక్షాబంధన్ శుభాకాంక్షలు",
+    final: true,
+    text: ["రాఖీ మౌనంగా ఉంటుంది.", "అది మాట్లాడదు.", "కానీ మనం దానిని కట్టినప్పుడు...", "అది ఒక మాట చెబుతుంది.", "“నువ్వు ఒంటరిగా లేవు.”", "నీ ఆనందంలో...", "నేను ఉంటాను.", "నీ బాధలో...", "నేను ఉంటాను.", "నువ్వు దూరంగా ఉన్నా...", "నిన్ను గుర్తు పెట్టుకుంటాను.", "నువ్వు పడిపోయినా...", "నిన్ను లేపడానికి ప్రయత్నిస్తాను.", "నువ్వు ఇతరులను రక్షిస్తున్నప్పుడు...", "నీ సేవను మేము గుర్తు పెట్టుకుంటాం.", "మరియు...", "తమ దేశం కోసం ప్రాణాలు అర్పించిన వారిని...", "మేము ఎప్పటికీ మర్చిపోము.", "ఒక చిన్న దారం...", "ఒక పెద్ద బంధం.", "ఒక కుటుంబం...", "ఒక జ్ఞాపకం...", "ఒక బాధ్యత...", "ఒక దేశం పట్ల కృతజ్ఞత.", "ఇదే రక్షాబంధన్.", "“నేను నీకు తోడుగా ఉంటాను.”", "రక్షాబంధన్ శుభాకాంక్షలు. ❤️🇮🇳"],
+    img: "assets/images/page_26.png",
+    prompt: "Breathtaking final cinematic 3D scene. Extreme close-up of a beautiful traditional rakhi floating in warm golden light, camera pulling backward as the glowing thread transforms into a luminous connection through brother and sister, family, children, grandparents, Indian communities, soldiers, military families and the peaceful landscape of India. The thread connects everyone, symbolizing love, support, responsibility, memory, sacrifice and gratitude. Warm golden light, subtle saffron-white-green accents, volumetric rays, floating dust, premium 3D animated feature-film quality, realistic Indian characters, cinematic depth of field, epic yet intimate, 4K, no text, no watermark."
+  }
+];
+
+let current = 0;
+const $ = id => document.getElementById(id);
+
+// Adaptive Three.js 3D Viewport Engine
+let threeScene, threeCamera, threeRenderer, threeParticles, animId, resizeObserver;
+let mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
+let time = 0;
+
+function isMobileView() {
+  return window.innerWidth <= 768;
+}
+
+function initThreeEngine() {
+  const container = $("threeCanvasMount");
+  if (!container || typeof THREE === "undefined") return;
+
+  const w = container.clientWidth || 400;
+  const h = container.clientHeight || 400;
+
+  threeScene = new THREE.Scene();
+  threeCamera = new THREE.PerspectiveCamera(45, w / h, 0.1, 100);
+  
+  // Adjust camera distance based on aspect ratio to preserve characters
+  updateCameraFraming(w, h);
+
+  const maxDpr = isMobileView() ? 1.5 : 2;
+  threeRenderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+  threeRenderer.setSize(w, h);
+  threeRenderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, maxDpr));
+
+  container.innerHTML = "";
+  container.appendChild(threeRenderer.domElement);
+
+  // Dynamic Particles (Adaptive Count: 320 for mobile, 750 for desktop)
+  const count = isMobileView() ? 320 : 750;
+  const geo = new THREE.BufferGeometry();
+  const pos = new Float32Array(count * 3);
+  const cols = new Float32Array(count * 3);
+
+  for (let i = 0; i < count; i++) {
+    pos[i * 3] = (Math.random() - 0.5) * 10;
+    pos[i * 3 + 1] = (Math.random() - 0.5) * 8;
+    pos[i * 3 + 2] = (Math.random() - 0.5) * 6;
+
+    cols[i * 3] = 0.95 + Math.random() * 0.05;
+    cols[i * 3 + 1] = 0.65 + Math.random() * 0.3;
+    cols[i * 3 + 2] = 0.1 + Math.random() * 0.2;
+  }
+
+  geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+  geo.setAttribute("color", new THREE.BufferAttribute(cols, 3));
+
+  const mat = new THREE.PointsMaterial({
+    size: isMobileView() ? 0.08 : 0.065,
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.8,
+    blending: THREE.AdditiveBlending
+  });
+
+  threeParticles = new THREE.Points(geo, mat);
+  threeScene.add(threeParticles);
+
+  // Mouse / Touch Parallax Tracking
+  window.addEventListener("mousemove", e => {
+    const rect = container.getBoundingClientRect();
+    if (rect.width === 0) return;
+    mouse.targetX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    mouse.targetY = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+  });
+
+  // ResizeObserver for rock-solid responsive canvas scaling
+  if (window.ResizeObserver) {
+    resizeObserver = new ResizeObserver(entries => {
+      for (let entry of entries) {
+        const nw = entry.contentRect.width;
+        const nh = entry.contentRect.height;
+        if (nw > 0 && nh > 0 && threeCamera && threeRenderer) {
+          threeCamera.aspect = nw / nh;
+          updateCameraFraming(nw, nh);
+          threeCamera.updateProjectionMatrix();
+          threeRenderer.setSize(nw, nh);
+        }
+      }
+    });
+    resizeObserver.observe(container);
+  }
+
+  animateThree();
+}
+
+function updateCameraFraming(width, height) {
+  if (!threeCamera) return;
+  const aspect = width / height;
+  if (aspect < 1) {
+    // Vertical mobile framing
+    threeCamera.position.z = 6.2;
+  } else {
+    // Landscape / widescreen framing
+    threeCamera.position.z = 5.0;
+  }
+}
+
+function animateThree() {
+  animId = requestAnimationFrame(animateThree);
+  time += 0.015;
+
+  mouse.x += (mouse.targetX - mouse.x) * 0.05;
+  mouse.y += (mouse.targetY - mouse.y) * 0.05;
+
+  if (threeCamera) {
+    const intensity = isMobileView() ? 0.15 : 0.3;
+    threeCamera.position.x = mouse.x * intensity + Math.sin(time * 0.5) * 0.03;
+    threeCamera.position.y = -mouse.y * (intensity * 0.7) + Math.cos(time * 0.6) * 0.03;
+    threeCamera.lookAt(0, 0, 0);
+  }
+
+  if (threeParticles) {
+    const pos = threeParticles.geometry.attributes.position.array;
+    for (let i = 0; i < pos.length; i += 3) {
+      pos[i + 1] += 0.005;
+      pos[i] += Math.sin(time + i) * 0.002;
+      if (pos[i + 1] > 4) pos[i + 1] = -4;
+    }
+    threeParticles.geometry.attributes.position.needsUpdate = true;
+  }
+
+  if (threeRenderer && threeScene && threeCamera) {
+    threeRenderer.render(threeScene, threeCamera);
+  }
+}
+
+// Audio Player ("Akhanda Rakhi" Soundtrack + Web Audio fallback)
+let bgAudio = null, isPlayingAudio = false, audioCtx = null, droneGain, fluteGain, fluteTimer, tanpuraOscs = [];
+
+function initBgAudio() {
+  if (!bgAudio) {
+    bgAudio = new Audio('assets/audio/akhanda_rakhi.mp3');
+    bgAudio.loop = true;
+    bgAudio.volume = 0.8;
+    bgAudio.preload = 'auto';
+  }
+}
+
+function toggleAudio() {
+  initBgAudio();
+
+  if (isPlayingAudio) {
+    isPlayingAudio = false;
+    if (bgAudio) bgAudio.pause();
+    if (tanpuraOscs.length) {
+      tanpuraOscs.forEach(o => { try { o.stop(); } catch(e){} });
+      tanpuraOscs = [];
+    }
+    clearTimeout(fluteTimer);
+    $("audioBtn").innerHTML = `🎵 <span class="btn-text-full">సంగీతం</span>`;
+    $("audioBtn").style.background = "";
+  } else {
+    isPlayingAudio = true;
+    $("audioBtn").innerHTML = `🔊 <span class="btn-text-full">అఖండ రాఖీ</span>`;
+    $("audioBtn").style.background = "rgba(245, 158, 11, 0.35)";
+
+    if (bgAudio) {
+      bgAudio.play().catch(err => {
+        console.warn("HTML5 audio playback error, fallback to synth:", err);
+        startSynthAudio();
+      });
+    } else {
+      startSynthAudio();
+    }
+  }
+}
+
+function startSynthAudio() {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    droneGain = audioCtx.createGain();
+    droneGain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+    droneGain.connect(audioCtx.destination);
+
+    fluteGain = audioCtx.createGain();
+    fluteGain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+    fluteGain.connect(audioCtx.destination);
+  }
+  if (audioCtx.state === "suspended") audioCtx.resume();
+  playTanpura();
+  scheduleFlute();
+}
+
+function playTanpura() {
+  const freqs = [73.42, 110.0, 146.83, 147.1];
+  freqs.forEach((f, i) => {
+    const osc = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    osc.type = i % 2 === 0 ? "sine" : "triangle";
+    osc.frequency.setValueAtTime(f, audioCtx.currentTime);
+    g.gain.setValueAtTime(0.04 / (i + 1), audioCtx.currentTime);
+    osc.connect(g);
+    g.connect(droneGain);
+    osc.start();
+    tanpuraOscs.push(osc);
+  });
+}
+
+function scheduleFlute() {
+  if (!isPlayingAudio) return;
+  const mohanam = [293.66, 329.63, 369.99, 440.0, 493.88, 587.33];
+  const freq = mohanam[Math.floor(Math.random() * mohanam.length)];
+  const dur = 2.2 + Math.random() * 2.0;
+
+  const osc = audioCtx.createOscillator();
+  const g = audioCtx.createGain();
+  const filter = audioCtx.createBiquadFilter();
+  osc.type = "sine";
+  osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+  filter.type = "bandpass";
+  filter.frequency.setValueAtTime(freq * 1.5, audioCtx.currentTime);
+
+  const now = audioCtx.currentTime;
+  g.gain.setValueAtTime(0.001, now);
+  g.gain.linearRampToValueAtTime(0.14, now + 0.5);
+  g.gain.linearRampToValueAtTime(0.001, now + dur);
+
+  osc.connect(filter);
+  filter.connect(g);
+  g.connect(fluteGain);
+  osc.start(now);
+  osc.stop(now + dur + 0.1);
+
+  fluteTimer = setTimeout(scheduleFlute, (dur + 1.5 + Math.random() * 2.0) * 1000);
+}
+
+function playFlipSound() {
+  if (!audioCtx) return;
+  try {
+    const buf = audioCtx.createBuffer(1, audioCtx.sampleRate * 0.15, audioCtx.sampleRate);
+    const out = buf.getChannelData(0);
+    for (let i = 0; i < out.length; i++) out[i] = (Math.random() * 2 - 1) * Math.exp(-i / (out.length * 0.3));
+    const src = audioCtx.createBufferSource();
+    src.buffer = buf;
+    const g = audioCtx.createGain();
+    g.gain.setValueAtTime(0.12, audioCtx.currentTime);
+    g.gain.linearRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+    src.connect(g);
+    g.connect(audioCtx.destination);
+    src.start();
+  } catch (e) {}
+}
+
+function render() {
+  const p = pages[current];
+  $("text").innerHTML = `
+    <div class="kicker">రక్షాబంధన్ • అధ్యాయం ${current + 1} / ${pages.length}</div>
+    <h1>${p.title}</h1>
+    ${p.subtitle ? `<div class="lead">${p.subtitle}</div>` : ""}
+    ${p.text.map(x => x.startsWith("“") || x.startsWith("‘") || x.includes("నేను నీకు") ? `<div class="quote">${x}</div>` : `<p>${x}</p>`).join("")}
+  `;
+
+  // Scroll text back to top smoothly on page change
+  $("text").scrollTop = 0;
+
+  // Update 3D Image
+  const imgEl = $("sceneImg");
+  if (imgEl && p.img) {
+    imgEl.style.opacity = "0.2";
+    imgEl.src = p.img;
+    imgEl.onload = () => { imgEl.style.opacity = "1"; };
+  }
+
+  $("sceneLabel").textContent = `3D సినిమాటిక్ దృశ్యం • పేజీ ${current + 1}`;
+  $("page").textContent = `పేజీ ${current + 1} / ${pages.length}`;
+  $("prev").disabled = current === 0;
+  $("next").disabled = current === pages.length - 1;
+  $("progress").style.width = ((current + 1) / pages.length * 100) + "%";
+
+  $("bg").style.background = `
+    linear-gradient(90deg, rgba(4,5,7,.96) 0%, rgba(4,5,7,.82) 40%, rgba(4,5,7,.3) 78%, rgba(4,5,7,.6) 100%),
+    radial-gradient(circle at ${55 + (current % 5) * 6}% ${35 + (current % 4) * 8}%, rgba(${200 + current * 2}, ${120 + current * 2}, 60, .26), transparent 42%)
+  `;
+}
+
+function move(n) {
+  const prev = current;
+  current = Math.max(0, Math.min(pages.length - 1, current + n));
+  if (current !== prev) {
+    playFlipSound();
+    render();
+  }
+}
+
+function handleTrackClick(e) {
+  const rect = e.currentTarget.getBoundingClientRect();
+  const ratio = (e.clientX - rect.left) / rect.width;
+  const target = Math.floor(ratio * pages.length);
+  current = Math.max(0, Math.min(pages.length - 1, target));
+  playFlipSound();
+  render();
+}
+
+function toggleFullscreen() {
+  if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {});
+  else document.exitFullscreen().catch(() => {});
+}
+
+// Table of Contents Modal
+function toggleTOC() {
+  const modal = $("tocModal");
+  if (modal.classList.contains("active")) {
+    modal.classList.remove("active");
+  } else {
+    modal.classList.add("active");
+    $("tocGrid").innerHTML = pages.map((p, idx) => `
+      <div class="toc-item ${idx === current ? 'active' : ''}" onclick="jumpToPage(${idx})">
+        <img src="${p.img}" alt="${p.title}" loading="lazy" />
+        <div class="toc-item-page">పేజీ ${idx + 1}</div>
+        <div class="toc-item-title">${p.title}</div>
+      </div>
+    `).join("");
+  }
+}
+
+function jumpToPage(idx) {
+  current = idx;
+  toggleTOC();
+  playFlipSound();
+  render();
+}
+
+// Prompt Modal
+function openPromptModal() {
+  const p = pages[current];
+  $("promptModalTitle").textContent = `✨ 3D AI ప్రాంప్ట్ ఇన్‌స్పెక్టర్ — పేజీ ${current + 1}`;
+  $("promptText").value = p.prompt;
+  $("negPromptText").value = GLOBAL_NEGATIVE_PROMPT;
+  $("promptModal").classList.add("active");
+}
+
+function closePromptModal() {
+  $("promptModal").classList.remove("active");
+}
+
+function copyPrompt() {
+  navigator.clipboard.writeText(pages[current].prompt).then(() => alert("3D ప్రాంప్ట్ కాపీ చేయబడింది!"));
+}
+
+function copyNegPrompt() {
+  navigator.clipboard.writeText(GLOBAL_NEGATIVE_PROMPT).then(() => alert("నెగెటివ్ ప్రాంప్ట్ కాపీ చేయబడింది!"));
+}
+
+// Keyboard Navigation
+document.addEventListener("keydown", e => {
+  if (e.key === "ArrowRight" || e.key === " ") move(1);
+  if (e.key === "ArrowLeft") move(-1);
+  if (e.key === "Home") { current = 0; render(); }
+  if (e.key === "End") { current = pages.length - 1; render(); }
+  if (e.key === "Escape") { closePromptModal(); $("tocModal").classList.remove("active"); }
+});
+
+// Mobile & Tablet Touch Swipe Handling
+let startX = 0, startY = 0;
+document.addEventListener("touchstart", e => {
+  if (e.touches.length === 1) {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+  }
+}, { passive: true });
+
+document.addEventListener("touchend", e => {
+  if (e.changedTouches.length === 1) {
+    const deltaX = e.changedTouches[0].clientX - startX;
+    const deltaY = e.changedTouches[0].clientY - startY;
+
+    // Check horizontal swipe with vertical scroll tolerance
+    if (Math.abs(deltaX) > Math.abs(deltaY) * 1.4 && Math.abs(deltaX) > 48) {
+      move(deltaX < 0 ? 1 : -1);
+    }
+  }
+}, { passive: true });
+
+// Ambient Gold Dust Particle Generation
+for (let i = 0; i < 35; i++) {
+  let d = document.createElement("span");
+  d.className = "particle";
+  d.style.left = Math.random() * 100 + "%";
+  d.style.top = Math.random() * 100 + "%";
+  d.style.animationDelay = Math.random() * 8 + "s";
+  d.style.animationDuration = 5 + Math.random() * 7 + "s";
+  $("particles").appendChild(d);
+}
+
+// Boot Application
+initThreeEngine();
+render();
+</script>
+</body>
+</html>
