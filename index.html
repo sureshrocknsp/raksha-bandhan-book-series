@@ -661,10 +661,11 @@
   <main class="content">
     <section class="text" id="text" aria-live="polite">
       <div class="kicker" id="kickerStatic">రక్షాబంధన్ • అధ్యాయం 1 / 26</div>
-      <h1 id="titleStatic">రక్షాబంధన్</h1>
-      <div class="lead" id="leadStatic">ఒక దారం చెప్పే మాట</div>
-      <p>బంధం అంటే రక్షించడం మాత్రమే కాదు…</p>
-      <p>తోడుగా ఉండడం.</p>
+      <h1 id="titleStatic">ప్రారంభం</h1>
+      <div class="lead" id="leadStatic">రక్షాబంధన్ — ఒక దారం చెప్పే మాట</div>
+      <p>రక్షాబంధన్</p>
+      <p>ఒక దారం చెప్పే మాట</p>
+      <div class="quote">బంధం అంటే రక్షించడం మాత్రమే కాదు… తోడుగా ఉండడం.</div>
     </section>
     
     <section class="scene" id="sceneContainer">
@@ -801,26 +802,38 @@ const GLOBAL_NEGATIVE_PROMPT = "flat 2D illustration, cheap cartoon, anime, chil
 
 let currentLang = localStorage.getItem("storybook_lang") || "te";
 
-// Complete 26-Page Authentic Multilingual Dataset (Telugu, Hindi, English)
+// Complete 26-Page Authentic Multilingual Dataset (Original Telugu by Suresh Thota + Faithful Hindi + English)
 const pages = [
   {
     id: 1,
     img: "assets/images/page_1.png",
     prompt: "Premium cinematic 3D animated storybook scene of a young Indian brother and sister celebrating Raksha Bandhan inside a warm traditional Indian home. Sister holding a handmade rakhi, puja thali with flowers, kumkum, rice, sweets and diya, subtle marigold decorations, golden morning sunlight, realistic Indian characters, expressive faces, detailed clothing, volumetric light, cinematic depth of field, high-end animated feature film quality, 4K, no text, no watermark.",
     te: {
-      title: "రక్షాబంధన్",
-      subtitle: "ఒక దారం చెప్పే మాట",
-      text: ["బంధం అంటే రక్షించడం మాత్రమే కాదు…", "తోడుగా ఉండడం."]
+      title: "ప్రారంభం",
+      subtitle: "రక్షాబంధన్ — ఒక దారం చెప్పే మాట",
+      text: [
+        "రక్షాబంధన్",
+        "ఒక దారం చెప్పే మాట",
+        "బంధం అంటే రక్షించడం మాత్రమే కాదు…\nతోడుగా ఉండడం."
+      ]
     },
     hi: {
-      title: "रक्षाबंधन",
-      subtitle: "एक धागे की बात",
-      text: ["रिश्ता सिर्फ रक्षा करना ही नहीं…", "हर मोड़ पर साथ निभाना है।"]
+      title: "प्रारंभ",
+      subtitle: "रक्षाबंधन — एक धागे की बात",
+      text: [
+        "रक्षाबंधन",
+        "एक धागे की बात",
+        "रिश्ता सिर्फ रक्षा करना ही नहीं…\nहर मोड़ पर साथ निभाना है।"
+      ]
     },
     en: {
-      title: "Raksha Bandhan",
-      subtitle: "What a Thread Says",
-      text: ["A bond is not just about protection…", "It is about standing beside each other."]
+      title: "Prologue",
+      subtitle: "Raksha Bandhan — What a Thread Says",
+      text: [
+        "Raksha Bandhan",
+        "What a Thread Says",
+        "A bond is not just about protection…\nIt is about standing beside each other."
+      ]
     }
   },
   {
@@ -830,17 +843,29 @@ const pages = [
     te: {
       title: "రాఖీ కట్టిన తర్వాత ఏమవుతుంది?",
       subtitle: "మన బాధ్యతను గుర్తు చేస్తుందా?",
-      text: ["రాఖీ కట్టారు.", "తిలకం పెట్టారు.", "మిఠాయి తినిపించారు.", "బహుమతులు ఇచ్చారు.", "ఫోటోలు తీసుకున్నారు.", "అందరూ నవ్వుకున్నారు.", "కానీ...", "రాఖీ కట్టిన తర్వాత ఆ దారం ఏం చేస్తుంది?", "అది నిజంగా ఎవరినైనా రక్షిస్తుందా?", "లేదా...", "మనకు మన బాధ్యతను గుర్తు చేస్తుందా?"]
+      text: [
+        "రాఖీ కట్టిన తర్వాత ఏమవుతుంది?",
+        "రాఖీ కట్టారు.\nతిలకం పెట్టారు.\nమిఠాయి తినిపించారు.\nబహుమతులు ఇచ్చారు.\nఫోటోలు తీసుకున్నారు.\nఅందరూ నవ్వుకున్నారు.",
+        "కానీ...\nరాఖీ కట్టిన తర్వాత ఆ దారం ఏం చేస్తుంది?\nఅది నిజంగా ఎవరినైనా రక్షిస్తుందా?\nలేదా...\nమనకు మన బాధ్యతను గుర్తు చేస్తుందా?"
+      ]
     },
     hi: {
       title: "राखी बांधने के बाद क्या होता है?",
       subtitle: "क्या यह हमारी ज़िम्मेदारी याद दिलाती है?",
-      text: ["राखी बांधी गई।", "तिलक लगाया गया।", "मिठाई खिलाई गई।", "उपहार दिए गए।", "तस्वीरें खींची गईं।", "सब हंसे और मुस्कुराए।", "लेकिन...", "राखी बांधने के बाद वह धागा क्या करता है?", "क्या वह सच में किसी की रक्षा करता है?", "या फिर...", "वह हमें हमारी ज़िम्मेदारी की याद दिलाता है?"]
+      text: [
+        "राखी बांधने के बाद क्या होता है?",
+        "राखी बांधी गई।\nतिलक लगाया गया।\nमिठाई खिलाई गई।\nउपहार दिए गए।\nतस्वीरें खींची गईं।\nसब हंसे और मुस्कुराए।",
+        "लेकिन...\nराखी बांधने के बाद वह धागा क्या करता है?\nक्या वह सच में किसी की रक्षा करता है?\nया फिर...\nवह हमें हमारी ज़िम्मेदारी की याद दिलाता है?"
+      ]
     },
     en: {
       title: "What Happens After Tying the Rakhi?",
       subtitle: "Does it remind us of our responsibility?",
-      text: ["The rakhi was tied.", "The tilak was applied.", "Sweets were shared.", "Gifts were exchanged.", "Photographs were taken.", "Everyone smiled and celebrated.", "But...", "What does that sacred thread do after it is tied?", "Does it physically protect anyone?", "Or...", "Does it awaken our sense of duty and responsibility?"]
+      text: [
+        "What happens after tying the rakhi?",
+        "The rakhi was tied.\nTilak was applied.\nSweets were shared.\nGifts were exchanged.\nPhotographs were taken.\nEveryone smiled.",
+        "But...\nWhat does that thread do after it is tied?\nDoes it truly protect anyone?\nOr...\nDoes it awaken our sense of duty and responsibility?"
+      ]
     }
   },
   {
@@ -850,17 +875,35 @@ const pages = [
     te: {
       title: "రక్షణ అంటే కేవలం కాపాడటమేనా?",
       subtitle: "రక్షణ అంటే అండగా ఉండటం",
-      text: ["మన చిన్నతనంలో...", "“అన్నయ్య చెల్లిని కాపాడాలి”", "అని వింటూ పెరిగి ఉండవచ్చు.", "అది రక్షాబంధన్లోని ఒక సాంప్రదాయ భావన.", "కానీ మనం పెద్దవాళ్లమయ్యాక జీవితం మనకు మరో విషయం నేర్పుతుంది.", "కొన్నిసార్లు...", "అన్నయ్యకు చెల్లి అవసరం అవుతుంది.", "చెల్లికి అన్నయ్య అవసరం అవుతుంది.", "ఇద్దరికీ ఒకరి మాట మరొకరికి అవసరం అవుతుంది.", "అందుకే...", "రక్షణ అనేది కేవలం బలం కాదు.", "రక్షణ అంటే అండగా ఉండటం."]
+      text: [
+        "రక్షణ అంటే కేవలం కాపాడటమేనా?",
+        "మన చిన్నతనంలో...\n“అన్నయ్య చెల్లిని కాపాడాలి”\nఅని వింటూ పెరిగి ఉండవచ్చు.",
+        "అది రక్షాబంధన్లోని ఒక సాంప్రదాయ భావన.\nకానీ మనం పెద్దవాళ్లమయ్యాక జీవితం మనకు మరో విషయం నేర్పుతుంది.",
+        "కొన్నిసార్లు...\nఅన్నయ్యకు చెల్లి అవసరం అవుతుంది.\nచెల్లికి అన్నయ్య అవసరం అవుతుంది.\nఇద్దరికీ ఒకరి మాట మరొకరికి అవసరం అవుతుంది.",
+        "అందుకే...\nరక్షణ అనేది కేవలం బలం కాదు.\nరక్షణ అంటే అండగా ఉండటం."
+      ]
     },
     hi: {
       title: "क्या रक्षा का मतलब सिर्फ बचाना है?",
-      subtitle: "रक्षा का सच्चा अर्थ है सहारा बनना",
-      text: ["बचपन में हमने सुना होगा...", "“भाई को बहन की रक्षा करनी चाहिए।”", "यह रक्षाबंधन की पारंपरिक सोच रही है।", "लेकिन बड़े होकर ज़िंदगी हमें एक नया सच सिखाती है।", "कभी-कभी...", "भाई को बहन के सहारे की ज़रूरत होती है।", "बहन को भाई के साथ की ज़रूरत होती है।", "दोनों को एक-दूसरे के प्यार भरे बोल की ज़रूरत होती है।", "इसलिए...", "रक्षा सिर्फ शारीरिक ताक़त नहीं है।", "रक्षा का सच्चा अर्थ एक-दूसरे का संबल बनना है।"]
+      subtitle: "रक्षा का अर्थ है संबल बनना",
+      text: [
+        "क्या रक्षा का मतलब सिर्फ बचाना है?",
+        "बचपन में हमने सुना होगा...\n“भाई को बहन की रक्षा करनी चाहिए।”",
+        "यह रक्षाबंधन की पारंपरिक सोच रही है।\nलेकिन बड़े होकर ज़िंदगी हमें एक नया सच सिखाती है।",
+        "कभी-कभी...\nभाई को बहन की ज़रूरत होती है।\nबहन को भाई की ज़रूरत होती है।\nदोनों को एक-दूसरे के प्यार भरे बोल की ज़रूरत होती है।",
+        "इसलिए...\nरक्षा केवल शारीरिक बल नहीं है।\nरक्षा का सच्चा अर्थ है एक-दूसरे का संबल बनना।"
+      ]
     },
     en: {
       title: "Is Protection Merely About Shielding?",
-      subtitle: "Protection means being each other’s pillar",
-      text: ["Growing up, we often heard...", "“A brother must protect his sister.”", "That has been the traditional thought.", "Yet as we grow older, life reveals a deeper truth.", "Sometimes...", "A brother needs his sister's strength.", "A sister needs her brother's comfort.", "Both need each other's reassuring words.", "Thus...", "Protection is not merely physical strength.", "Protection means being a pillar of support for one another."]
+      subtitle: "Protection means being a pillar of support",
+      text: [
+        "Is protection merely about shielding?",
+        "In our childhood, we grew up hearing:\n“A brother must protect his sister.”",
+        "That is a traditional concept of Raksha Bandhan.\nYet as we grow older, life teaches us another truth.",
+        "Sometimes...\nA brother needs his sister's strength.\nA sister needs her brother's comfort.\nBoth need each other's reassuring words.",
+        "That is why...\nProtection is not merely physical strength.\nProtection means being a pillar of support for one another."
+      ]
     }
   },
   {
@@ -870,17 +913,32 @@ const pages = [
     te: {
       title: "చెల్లి కూడా రక్షించగలదు",
       subtitle: "అతని కష్టంలో ధైర్యం చెప్పడం",
-      text: ["ఒక అన్నయ్య బయట ప్రపంచంతో పోరాడుతూ ఉండవచ్చు.", "కానీ ఇంటికి వచ్చినప్పుడు...", "తన చెల్లితో మాట్లాడవచ్చు.", "ఆమె మాట వినవచ్చు.", "తన బాధను పంచుకోవచ్చు.", "అలాగే...", "ఒక చెల్లి తన అన్నయ్య కష్టాల్లో ఉన్నప్పుడు అతనికి ధైర్యం చెప్పవచ్చు.", "అతని వైఫల్యంలో అతనితో ఉండవచ్చు.", "అతని విజయాన్ని తన విజయంలా ఆనందించవచ్చు.", "అది కూడా ఒక రకమైన రక్షణే."]
+      text: [
+        "చెల్లి కూడా రక్షించగలదు",
+        "ఒక అన్నయ్య బయట ప్రపంచంతో పోరాడుతూ ఉండవచ్చు.\nకానీ ఇంటికి వచ్చినప్పుడు...\nఅతనికి కూడా అలసట ఉంటుంది.\nఅతనికి కూడా బాధ ఉంటుంది.\nఅతనికి కూడా ఎవరితోనైనా మాట్లాడాలనిపిస్తుంది.",
+        "అలాంటి సమయంలో...\nచెల్లి ఇచ్చే ధైర్యం,\nఆమె చెప్పే చిన్న మాట,\n“నేను ఉన్నాను అన్నయ్యా” అనే ఆ నమ్మకం...\nఅతనికి కొత్త బలాన్ని ఇస్తుంది.",
+        "రక్షణ అంటే శారీరక బలం మాత్రమే కాదు.\nరక్షణ అంటే ఒకరి మనసుకు ఇచ్చే శాంతి."
+      ]
     },
     hi: {
       title: "बहन भी रक्षा कर सकती है",
-      subtitle: "कठिनाइयों में हौसला देना भी रक्षा है",
-      text: ["एक भाई बाहर की दुनिया से संघर्ष कर रहा हो सकता है।", "लेकिन घर लौटने पर...", "वह अपनी बहन से दिल की बात कह सकता है।", "उसकी बातें सुन सकता है, अपना दर्द बांट सकता है।", "वैसे ही...", "एक बहन अपने भाई के मुश्किल वक्त में उसे हिम्मत देती है।", "उसकी असफलताओं में उसके साथ खड़ी रहती है।", "उसकी जीत को अपनी जीत मानकर खुश होती है।", "यह आत्मीय सहारा भी एक अनमोल रक्षा ही है।"]
+      subtitle: "मुश्किल में हौसला देना",
+      text: [
+        "बहन भी रक्षा कर सकती है",
+        "एक भाई बाहर की दुनिया से संघर्ष कर रहा हो सकता है।\nलेकिन घर लौटने पर...\nवह भी थकता है, उसे भी दर्द होता है,\nउसका भी दिल किसी से बात करने का होता है।",
+        "ऐसे समय में...\nबहन द्वारा दी गई हिम्मत,\nउसकी मीठी बात,\n“मैं हूँ ना भैया” का वह विश्वास...\nउसे नई ताक़त देता है।",
+        "रक्षा सिर्फ शारीरिक ताक़त नहीं है।\nरक्षा मन को दी जाने वाली सच्ची शांति है।"
+      ]
     },
     en: {
-      title: "A Sister Protects Too",
-      subtitle: "Offering courage in times of struggle",
-      text: ["A brother may battle the outside world all day.", "Yet upon returning home...", "He finds solace speaking with his sister.", "She listens to his unsaid pain.", "Likewise...", "A sister instills courage when her brother faces hardships.", "She stands steadfast by him in failures,", "And celebrates his victories as her own.", "That heartfelt emotional shelter is also a divine form of protection."]
+      title: "A Sister Can Protect Too",
+      subtitle: "Giving courage in times of struggle",
+      text: [
+        "A sister can protect too",
+        "A brother may battle the outside world all day.\nYet upon returning home...\nHe too feels exhausted, he too feels sorrow,\nHe too longs to confide in someone.",
+        "In such moments...\nThe courage a sister instills,\nHer gentle words, that faith of\n“I am right here with you, brother”...\nInfuses him with renewed strength.",
+        "Protection is not merely physical might.\nProtection is the peace offered to someone’s heart."
+      ]
     }
   },
   {
@@ -890,17 +948,32 @@ const pages = [
     te: {
       title: "బంధం అంటే బాధ్యత",
       subtitle: "బంధం యొక్క అసలు విలువ",
-      text: ["ప్రేమ అనేది ఒక భావన.", "కానీ బంధం...", "బాధ్యతను కూడా తీసుకువస్తుంది.", "“అతను నా అన్నయ్య.”", "“ఆమె నా చెల్లి.”", "అని చెప్పడం మాత్రమే కాదు.", "అవసరమైనప్పుడు:", "“నేను ఏమి చేయగలను?”", "అని ఆలోచించడం.", "అదే బంధం యొక్క అసలు విలువ."]
+      text: [
+        "బంధం అంటే బాధ్యత",
+        "చిన్నప్పుడు...\nచాక్లెట్ల కోసం గొడవలు.\nటీవీ రిమోట్ కోసం యుద్ధాలు.\nచిన్న విషయాలకే అలిగి కూర్చోవడం.",
+        "కానీ కాలం గడిచేకొద్దీ... మనం నేర్చుకుంటాం —\nబంధం అంటే గెలవడం కాదు,\nబంధం అంటే కలిసి నిలబడడం.",
+        "ఒకరి కష్టంలో మరొకరు నిలబడటమే\nబంధం యొక్క అసలు విలువ."
+      ]
     },
     hi: {
       title: "रिश्ता यानी ज़िम्मेदारी",
       subtitle: "रिश्ते का असली मोल",
-      text: ["प्यार एक सुंदर अहसास है।", "लेकिन रिश्ता...", "अपने साथ ज़िम्मेदारी भी लाता है।", "सिर्फ यह कहना नहीं कि—", "“वह मेरा भाई है।” या “वह मेरी बहन है।”", "बल्कि ज़रूरत पड़ने पर यह सोचना:", "“मैं उनके लिए क्या कर सकता हूँ?”", "यही रिश्ते का सच्चा और गहरा मोल है।"]
+      text: [
+        "रिश्ता यानी ज़िम्मेदारी",
+        "बचपन में...\nचॉकलेट के लिए झगड़े।\nटीवी रिमोट के लिए लड़ाइयां।\nछोटी-छोटी बातों पर रूठना।",
+        "लेकिन समय के साथ... हम सीखते हैं —\nरिश्ता जीतने का नाम नहीं,\nरिश्ता साथ खड़े रहने का नाम है।",
+        "एक-दूसरे के कठिन समय में साथ खड़े रहना ही\nरिश्ते का असली मोल है।"
+      ]
     },
     en: {
       title: "A Bond Means Responsibility",
       subtitle: "The true value of relationships",
-      text: ["Love is a feeling.", "Yet a true bond...", "Brings commitment and responsibility.", "It is not just saying:", "“He is my brother” or “She is my sister.”", "It is asking in moments of need:", "“What can I do for them?”", "That proactive care is the profound essence of a relationship."]
+      text: [
+        "A bond means responsibility",
+        "In childhood...\nSquabbles over chocolates.\nBattles over the TV remote.\nSulking over trivial matters.",
+        "Yet as time passes... we learn —\nA bond is not about winning,\nA bond is about standing together.",
+        "Standing by one another in times of hardship\nIs the true essence of a bond."
+      ]
     }
   },
   {
@@ -910,17 +983,32 @@ const pages = [
     te: {
       title: "జీవితంలో దూరం వచ్చినప్పుడు",
       subtitle: "దూరాలు దాటిన బాల్య బంధం",
-      text: ["ఒకప్పుడు అన్నాచెల్లెళ్లు ఒకే ఇంట్లో పెరిగారు.", "ఒకే గదిలో ఆడుకున్నారు.", "చిన్న విషయాల మీద గొడవపడ్డారు.", "ఒకరి వస్తువులు మరొకరు తీసుకున్నారు.", "అమ్మ దగ్గర ఒకరిపై ఒకరు ఫిర్యాదు చేశారు.", "తర్వాత...", "చదువు కోసం ఒకరు వేరే నగరానికి వెళ్లారు.", "ఉద్యోగం కోసం మరొకరు మరో నగరానికి వెళ్లారు.", "పెళ్లి తర్వాత ఇంకొకరు ఇంకో ఇంటికి వెళ్లారు.", "జీవితం అందరినీ వేర్వేరు దారుల్లోకి తీసుకెళ్లింది.", "కానీ...", "బాల్యంలో ఏర్పడిన బంధం మాత్రం మిగిలిపోయింది."]
+      text: [
+        "జీవితంలో దూరం వచ్చినప్పుడు",
+        "ఒకరోజు వస్తుంది...\nచదువుల కోసం, ఉద్యోగాల కోసం,\nజీవిత బాధ్యతల కోసం...\nమనం వేర్వేరు నగరాలకు వెళ్తాం.",
+        "ఒకే ఇంట్లో ఆడుకున్న ఇద్దరు పిల్లలు...\nరెండు వేర్వేరు ప్రదేశాల్లో జీవించడం మొదలుపెడతారు.",
+        "కానీ రక్షాబంధన్ రోజున...\nఆ చిన్న దారం మనల్ని మళ్లీ ఒకే ఇంటికి తీసుకువస్తుంది.\nమనసులో."
+      ]
     },
     hi: {
       title: "जब ज़िंदगी में दूरियां आ जाएं",
       subtitle: "दूरियों से परे बचपन का रिश्ता",
-      text: ["कभी भाई-बहन एक ही छत के नीचे पले-बढ़े।", "एक ही कमरे में खेले, छोटी-छोटी बातों पर लड़े।", "एक-दूसरे की चीज़ें छीनीं, मां से शिकायतें कीं।", "फिर...", "पढ़ाई के लिए एक अलग शहर चला गया।", "नौकरी के लिए दूसरा कहीं और निकल गया।", "विवाह के बाद ज़िंदगी के रास्ते बदल गए।", "ज़िंदगी सबको अलग-अलग दिशाओं में ले गई,", "लेकिन बचपन में बंधी वह डोर हमेशा दिलों में बंधी रही।"]
+      text: [
+        "जब ज़िंदगी में दूरियां आ जाएं",
+        "एक दिन आता है...\nपढ़ाई के लिए, नौकरी के लिए,\nजीवन की ज़िम्मेदारियों के लिए...\nहम अलग-अलग शहरों में चले जाते हैं।",
+        "एक ही घर में खेले दो बच्चे...\nदो अलग-अलग जगहों पर रहने लगते हैं।",
+        "लेकिन रक्षाबंधन के दिन...\nवह छोटा सा धागा हमें फिर से एक ही घर में ले आता है—\nदिलों के आंगन में।"
+      ]
     },
     en: {
       title: "When Distance Enters Life",
       subtitle: "A childhood bond beyond borders",
-      text: ["Once, siblings grew up under the same roof.", "Playing in the same room, squabbling over trivial toys,", "Tattling to mother with playful innocence.", "Then...", "Higher studies took one to a distant city,", "Careers led another to far-off horizons,", "Marriage ushered new homes and paths.", "Life led everyone in different directions,", "Yet the sacred bond forged in childhood remained unbreakable."]
+      text: [
+        "When distance enters life",
+        "A day arrives...\nFor education, for careers,\nFor life’s responsibilities...\nWe move to different cities.",
+        "Two children who grew up playing in the same house...\nBegin living in two separate places.",
+        "Yet on the day of Raksha Bandhan...\nThat little thread brings us right back to the same home.\nWithin the heart."
+      ]
     }
   },
   {
@@ -929,18 +1017,33 @@ const pages = [
     prompt: "Warm cinematic 3D scene of Indian sister video-calling her brother during Raksha Bandhan. Decorated rakhi thali beside her, brother smiling from another city on smartphone, warm evening light, realistic Indian home, emotional connection, premium 3D animation, no text.",
     te: {
       title: "రాఖీ — ఒక రిమైండర్",
-      subtitle: "సంబంధాలకు సమయం & శ్రద్ధ",
-      text: ["ప్రతి సంవత్సరం రక్షాబంధన్ వచ్చి ఒక చిన్న ప్రశ్న అడుగుతుంది:", "“నువ్వు నీ వాళ్లను చివరిసారి ఎప్పుడు మాట్లాడావు?”", "కొన్నిసార్లు ఒక ఫోన్ కాల్ సరిపోతుంది.", "కొన్నిసార్లు ఒక చిన్న సందేశం.", "కొన్నిసార్లు కలిసి భోజనం చేయడం.", "మరికొన్నిసార్లు...", "ఏమీ చెప్పకుండా పక్కన కూర్చోవడం.", "రాఖీ మనకు గుర్తు చేసేది:", "సంబంధాలకు కూడా శ్రద్ధ అవసరం."]
+      subtitle: "సంబంధాలకు సమయం ఇవ్వడం",
+      text: [
+        "రాఖీ — ఒక రిమైండర్",
+        "మనం ఎంత బిజీగా ఉన్నా...\nజీవితంలో ఎన్ని పనులు ఉన్నా...\nఈ రోజు ఒక విషయాన్ని గుర్తు చేస్తుంది:",
+        "సంబంధాలకు కూడా సమయం ఇవ్వాలి.",
+        "ఒక ఫోన్ కాల్,\nఒక చిన్న నవ్వు,\n“నువ్వు ఎలా ఉన్నావు?” అనే ఒక మాట...\nకొన్నిసార్లు అంతే చాలు."
+      ]
     },
     hi: {
-      title: "राखी — एक प्यारा स्मरण",
-      subtitle: "रिश्तों को समय और अपनत्व की ज़रूरत",
-      text: ["हर साल रक्षाबंधन आकर हमसे एक कोमल सवाल पूछता है:", "“तुमने अपने अपनों से पिछली बार कब बात की थी?”", "कभी-कभी बस एक फोन कॉल काफी होता है।", "कभी एक छोटा सा संदेश, कभी साथ बैठकर भोजन करना,", "और कभी बस चुपचाप पास बैठकर उनका हाथ थाम लेना।", "राखी हमें याद दिलाती है:", "रिश्तों को भी समय, संवार और अपनत्व की ज़रूरत होती है।"]
+      title: "राखी — एक स्मरण",
+      subtitle: "रिश्तों को समय देना",
+      text: [
+        "राखी — एक स्मरण",
+        "हम कितने भी व्यस्त हों...\nज़िंदगी में कितने भी काम हों...\nयह दिन एक बात याद दिलाता है:",
+        "रिश्तों को भी समय देना चाहिए।",
+        "एक फोन कॉल,\nएक छोटी सी मुस्कान,\n“तुम कैसे हो?” का एक प्यार भरा बोल...\nकभी-कभी बस इतना ही काफी होता है।"
+      ]
     },
     en: {
-      title: "Rakhi — A Gentle Reminder",
-      subtitle: "Relationships require time and care",
-      text: ["Every year, Raksha Bandhan arrives with a poignant question:", "“When did you last speak to your loved ones?”", "Sometimes, a single phone call is enough.", "Sometimes a brief message, or sharing a warm meal together.", "And sometimes, just sitting beside them in quiet solidarity.", "Rakhi reminds us:", "Relationships need intentional care and nurturing."]
+      title: "Rakhi — A Reminder",
+      subtitle: "Giving time to relationships",
+      text: [
+        "Rakhi — A reminder",
+        "No matter how busy we are...\nNo matter how packed our days are...\nThis day reminds us of one essential truth:",
+        "We must give time to relationships too.",
+        "A phone call,\nA gentle smile,\nAsking “How are you doing?”...\nSometimes, that is all it takes."
+      ]
     }
   },
   {
@@ -950,17 +1053,32 @@ const pages = [
     te: {
       title: "బహుమతి కంటే గొప్పది",
       subtitle: "తోడుగా ఉన్న జ్ఞాపకం",
-      text: ["రాఖీ రోజు అన్నయ్య చెల్లికి బహుమతి ఇస్తాడు.", "బట్టలు కావచ్చు, డబ్బు కావచ్చు, ఇంకేదైనా కావచ్చు.", "కానీ సంవత్సరాలు గడిచిన తర్వాత...", "మనకు గుర్తుండిపోయేది బహుమతి విలువ కాదు.", "గుర్తుండేది...", "“ఆ రోజు అతను నా పక్కన ఉన్నాడు.”", "“ఆమె నన్ను గుర్తు పెట్టుకుంది.”", "“మేమంతా కలిసి కూర్చున్నాం.”", "అదే కుటుంబ జ్ఞాపకం."]
+      text: [
+        "బహుమతి కంటే గొప్పది",
+        "రక్షాబంధన్ అంటే\nకేవలం బహుమతులు ఇవ్వడం కాదు.",
+        "ఎందుకంటే...\nబహుమతులు పాతబడిపోవచ్చు.\nవస్తువులు పోవచ్చు.",
+        "కానీ...\nఒకరికొకరు ఇచ్చిన మాట,\nకష్టంలో తోడుగా ఉన్న జ్ఞాపకం...\nజీవితాంతం అలాగే ఉంటాయి."
+      ]
     },
     hi: {
       title: "उपहार से भी अनमोल",
-      subtitle: "साथ बिताए पलों की अमिट यादें",
-      text: ["राखी पर भाई बहन को उपहार देता है—", "नए कपड़े, धन या कोई कीमती वस्तु।", "लेकिन वर्षों बाद जब हम मुड़कर देखते हैं...", "तो हमें उपहार का मोल नहीं, बल्कि वे पल याद रहते हैं:", "“उस दिन वह मेरे साथ खड़ा था।”", "“उसने मुझे दिल से याद रखा।”", "“हम सब एक साथ हंसे और बैठे थे।”", "यही परिवार की सबसे अनमोल धरोहर है।"]
+      subtitle: "साथ रहने की पावन स्मृति",
+      text: [
+        "उपहार से भी अनमोल",
+        "रक्षाबंधन का अर्थ\nकेवल उपहार देना नहीं है।",
+        "क्योंकि...\nउपहार पुराने हो सकते हैं,\nवस्तुएं खो सकती हैं।",
+        "लेकिन...\nएक-दूसरे को दिया गया वचन,\nमुश्किल में साथ निभाने की याद...\nज़िंदगी भर यूं ही बनी रहती है।"
+      ]
     },
     en: {
       title: "Greater Than Any Gift",
-      subtitle: "The enduring memory of togetherness",
-      text: ["On Rakhi, a brother presents a gift to his sister—", "Clothes, money, or treasured keepsakes.", "Yet as decades roll by...", "What lingers is never the price tag of the gift.", "What endures is:", "“He stood by me that day.”", "“She remembered me from her heart.”", "“We all gathered together as one family.”", "That shared warmth is the real treasure."]
+      subtitle: "The memory of being there",
+      text: [
+        "Greater than any gift",
+        "Raksha Bandhan is not merely\nAbout presenting material gifts.",
+        "Because...\nGifts can grow old.\nThings can be misplaced.",
+        "Yet...\nThe promise given to one another,\nThe memory of standing together in hard times...\nRemains steadfast for a lifetime."
+      ]
     }
   },
   {
@@ -970,17 +1088,32 @@ const pages = [
     te: {
       title: "పిల్లలకు రక్షాబంధన్ ఎందుకు అవసరం?",
       subtitle: "తరాల సంస్కృతి & విలువలు",
-      text: ["పిల్లలు పండుగలను కేవలం చూస్తూ నేర్చుకోరు. వారు చేస్తూ నేర్చుకుంటారు.", "రాఖీ కట్టేటప్పుడు... వారు ఒక ఆచారాన్ని చూస్తారు.", "మిఠాయి పంచేటప్పుడు... వారు పంచుకోవడం నేర్చుకుంటారు.", "అన్నాచెల్లెళ్లు ఒకరినొకరు ఆశీర్వదించేటప్పుడు... వారు బంధం విలువను నేర్చుకుంటారు.", "తాతయ్య, అమ్మమ్మ కథలు చెప్పేటప్పుడు... వారు తమ కుటుంబ చరిత్రను తెలుసుకుంటారు.", "అందుకే పండుగలు... ఒక తరం నుంచి మరో తరానికి విలువలను తీసుకెళ్లే మార్గాలు."]
+      text: [
+        "పిల్లలకు రక్షాబంధన్ ఎందుకు అవసరం?",
+        "పిల్లలకు మనం పండుగలు నేర్పించడం అంటే...\nకేవలం సంప్రదాయం నేర్పించడం కాదు.",
+        "మనుషులను గౌరవించడం,\nబాధ్యతను అర్థం చేసుకోవడం,\nఒకరికొకరు తోడుగా ఉండటం...\nవీటిని చిన్నప్పటి నుంచే నేర్పించడం.",
+        "రక్షాబంధన్ పిల్లలకు\nసంబంధాల విలువను నేర్పుతుంది."
+      ]
     },
     hi: {
       title: "बच्चों के लिए रक्षाबंधन क्यों ज़रूरी है?",
-      subtitle: "पीढ़ियों के संस्कार और जीवन मूल्य",
-      text: ["बच्चे सिर्फ देखकर नहीं, अनुभव करके सीखते हैं।", "राखी बांधते समय वे अपनी समृद्ध संस्कृति को देखते हैं।", "मिठाई बांटते हुए वे साझेदारी और त्याग सीखते हैं।", "एक-दूसरे को दुआएं देते हुए वे रिश्तों का सम्मान सीखते हैं।", "दादा-दादी से कहानियां सुनते हुए वे अपनी जड़ों को पहचानते हैं।", "इसलिए ये त्यौहार एक पीढ़ी से दूसरी पीढ़ी तक संस्कार पहुंचाने के पावन सेतु हैं।"]
+      subtitle: "संस्कार और जीवन मूल्य",
+      text: [
+        "बच्चों के लिए रक्षाबंधन क्यों ज़रूरी है?",
+        "बच्चों को त्यौहार सिखाने का मतलब...\nसिर्फ परंपरा सिखाना नहीं है।",
+        "इंसानों का सम्मान करना,\nज़िम्मेदारी को समझना,\nएक-दूसरे का साथ निभाना...\nयह बचपन से ही सिखाना है।",
+        "रक्षाबंधन बच्चों को\nरिश्तों की अहमियत सिखाता है।"
+      ]
     },
     en: {
       title: "Why Children Need Raksha Bandhan",
-      subtitle: "Passing culture and values across generations",
-      text: ["Children do not merely observe festivals; they absorb through participation.", "While tying the rakhi, they witness sacred tradition.", "While sharing sweets, they learn the beauty of giving.", "While blessing one another, they discover the sanctity of sibling bonds.", "While grandparents narrate timeless stories, they connect with their heritage.", "Festivals are bridges that transmit timeless values across generations."]
+      subtitle: "Culture and values across generations",
+      text: [
+        "Why children need Raksha Bandhan",
+        "Teaching festivals to children is not merely\nPassing on traditions.",
+        "It is nurturing them from early years\nTo respect people, understand responsibility,\nAnd stand by one another.",
+        "Raksha Bandhan teaches children\nThe true value of relationships."
+      ]
     }
   },
   {
@@ -990,17 +1123,32 @@ const pages = [
     te: {
       title: "రాఖీ కేవలం కుటుంబానికేనా?",
       subtitle: "నమ్మకం, బాధ్యత, ఆప్యాయత",
-      text: ["మనము ఇప్పటివరకు కుటుంబం గురించి మాట్లాడుకున్నాం.", "కానీ భారతీయ సంప్రదాయంలో బంధం అనే భావన కొన్నిసార్లు కుటుంబ సరిహద్దులను దాటి వెళ్తుంది.", "ఒక రాఖీ... ఒక వ్యక్తిని “అన్నయ్య”గా గుర్తించవచ్చు.", "ఒక సంబంధాన్ని కొత్తగా నిర్వచించవచ్చు.", "ఒకరిపై ఒకరికి బాధ్యతను గుర్తు చేయవచ్చు.", "అందుకే... బంధం అంటే కేవలం రక్తం కాదు.", "నమ్మకం కూడా, బాధ్యత కూడా, ఆప్యాయత కూడా."]
+      text: [
+        "రాఖీ కేవలం కుటుంబానికేనా?",
+        "రక్తం పంచుకు పుట్టిన వారికేనా రాఖీ?\nలేదా...\nజీవితంలో మనకు తోడుగా నిలిచిన ప్రతి ఒక్కరికీనా?",
+        "ఒక స్నేహితుడు, ఒక గురువు,\nకష్టంలో చేయి అందించిన ఒక మంచి మనిషి...",
+        "ఎవరితోనైనా నమ్మకం, బాధ్యత, ఆప్యాయత ఉంటే...\nఅక్కడ ఒక రక్షాబంధన్ ఉంటుంది."
+      ]
     },
     hi: {
-      title: "क्या राखी सिर्फ परिवार तक सीमित है?",
-      subtitle: "विश्वास, कर्तव्य और अटूट स्नेह",
-      text: ["हमने अब तक परिवार की बात की।", "लेकिन भारतीय संस्कृति में रिश्ते की भावना चारदीवारी को लांघकर पूरे समाज को जोड़ती है।", "एक पवित्र राखी किसी को भी 'भाई' का सम्मान दे सकती है।", "एक नए रिश्ते को जन्म देकर कर्तव्यबोध जगा सकती है।", "इसलिए रिश्ता सिर्फ खून का नहीं होता—", "यह विश्वास, उत्तरदायित्व और निस्वार्थ प्रेम का पावन बंधन है।"]
+      title: "क्या राखी सिर्फ परिवार के लिए है?",
+      subtitle: "विश्वास, ज़िम्मेदारी और स्नेह",
+      text: [
+        "क्या राखी सिर्फ परिवार के लिए है?",
+        "क्या राखी सिर्फ खून के रिश्तों के लिए है?\nया...\nज़िंदगी में हमारा साथ देने वाले हर इंसान के लिए?",
+        "एक सच्चा मित्र, एक गुरु,\nया मुश्किल में हाथ थामने वाला कोई नेक इंसान...",
+        "जहाँ भी विश्वास, ज़िम्मेदारी और अपनापन हो...\nवहीं एक रक्षाबंधन होता है।"
+      ]
     },
     en: {
-      title: "Is Rakhi Confined Only to the Family?",
-      subtitle: "Trust, responsibility, and pure affection",
-      text: ["We have spoken of the immediate family so far.", "Yet Indian tradition expands the concept of kinship beyond household walls.", "A rakhi can sanctify any trusted person as a brother.", "It can redefine relationships and awaken universal brotherhood.", "Thus, kinship is not defined by blood alone—", "It is built on trust, noble responsibility, and unconditional affection."]
+      title: "Is Rakhi Only for Family?",
+      subtitle: "Trust, responsibility, affection",
+      text: [
+        "Is Rakhi only for family?",
+        "Is Rakhi only for those born of the same blood?\nOr...\nFor everyone who stood by us in life?",
+        "A loyal friend, a guiding teacher,\nA kind soul who lent a helping hand in distress...",
+        "Wherever there is trust, responsibility, and affection...\nThere lives a true Raksha Bandhan."
+      ]
     }
   },
   {
@@ -1010,17 +1158,29 @@ const pages = [
     te: {
       title: "రక్షణకు మరో రూపం",
       subtitle: "ఇంటి రక్షణ నుండి దేశ రక్షణ వరకు",
-      text: ["ఇప్పుడు... మన కుటుంబం బయటికి చూద్దాం.", "మన నగరాలు ప్రశాంతంగా ఉన్నాయి. మన పిల్లలు పాఠశాలకు వెళ్తున్నారు.", "మన కుటుంబాలు పండుగలు జరుపుకుంటున్నాయి. మన ఇళ్లలో దీపాలు వెలుగుతున్నాయి.", "కానీ... దేశం మరో చివరలో ఎవరో తమ విధిలో ఉన్నారు.", "వారికి పండుగ రోజు కూడా డ్యూటీ ఉంటుంది.", "వారికి కుటుంబం గుర్తొస్తుంది, కానీ బాధ్యత ముందుంటుంది.", "వారు మన భారత సైనికులు."]
+      text: [
+        "రక్షణకు మరో రూపం",
+        "ఇంట్లో అన్నయ్య లేదా చెల్లి రక్షణ ఒకటైతే...\nమనం ప్రశాంతంగా నిద్రపోవడానికి\nవేల కిలోమీటర్ల దూరంలో\nఎండనకా, వాననకా, మంచునకా...\nసరిహద్దుల్లో కాపలా కాసే సైనికుల రక్షణ మరొకటి.",
+        "మన ఇళ్లలో పండుగలు జరుగుతున్నప్పుడు...\nసరిహద్దుల్లో ఒక సైనికుడు\nతుపాకీ పట్టుకుని నిలబడి ఉంటాడు."
+      ]
     },
     hi: {
-      title: "रक्षा का एक और विराट रूप",
-      subtitle: "घर की देहरी से लेकर देश की सीमा तक",
-      text: ["आइए अब अपनी घर की चौखट से बाहर झांकें।", "हमारे शहर शांत हैं, बच्चे सुरक्षित स्कूल जा रहे हैं,", "घरों में उत्सव की रोशनी है और परिवार मुस्कुरा रहे हैं।", "लेकिन देश के सुदूर छोर पर कोई अपने कर्तव्य पर डटा है।", "त्यौहार के दिन भी उनकी आंखों में मातृभूमि की सुरक्षा का पहरा है।", "उन्हें अपने घर की याद आती है, पर फर्ज सबसे पहले आता है—", "वे हैं हमारे वीर भारतीय सैनिक!"]
+      title: "रक्षा का एक और रूप",
+      subtitle: "घर की देहरी से देश की सीमा तक",
+      text: [
+        "रक्षा का एक और रूप",
+        "घर में भाई या बहन की रक्षा एक बात है...\nलेकिन हमारे सुकून से सोने के लिए\nहज़ारों किलोमीटर दूर\nधूप, बारिश और बर्फ में...\nसरहदों पर पहरा देने वाले सैनिकों की रक्षा दूसरी बात है।",
+        "जब हमारे घरों में त्यौहार मन रहे होते हैं...\nतब सरहद पर एक सैनिक\nबंदूक थामे मुस्तैद खड़ा रहता है।"
+      ]
     },
     en: {
-      title: "Another Dimension of Protection",
-      subtitle: "From the hearth of home to the nation’s borders",
-      text: ["Now, let us gaze beyond our doorstep.", "Our cities thrive peacefully, our children attend schools safely,", "Festive lamps illuminate our homes, and families celebrate joyfully.", "Yet at the nation’s far-flung borders, brave souls stand vigil on duty.", "Even on festive days, duty takes precedence over celebration.", "They miss their families, yet the motherland comes first—", "They are our brave Indian soldiers."]
+      title: "Another Form of Protection",
+      subtitle: "From domestic safety to national defense",
+      text: [
+        "Another form of protection",
+        "While sibling protection at home is one realm...\nThe vigilance of soldiers stationed thousands of miles away\nIn scorching heat, rain, and freezing snow\nSo that we may sleep in peace, is another.",
+        "While festivals light up our homes...\nA brave soldier stands vigil on the frontier,\nHolding his rifle with steadfast resolve."
+      ]
     }
   },
   {
@@ -1030,17 +1190,32 @@ const pages = [
     te: {
       title: "పండుగ రోజున కూడా విధి",
       subtitle: "సరిహద్దుల్లో కర్తవ్య దీక్ష",
-      text: ["ఒక సైనికుడికి రక్షాబంధన్ రోజు... ఇంట్లో ఉండి రాఖీ కట్టించుకునే రోజు కాకపోవచ్చు.", "అతను సరిహద్దులో ఉండవచ్చు, మంచుతో నిండిన ప్రాంతంలో ఉండవచ్చు,", "ఎడారి ప్రాంతంలో ఉండవచ్చు, సముద్రంలో ఉండవచ్చు.", "అత్యంత కఠినమైన పరిస్థితుల్లో విధి నిర్వహిస్తూ ఉండవచ్చు.", "అతని కుటుంబం మాత్రం... ఇంట్లో అతని కోసం ఎదురుచూస్తూ ఉండవచ్చు."]
+      text: [
+        "పండుగ రోజున కూడా విధి",
+        "రక్షాబంధన్ రోజున...\nమనం మన కుటుంబంతో నవ్వుతూ గడుపుతాం.",
+        "కానీ అదే రోజున...\nహిమాలయాల మంచు కొండల్లో,\nఎడారి ఇసుక తిన్నెలపై,\nదట్టమైన అడవుల్లో...\nఒక సైనికుడు తన చేతికి రాఖీ లేకపోయినా,\nతన బాధ్యతను మోస్తూ నిలబడతాడు.",
+        "ఎందుకంటే...\nఅతని రక్షణలో ఒక ఇల్లు మాత్రమే లేదు,\nకోట్లాది ఇళ్లు ఉన్నాయి."
+      ]
     },
     hi: {
-      title: "त्यौहार के दिन भी कर्तव्य की वेदी पर",
-      subtitle: "सीमाओं पर सजग निष्ठा",
-      text: ["एक सैनिक के लिए रक्षाबंधन का दिन घर बैठकर राखी बंधवाने का दिन नहीं होता।", "वह सियाचिन की बर्फीली चोटियों पर हो सकता है,", "थार के तपते रेगिस्तान में या हिंद महासागर की लहरों पर।", "अत्यंत विषम परिस्थितियों में वह देश की ढाल बना खड़ा रहता है,", "जबकि उसका परिवार घर पर उसकी सलामती की राह देखता रहता है।"]
+      title: "त्यौहार के दिन भी कर्तव्य",
+      subtitle: "सरहदों पर सजग निष्ठा",
+      text: [
+        "त्यौहार के दिन भी कर्तव्य",
+        "रक्षाबंधन के दिन...\nहम अपने परिवार के साथ मुस्कुराते हुए समय बिताते हैं।",
+        "लेकिन उसी दिन...\nहिमालय की बर्फीली चोटियों पर,\nरेगिस्तान के टीलों पर,\nघने जंगलों में...\nएक सैनिक अपनी कलाई पर राखी न होने पर भी,\nअपनी ज़िम्मेदारी निभाते हुए खड़ा रहता है।",
+        "क्योंकि...\nउसकी सुरक्षा में सिर्फ एक घर नहीं,\nकरोड़ों घर होते हैं।"
+      ]
     },
     en: {
       title: "Duty Even on Festive Days",
-      subtitle: "Vigilant devotion at the frontiers",
-      text: ["For a soldier, Raksha Bandhan may not be a day of resting at home.", "He stands guard on freezing Himalayan peaks,", "In scorching desert sands, or patrolling stormy ocean waves.", "Performing duty amidst the harshest trials,", "While back home, his family gazes at the doorway, praying for his safe return."]
+      subtitle: "Vigilant duty at the frontiers",
+      text: [
+        "Duty even on festive days",
+        "On Raksha Bandhan...\nWe spend joyful moments with our family.",
+        "Yet on that very day...\nIn Himalayan snow peaks,\nAcross desert sands, and in dense jungles...\nA soldier stands bearing his duty,\nEven without a rakhi on his wrist.",
+        "Because...\nIn his protection lies not just one home,\nBut hundreds of millions of homes."
+      ]
     }
   },
   {
@@ -1050,17 +1225,29 @@ const pages = [
     te: {
       title: "ఒక తల్లి ఎదురుచూపు",
       subtitle: "మాతృ హృదయం",
-      text: ["ఒక తల్లి తన కొడుకు చేతికి ప్రతి సంవత్సరం రాఖీ కట్టేది.", "ఈ సంవత్సరం... ఆమె చేతిలో రాఖీ ఉంది. కానీ కొడుకు ఇంట్లో లేడు.", "ఆమె రాఖీని జాగ్రత్తగా ఉంచుతుంది. ఫోన్ చేస్తుంది.", "“జాగ్రత్తగా ఉండు బిడ్డా.” అని చెబుతుంది.", "ఆ ఒక్క వాక్యంలో... ఒక తల్లి ప్రేమ ఉంది. ఒక కుటుంబం భయం ఉంది. ఒక దేశం మీద నమ్మకం ఉంది."]
+      text: [
+        "ఒక తల్లి ఎదురుచూపు",
+        "ఒక సైనికుడు సరిహద్దులో ఉంటే...\nఇంట్లో ఒక తల్లి ఉంటుంది.\nఒక చెల్లి ఉంటుంది.\nఒక భార్య ఉంటుంది.\nఒక కుటుంబం ఉంటుంది.",
+        "ప్రతి పండుగకు వారు అతని కోసం ఎదురుచూస్తారు.\nఒక ఫోన్ కాల్ వస్తే...\n“నేను బాగున్నాను అమ్మా”\nఅనే ఆ ఒక్క మాటే వారికి పెద్ద పండుగ."
+      ]
     },
     hi: {
       title: "एक मां का इंतज़ार",
-      subtitle: "मातृ हृदय का मौन समर्पण",
-      text: ["एक मां हर साल अपने फौजी बेटे की कलाई पर राखी बांधा करती थी।", "इस साल हाथ में राखी है, पर बेटा सरहद पर तैनात है।", "वह उस राखी को संभालकर रखती है, फोन मिलाती है और बस कहती है:", "“अपना ध्यान रखना बेटा...”", "उस एक वाक्य में मां की असीम ममता, परिवार की चिंता और राष्ट्र के प्रति अटूट गौरव समाया है।"]
+      subtitle: "मातृ हृदय की पुकार",
+      text: [
+        "एक मां का इंतज़ार",
+        "एक सैनिक जब सरहद पर होता है...\nतब घर में एक मां होती है,\nएक बहन होती है,\nएक पत्नी होती है,\nएक पूरा परिवार होता है।",
+        "हर त्यौहार पर वे उसकी राह तकते हैं।\nएक फोन कॉल आने पर...\n“मैं ठीक हूँ माँ”\nका वह एक वाक्य ही उनके लिए सबसे बड़ा त्यौहार बन जाता है।"
+      ]
     },
     en: {
-      title: "A Mother’s Silent Vigil",
+      title: "A Mother's Waiting",
       subtitle: "The boundless maternal heart",
-      text: ["Every year, a mother lovingly tied a rakhi upon her son's wrist.", "This year, the rakhi rests in her palms, but her son stands on the frontlines.", "She treasures the sacred thread, dials his number, and whispers:", "“Take care of yourself, my child.”", "In that single sentence resonates a mother’s infinite love, a family’s quiet anxiety, and an unwavering faith in the nation."]
+      text: [
+        "A mother's waiting",
+        "When a soldier is on the border...\nAt home there is a mother.\nA sister. A spouse. A whole family.",
+        "Every festive season, they wait for his return.\nWhen a phone call rings...\nHearing just “I am doing well, Mother”\nBecomes their greatest celebration."
+      ]
     }
   },
   {
@@ -1070,17 +1257,29 @@ const pages = [
     te: {
       title: "సరిహద్దులో ఒక రాఖీ",
       subtitle: "కోట్లాది చెల్లెళ్ల రక్ష",
-      text: ["ఇంకో వైపు... ఒక సైనికుడి చేతికి ఒక రాఖీ కట్టబడుతోంది.", "అది అతని సొంత చెల్లి కట్టిన రాఖీ కాకపోవచ్చు.", "కానీ ఆ రాఖీ ఒక సందేశాన్ని తీసుకువస్తుంది:", "“మీరు మా కోసం నిలబడి ఉన్నారు. మేము మిమ్మల్ని మర్చిపోలేదు.”", "భారతదేశంలోని వివిధ ప్రాంతాల్లో సైనికులు, సాయుధ దళాలకు రాఖీలు కట్టే కార్యక్రమాలు కుటుంబ బంధాన్ని దేశ సేవతో కలుపుతాయి."]
+      text: [
+        "సరిహద్దులో ఒక రాఖీ",
+        "ప్రతి సంవత్సరం...\nభారతదేశంలోని వేలాది మంది ఆడపడుచులు\nసరిహద్దుల్లో ఉన్న సైనికులకు రాఖీలు పంపుతారు.",
+        "ఆ రాఖీ కేవలం ఒక దారం కాదు.\n“మీరు అక్కడ ఉన్నారు కాబట్టే మేము ఇక్కడ ప్రశాంతంగా ఉన్నాం”\nఅని ఒక దేశం సైనికుడికి చెప్పే కృతజ్ఞత."
+      ]
     },
     hi: {
       title: "सरहद पर एक राखी",
       subtitle: "करोड़ों बहनों की दुआएं",
-      text: ["सरहद की चौकी पर एक जवान की कलाई पर राखी बांधी जा रही है।", "शायद यह उसकी अपनी सगी बहन की बांधी राखी न हो,", "लेकिन यह धागा पूरे देश का यह संदेश लेकर आया है:", "“आप हमारे लिए पहरा दे रहे हैं, हम आपको कभी नहीं भूले।”", "यह पावन दृश्य घरेलू प्रेम को राष्ट्र सेवा के महायज्ञ से जोड़ देता है।"]
+      text: [
+        "सरहद पर एक राखी",
+        "हर साल...\nभारत की हज़ारों बहनें\nसरहदों पर तैनात सैनिकों को राखियां भेजती हैं।",
+        "वह राखी सिर्फ एक धागा नहीं है।\n“आप वहां हैं, इसीलिए हम यहां चैन से हैं”\nयह पूरे देश द्वारा सैनिक को दी जाने वाली सच्ची कृतज्ञता है।"
+      ]
     },
     en: {
       title: "A Rakhi at the Border",
-      subtitle: "The blessings of millions of sisters",
-      text: ["At a forward military post, a rakhi is tied around a soldier’s wrist.", "It may not be tied by his biological sister,", "Yet that thread carries the heartfelt gratitude of an entire nation:", "“You stand guard for us; we have never forgotten you.”", "This bridges familial love with supreme national service."]
+      subtitle: "Blessings of millions of sisters",
+      text: [
+        "A rakhi at the border",
+        "Every year...\nThousands of women across India\nSend handmade rakhis to soldiers on the frontiers.",
+        "That rakhi is not just a thread.\nIt is an entire nation expressing heartfelt gratitude:\n“Because you stand guard there, we live peacefully here.”"
+      ]
     }
   },
   {
@@ -1090,17 +1289,32 @@ const pages = [
     te: {
       title: "కానీ ఒక రాఖీ వారి త్యాగాన్ని కొలవగలదా?",
       subtitle: "నిస్వార్థ త్యాగం",
-      text: ["లేదు. ఒక రాఖీ... ఒక పుష్పగుచ్ఛం... ఒక ధన్యవాదం... వారి త్యాగం యొక్క పూర్తి విలువను కొలవలేవు.", "ఎందుకంటే ఒక సైనికుడి వెనుక ఒక కుటుంబం ఉంటుంది.", "అతను విధిలో ఉన్నప్పుడు... తల్లి ఎదురుచూస్తుంది, తండ్రి ఎదురుచూస్తాడు, భార్య లేదా భర్త ఎదురుచూస్తారు, పిల్లలు ఎదురుచూస్తారు, అన్నాచెల్లెళ్లు ఎదురుచూస్తారు."]
+      text: [
+        "కానీ ఒక రాఖీ వారి త్యాగాన్ని కొలవగలదా?",
+        "మనం ఇచ్చే రాఖీ వారి ప్రాణాల కంటే పెద్దదా?\nకాదు.",
+        "వారి త్యాగాన్ని ఏ బహుమతీ కొలవలేదు.\nవారి సమయాన్ని ఏ పండుగా తిరిగి ఇవ్వలేదు.",
+        "మనం చేయగలిగినదల్లా ఒక్కటే —\nవారి సేవను మర్చిపోకుండా ఉండడం.\nవారి త్యాగాన్ని గౌరవించడం."
+      ]
     },
     hi: {
-      title: "क्या एक राखी उनके बलिदान का मोल चुका सकती है?",
-      subtitle: "निस्वार्थ और असीम त्याग",
-      text: ["नहीं! कोई राखी, पुष्पगुच्छ या धन्यवाद उनके सर्वोच्च त्याग का मोल नहीं चुका सकते।", "क्योंकि हर वर्दीधारी के पीछे एक पूरा परिवार सांस लेता है।", "जब वह सीमा पर तैनात होता है, तब घर पर माता-पिता, जीवनसाथी, मासूम बच्चे और भाई-बहन हर पल उसकी राह तकते हैं।"]
+      title: "क्या एक राखी उनके बलिदान को नाप सकती है?",
+      subtitle: "निस्वार्थ त्याग",
+      text: [
+        "क्या एक राखी उनके बलिदान को नाप सकती है?",
+        "क्या हमारी दी हुई राखी उनके जीवन से बड़ी है?\nनहीं।",
+        "उनके बलिदान को कोई उपहार नहीं नाप सकता।\nउनके समय को कोई त्यौहार लौटा नहीं सकता।",
+        "हम बस इतना कर सकते हैं —\nउनकी सेवा को कभी न भूलें,\nऔर उनके सर्वोच्च बलिदान का सदा आदर करें।"
+      ]
     },
     en: {
       title: "Can a Rakhi Measure Their Sacrifice?",
-      subtitle: "Selfless devotion beyond measure",
-      text: ["No single rakhi, floral tribute, or word of thanks can measure the depth of their sacrifice.", "Behind every soldier stands an entire family holding its breath.", "While he braves danger on duty, parents, spouses, children, and siblings wait with endless prayers."]
+      subtitle: "Selfless sacrifice beyond measure",
+      text: [
+        "Can a rakhi measure their sacrifice?",
+        "Is the rakhi we offer greater than their lives?\nNo.",
+        "No gift can measure their supreme sacrifice.\nNo festival can return their lost moments.",
+        "All we can do is this —\nNever forget their selfless service,\nAnd deeply revere their sacrifice."
+      ]
     }
   },
   {
@@ -1110,17 +1324,32 @@ const pages = [
     te: {
       title: "కొందరు తిరిగి రారు",
       subtitle: "అమరవీరుల స్మరణ",
-      text: ["ఇది రక్షాబంధన్ కథలో అత్యంత నిశ్శబ్దమైన భాగం.", "కొంతమంది సైనికులు... తమ కుటుంబాల దగ్గరకు తిరిగి రారు.", "వారి చివరి ప్రయాణం ఒక కుటుంబం జీవితాన్ని శాశ్వతంగా మార్చేస్తుంది.", "ఒక తల్లి తన కొడుకును, ఒక చెల్లి తన అన్నయ్యను, ఒక భార్య తన భర్తను, ఒక పిల్లవాడు తన తండ్రిని కోల్పోతాడు.", "ఒక సైనికుడి త్యాగం... అతని కుటుంబం కూడా మోసే త్యాగమే."]
+      text: [
+        "కొందరు తిరిగి రారు",
+        "కొందరు సైనికులు...\nపండుగలకు ఇంటికి రారు.\nమరుసటి సంవత్సరానికి కూడా రారు.\nఎప్పటికీ తిరిగి రారు.",
+        "వారు దేశం కోసం తమ ప్రాణాలను ఇస్తారు.",
+        "ఆ సమయంలో...\nవారి చేతికి కట్టిన రాఖీ ఒక జ్ఞాపకంగా మిగిలిపోతుంది.\nవారి త్యాగం ఒక చరిత్రగా నిలిచిపోతుంది."
+      ]
     },
     hi: {
-      title: "कुछ वीर कभी लौटकर नहीं आते",
-      subtitle: "अमर शहीदों को नमन",
-      text: ["यह रक्षाबंधन की गाथा का सबसे शांत और भावुक अध्याय है।", "कुछ वीर सपूत कभी अपने घर लौटकर नहीं आते।", "उनकी शहादत उस परिवार की दुनिया सदा के लिए बदल देती है।", "एक मां अपना लाल, एक बहन अपना प्यारा भाई, और एक बच्चा अपने पिता को खो देता है।", "सैनिक का बलिदान सिर्फ उसका नहीं, उसके पूरे परिवार का भी होता है।"]
+      title: "कुछ वीर लौटकर नहीं आते",
+      subtitle: "अमर शहीदों का स्मरण",
+      text: [
+        "कुछ वीर लौटकर नहीं आते",
+        "कुछ सैनिक...\nत्यौहार पर घर नहीं आते।\nअगले साल भी नहीं आते।\nकभी लौटकर नहीं आते।",
+        "वे देश के लिए अपने प्राण न्योछावर कर देते हैं।",
+        "उस पल...\nउनकी कलाई पर बंधी राखी एक अनमोल स्मृति बन जाती है,\nऔर उनका बलिदान इतिहास में अमर हो जाता है।"
+      ]
     },
     en: {
       title: "Some Never Return",
       subtitle: "Remembering the immortal martyrs",
-      text: ["This is the most solemn chapter in the story of Raksha Bandhan.", "Some brave soldiers never return to their families.", "Their supreme martyrdom permanently alters the lives of their loved ones.", "A mother loses her son, a sister her brother, a child a father.", "A soldier’s sacrifice is borne silently by the entire family."]
+      text: [
+        "Some never return",
+        "Some soldiers...\nDo not return home for festivals.\nNor do they return the following year.\nThey never return.",
+        "They lay down their lives for the nation.",
+        "In that solemn moment...\nThe rakhi tied to their wrist remains a sacred memory.\nTheir sacrifice becomes immortal history."
+      ]
     }
   },
   {
@@ -1130,17 +1359,32 @@ const pages = [
     te: {
       title: "దేశం అంటే ఎవరు?",
       subtitle: "మహా భారతం — జాతి సమైక్యత",
-      text: ["దేశం అంటే కేవలం ఒక మ్యాప్ కాదు.", "దేశం అంటే మన ఇళ్లు, మన కుటుంబాలు, మన పిల్లలు, మన పాఠశాలలు, మన పొలాలు, మన నగరాలు.", "మన దేవాలయాలు, మసీదులు, చర్చిలు, గురుద్వారాలు. మన భాషలు, మన సంస్కృతులు, మన జ్ఞాపకాలు.", "ఈ జీవితం సురక్షితంగా కొనసాగేందుకు... ఎవరో తమ జీవితాన్ని బాధ్యతగా తీసుకుంటారు."]
+      text: [
+        "దేశం అంటే ఎవరు?",
+        "దేశం అంటే కేవలం భూమి కాదు.\nదేశం అంటే సరిహద్దులు మాత్రమే కాదు.",
+        "దేశం అంటే —\nఇళ్లలో ఉన్న కుటుంబాలు,\nపాఠశాలలకు వెళ్లే పిల్లలు,\nపొలాల్లో కష్టపడే రైతులు,\nవీధుల్లో తిరిగే సామాన్య ప్రజలు,\nమనం రోజూ చూసే ప్రతి మనిషి.",
+        "వీరందరినీ కాపాడటమే\nనిజమైన “రక్ష”."
+      ]
     },
     hi: {
-      title: "राष्ट्र आखिर है कौन?",
+      title: "देश आखिर कौन है?",
       subtitle: "अखंड भारत — राष्ट्रीय एकता",
-      text: ["देश केवल एक नक्शा या भूभाग नहीं है।", "देश है हमारे घर, हमारे आंगन, हंसते-खेलते बच्चे, हमारे खेत और जीवंत शहर।", "हमारे मंदिर, मस्जिद, गुरुद्वारे और चर्च; हमारी भाषाएं, संस्कृतियां और साझा यादें।", "ताकि यह जीवन निर्बाध महकता रहे, कोई सरहद पर अपनी जवानी न्योछावर कर रहा है।"]
+      text: [
+        "देश आखिर कौन है?",
+        "देश केवल भूमि का टुकड़ा नहीं है।\nदेश सिर्फ सीमाएं नहीं हैं।",
+        "देश यानी —\nघरों में बसे परिवार,\nस्कूल जाते बच्चे,\nखेतों में पसीना बहाते किसान,\nसड़कों पर चलते आम लोग,\nऔर हर वह इंसान जिसे हम रोज़ देखते हैं।",
+        "इन सब की रक्षा करना ही\nसच्ची “रक्षा” है।"
+      ]
     },
     en: {
       title: "Who is the Nation?",
       subtitle: "Great India — National unity and harmony",
-      text: ["A nation is not merely lines on a map.", "The nation is our homes, our families, our children, our schools, farms, and bustling cities.", "Our temples, mosques, churches, and gurudwaras; our languages, cultures, and shared memories.", "So that this life continues safely, noble sentinels shoulder the duty of vigilance."]
+      text: [
+        "Who is the nation?",
+        "A nation is not merely physical land.\nA nation is not only borders on a map.",
+        "A nation is —\nFamilies thriving in homes,\nChildren walking to school,\nFarmers toiling in fields,\nEveryday citizens on the streets,\nEvery single soul we encounter each day.",
+        "Protecting all of them\nIs the true essence of “Raksha”."
+      ]
     }
   },
   {
@@ -1150,17 +1394,35 @@ const pages = [
     te: {
       title: "“రక్ష” — ఒక కుటుంబం నుంచి ఒక దేశం వరకు",
       subtitle: "అఖండ రక్షా ప్రవాహం",
-      text: ["ఒక చెల్లి: “నా అన్నయ్య సురక్షితంగా ఉండాలి” అని కోరుతుంది.", "ఒక తల్లి: “నా బిడ్డ సురక్షితంగా ఉండాలి” అని కోరుతుంది.", "ఒక కుటుంబం: “మా వాళ్లు సురక్షితంగా ఉండాలి” అని కోరుతుంది.", "ఒక దేశం: “మన దేశం సురక్షితంగా ఉండాలి” అని కోరుతుంది.", "ఇక్కడ... రక్ష అనే భావన కుటుంబం నుంచి దేశం వరకు విస్తరిస్తుంది."]
+      text: [
+        "“రక్ష” — ఒక కుటుంబం నుంచి ఒక దేశం వరకు",
+        "చెల్లి అన్నయ్యకు రాఖీ కడుతుంది.\nఅన్నయ్య చెల్లికి అండగా ఉంటాడు.",
+        "తల్లి పిల్లలను కాపాడుతుంది.\nకుటుంబం ఒకరికొకరు తోడుగా ఉంటుంది.",
+        "సమాజం ఒకరికొకరు సహాయం చేసుకుంటుంది.\nసైనికుడు దేశాన్ని రక్షిస్తాడు.",
+        "రక్ష అనేది ఒక చిన్న దారంతో మొదలై...\nఒక దేశం మొత్తం విస్తరిస్తుంది."
+      ]
     },
     hi: {
-      title: "“रक्षा” — एक परिवार से लेकर पूरे राष्ट्र तक",
+      title: "“रक्षा” — एक परिवार से एक देश तक",
       subtitle: "अखंड रक्षा का पावन प्रवाह",
-      text: ["एक बहन कहती है: “मेरा भाई सुरक्षित रहे।”", "एक मां मनाती है: “मेरा बच्चा सलामत रहे।”", "एक परिवार चाहता है: “हमारे अपने खुशहाल रहें।”", "और एक राष्ट्र पुकारता है: “हमारा भारतवर्ष सुरक्षित रहे!”", "यही वह क्षण है जब रक्षा की भावना घर से निकलकर राष्ट्र-चेतना बन जाती है।"]
+      text: [
+        "“रक्षा” — एक परिवार से एक देश तक",
+        "बहन भाई को राखी बांधती है।\nभाई बहन का संबल बनता है।",
+        "मां बच्चों की रक्षा करती है।\nपरिवार एक-दूसरे का साथ देता है।",
+        "समाज एक-दूसरे की मदद करता है।\nसैनिक देश की रक्षा करता है।",
+        "रक्षा की यह पावन भावना एक छोटे से धागे से शुरू होकर...\nपूरे राष्ट्र में फैल जाती है।"
+      ]
     },
     en: {
-      title: "“Raksha” — From a Single Family to the Entire Nation",
-      subtitle: "The luminous stream of universal protection",
-      text: ["A sister prays: “May my brother be safe.”", "A mother wishes: “May my child prosper.”", "A family hopes: “May our loved ones be protected.”", "The nation declares: “May our motherland remain invincible!”", "Here, the virtue of Raksha expands from personal love to national solidarity."]
+      title: "“Raksha” — From a Family to a Nation",
+      subtitle: "The stream of universal protection",
+      text: [
+        "“Raksha” — From a family to a nation",
+        "A sister ties rakhi to her brother.\nA brother stands as a shield for his sister.",
+        "A mother protects her children.\nA family stands firmly beside one another.",
+        "Society assists one another.\nA soldier defends the nation.",
+        "Raksha begins with a humble thread...\nAnd expands across the entire nation."
+      ]
     }
   },
   {
@@ -1170,17 +1432,32 @@ const pages = [
     te: {
       title: "కానీ సైనికులు కూడా ఎవరికో సోదరులే",
       subtitle: "యూనిఫాం వెనుక మనిషి",
-      text: ["ఇది మనం మర్చిపోకూడని విషయం. సైనికుడు ముందుగా... ఒక మనిషి.", "అతను ఎవరికో: అన్నయ్య, తమ్ముడు, కొడుకు, భర్త, తండ్రి, స్నేహితుడు.", "అతను యూనిఫాం వేసుకున్నప్పుడు మనం అతని బాధ్యతను చూస్తాం. కానీ అతని కుటుంబం అతని మనసును చూస్తుంది.", "అందుకే సైనికుడి త్యాగాన్ని గుర్తు చేసుకోవడం అంటే... అతని కుటుంబాన్ని కూడా గుర్తు చేసుకోవడం."]
+      text: [
+        "కానీ సైనికులు కూడా ఎవరికో సోదరులే",
+        "మనం సైనికుడిని చూసినప్పుడు\nయూనిఫాం చూస్తాం.\nఆయుధం చూస్తాం.\nధైర్యం చూస్తాం.",
+        "కానీ ఆ యూనిఫాం వెనుక...\nఒక అన్నయ్య ఉన్నాడు.\nఒక తమ్ముడు ఉన్నాడు.\nఒక కొడుకు ఉన్నాడు.\nఒక తండ్రి ఉన్నాడు.",
+        "అతని హృదయంలో కూడా\nతన కుటుంబం గురించిన ప్రేమ అలాగే ఉంటుంది."
+      ]
     },
     hi: {
       title: "सैनिक भी तो किसी के भाई हैं",
-      subtitle: "वर्दी के पीछे धड़कता इंसान",
-      text: ["हमें कभी नहीं भूलना चाहिए कि हर सैनिक सबसे पहले एक इंसान है।", "वह किसी का लाडला भाई, बेटा, पति, पिता और सच्चा दोस्त है।", "वर्दी में हम उसका अदम्य शौर्य देखते हैं, पर उसका परिवार उसका कोमल हृदय जानता है।", "इसलिए सैनिक के प्रति कृतज्ञता का अर्थ उसके परिवार के प्रति भी नतमस्तक होना है।"]
+      subtitle: "वर्दी के पीछे धड़कता दिल",
+      text: [
+        "सैनिक भी तो किसी के भाई हैं",
+        "जब हम सैनिक को देखते हैं,\nतो वर्दी देखते हैं,\nहथियार देखते हैं,\nसाहस देखते हैं।",
+        "लेकिन उस वर्दी के पीछे...\nएक भाई है,\nएक बेटा है,\nएक पिता है।",
+        "उसके दिल में भी अपने परिवार के लिए\nवही गहरा प्यार धड़कता रहता है।"
+      ]
     },
     en: {
-      title: "Soldiers Are Someone’s Brothers Too",
-      subtitle: "The beating human heart behind the uniform",
-      text: ["We must never forget: a soldier is first and foremost a human being.", "He is someone’s brother, son, husband, father, and beloved friend.", "In uniform, we see his steely resolve, but his family knows his gentle soul.", "To honor a soldier is to honor the quiet resilience of his family."]
+      title: "Soldiers Are Someone's Brothers Too",
+      subtitle: "The human heart behind the uniform",
+      text: [
+        "Soldiers are someone's brothers too",
+        "When we look upon a soldier,\nWe see the uniform.\nWe see the weapon.\nWe see unshakable bravery.",
+        "Yet behind that uniform...\nLives a brother.\nA son.\nA father.",
+        "In his heart too,\nLove for his family beats just as tenderly."
+      ]
     }
   },
   {
@@ -1190,17 +1467,32 @@ const pages = [
     te: {
       title: "నిజమైన కృతజ్ఞత",
       subtitle: "సేవను గౌరవించడం",
-      text: ["రక్షాబంధన్ రోజున సైనికుడికి రాఖీ కట్టడం అందమైన సంప్రదాయం.", "కానీ నిజమైన కృతజ్ఞత... ఒక్కరోజు ఫోటోతో ముగియకూడదు.", "వారి సేవను గౌరవించడం, వారి కుటుంబాల త్యాగాన్ని గుర్తించడం,", "దేశ భద్రత కోసం పనిచేసే ప్రతి ఒక్కరి సేవను విలువైనదిగా చూడడం... అదే నిజమైన కృతజ్ఞత."]
+      text: [
+        "నిజమైన కృతజ్ఞత",
+        "సైనికులకు మనం ఎలా కృతజ్ఞత చెప్పగలం?",
+        "కేవలం జై కొట్టడం ద్వారా మాత్రమే కాదు.\nవారు కాపాడుతున్న ఈ దేశాన్ని\nమనం బాధ్యతగల పౌరులుగా మార్చడం ద్వారా.",
+        "మనం సమాజంలో ఒకరికొకరు సహాయం చేసుకుంటే,\nఒకరినొకరు గౌరవించుకుంటే,\nశాంతిగా జీవిస్తే...\nవారి త్యాగానికి అదే నిజమైన అర్థం."
+      ]
     },
     hi: {
       title: "सच्ची कृतज्ञता",
-      subtitle: "समर्पण और सेवा का वास्तविक सम्मान",
-      text: ["रक्षाबंधन पर सैनिकों को राखी भेजना एक सुंदर परंपरा है।", "लेकिन सच्ची कृतज्ञता एक दिन के फोटो और शुभकामनाओं से आगे जाती है।", "उनकी निष्ठा का आजीवन आदर करना, उनके परिवारों के त्याग को पहचानना,", "और राष्ट्र निर्माण में अपना योगदान देना—यही सच्ची कृतज्ञता है।"]
+      subtitle: "सेवा का सच्चा सम्मान",
+      text: [
+        "सच्ची कृतज्ञता",
+        "हम सैनिकों के प्रति अपनी कृतज्ञता कैसे व्यक्त करें?",
+        "सिर्फ जयकारे लगाकर नहीं,\nबल्कि जिस देश की वे रक्षा करते हैं,\nउसके ज़िम्मेदार नागरिक बनकर।",
+        "जब हम समाज में एक-दूसरे की मदद करते हैं,\nआदर करते हैं और शांति से रहते हैं...\nतभी उनके बलिदान का सच्चा सम्मान होता है।"
+      ]
     },
     en: {
       title: "True Gratitude",
       subtitle: "Honoring lifelong devotion and service",
-      text: ["Tying a rakhi for soldiers on Raksha Bandhan is a beautiful ritual.", "Yet genuine gratitude must transcend a single day's photograph.", "Respecting their service year-round, cherishing their families' sacrifice,", "And standing united for the nation—that is true gratitude."]
+      text: [
+        "True gratitude",
+        "How can we truly express our gratitude to soldiers?",
+        "Not merely by shouting slogans.\nBut by transforming this country they defend\nAs responsible, conscientious citizens.",
+        "When we help one another in society,\nRespect one another, and live in peace...\nThat is the true honor bestowed upon their sacrifice."
+      ]
     }
   },
   {
@@ -1210,17 +1502,38 @@ const pages = [
     te: {
       title: "రాఖీ మనకు నేర్పేది",
       subtitle: "5 దివ్య జీవన పాఠాలు",
-      text: ["రాఖీ మనకు ఐదు విషయాలు గుర్తు చేస్తుంది:", "1. ప్రేమను వ్యక్తం చేయాలి.", "2. సంబంధాలకు సమయం ఇవ్వాలి.", "3. బాధ్యత తీసుకోవాలి.", "4. దూరం బంధాన్ని ముగించదు.", "5. రక్షణ పరస్పరం — మనమంతా ఒకరికొకరం అండగా ఉండాలి."]
+      text: [
+        "రాఖీ మనకు నేర్పేది",
+        "1. ప్రేమ — షరతులు లేని అనురాగం.",
+        "2. సంబంధాలకు సమయం — ఎంత బిజీగా ఉన్నా మనుషులకు ప్రాధాన్యత ఇవ్వడం.",
+        "3. బాధ్యత — కష్టంలో అండగా నిలబడటం.",
+        "4. దూరం — భౌతికంగా దూరమైనా మనసులను దగ్గరగా ఉంచడం.",
+        "5. పరస్పర రక్షణ — ఒకరికొకరు తోడుగా ఉండటం."
+      ]
     },
     hi: {
       title: "राखी जो हमें सिखाती है",
-      subtitle: "जीवन के 5 दिव्य संदेश",
-      text: ["राखी हमें जीवन के 5 शाश्वत सत्य सिखाती है:", "1. प्रेम को अभिव्यक्त करें — मन के भावों को शब्दों में कहें।", "2. रिश्तों को समय दें — संबंध अपने आप नहीं टिकते, उन्हें सींचना पड़ता है।", "3. ज़िम्मेदारी निभाएं — अपनों के कठिन समय में ढाल बनें।", "4. दूरियां रिश्ते खत्म नहीं करतीं — सच्चा स्नेह सीमाओं से परे होता है।", "5. रक्षा परस्पर है — हम सब एक-दूसरे का संबल हैं।"]
+      subtitle: "5 दिव्य जीवन पाठ",
+      text: [
+        "राखी जो हमें सिखाती है",
+        "1. प्रेम — निःशर्त स्नेह।",
+        "2. रिश्तों को समय — व्यस्तता के बावजूद अपनों को प्राथमिकता देना।",
+        "3. ज़िम्मेदारी — कठिनाई में संबल बनकर खड़े होना।",
+        "4. दूरी — शारीरिक रूप से दूर होने पर भी दिलों को जोड़े रखना।",
+        "5. परस्पर रक्षा — हर हाल में एक-दूसरे का साथ निभाना।"
+      ]
     },
     en: {
       title: "What Rakhi Teaches Us",
       subtitle: "5 Divine Life Lessons",
-      text: ["Rakhi imparts five timeless principles:", "1. Express Love — articulate your affection without hesitation.", "2. Invest Time — bonds flourish only when nurtured with care.", "3. Take Responsibility — step forward when loved ones need you.", "4. Distance Never Ends Love — geography cannot sever genuine kinship.", "5. Protection is Mutual — we are all each other’s guardians."]
+      text: [
+        "What Rakhi teaches us",
+        "1. Love — Unconditional affection.",
+        "2. Time for Relationships — Prioritizing loved ones no matter how busy life becomes.",
+        "3. Responsibility — Standing firm during times of hardship.",
+        "4. Transcending Distance — Keeping hearts close despite physical miles.",
+        "5. Mutual Protection — Being each other’s lifelong sanctuary."
+      ]
     }
   },
   {
@@ -1230,17 +1543,32 @@ const pages = [
     te: {
       title: "రాఖీ తెగిపోతే?",
       subtitle: "బంధం మనసులో ఉంది",
-      text: ["ఒక చిన్న ప్రయోగం. ఒక రాఖీని చేతిలో తీసుకోండి. దాన్ని లాగండి. అది తెగిపోవచ్చు.", "అప్పుడు మనం ఏమి కోల్పోతాం? ఒక దారం. అంతే.", "ఎందుకంటే... బంధం దారంలో లేదు, బంధం మనసులో ఉంది.", "రాఖీ ఒక గుర్తు మాత్రమే. ప్రేమే అసలు బంధం."]
+      text: [
+        "రాఖీ తెగిపోతే?",
+        "కొన్ని రోజుల తర్వాత...\nచేతికి కట్టిన రాఖీ రంగు మారవచ్చు.\nదారం తెగిపోవచ్చు.\nఅది చేతిలో లేకుండా పోవచ్చు.",
+        "కానీ...\nరాఖీ తెగిపోయినంత మాత్రాన\nబంధం తెగిపోదు.",
+        "ఎందుకంటే...\nబంధం దారంలో లేదు.\nబంధం మనసులో ఉంది."
+      ]
     },
     hi: {
       title: "अगर राखी टूट जाए तो?",
-      subtitle: "रिश्ता धागे में नहीं, दिल में धड़कता है",
-      text: ["एक छोटा सा विचार: एक राखी हाथ में लीजिए और खींचिए—वह टूट सकती है।", "तब हमने क्या खोया? सिर्फ रेशम का एक धागा, बस!", "क्योंकि रिश्ता उस सूत के धागे में नहीं, अंतरात्मा के विश्वास में बंधा है।", "राखी तो एक सुंदर प्रतीक है; प्रेम ही शाश्वत संबंध है।"]
+      subtitle: "रिश्ता दिल में बसता है",
+      text: [
+        "अगर राखी टूट जाए तो?",
+        "कुछ दिनों बाद...\nकलाई पर बंधी राखी का रंग फीका पड़ सकता है।\nधागा टूट सकता है।\nवह कलाई से छूट सकती है।",
+        "लेकिन...\nराखी के टूट जाने से रिश्ता नहीं टूटता।",
+        "क्योंकि...\nरिश्ता धागे में नहीं,\nदिल में बसता है।"
+      ]
     },
     en: {
       title: "What If the Rakhi Breaks?",
-      subtitle: "The bond lives within the heart",
-      text: ["A gentle reflection: Take a thread of rakhi and pull it—it may snap.", "What have we lost? Merely a piece of string.", "Because the true bond does not reside in silk threads; it thrives within the heart.", "Rakhi is but a symbol; love is the eternal bond."]
+      subtitle: "The bond lives in the heart",
+      text: [
+        "What if the rakhi breaks?",
+        "After a few days...\nThe rakhi tied around the wrist may fade in color.\nThe thread may snap.\nIt may no longer rest on the hand.",
+        "Yet...\nJust because the rakhi breaks,\nThe bond never breaks.",
+        "Because...\nThe bond does not reside in silk threads.\nThe bond lives within the heart."
+      ]
     }
   },
   {
@@ -1248,19 +1576,34 @@ const pages = [
     img: "assets/images/page_23.png",
     prompt: "Intimate cinematic 3D scene of Indian brother and sister sitting together during Raksha Bandhan. Sister has tied rakhi, brother gently holds her hand, sincere affectionate eye contact, warm golden light, festive background softly blurred, realistic faces and hands, premium animated feature quality, 4K, no text.",
     te: {
-      title: "ఒక మాట…",
+      title: "ఒకే ఒక్క మాట…",
       subtitle: "‘నేను నీకు తోడుగా ఉంటాను’",
-      text: ["రక్షాబంధన్ రోజున... మీ అన్నయ్యకు, చెల్లికి, కుటుంబానికి ఒక మాట చెప్పండి.", "అది పెద్ద ప్రసంగం కావాల్సిన అవసరం లేదు. కేవలం: “నేను నీకు తోడుగా ఉంటాను.”", "కొన్నిసార్లు ఒక చిన్న మాట ఒక జీవితానికి కొండంత ధైర్యం ఇస్తుంది."]
+      text: [
+        "ఒకే ఒక్క మాట…",
+        "జీవితంలో ఎప్పుడైనా...\nకష్టం వచ్చినప్పుడు,\nభయం వేసినప్పుడు,\nఒంటరిగా అనిపించినప్పుడు...\nఒకరి కళ్లలోకి మరొకరు చూసి చెప్పుకునే ఆ ఒక్క మాట:",
+        "“నువ్వు భయపడకు...\nనేను నీకు తోడుగా ఉంటాను.”",
+        "ఆ మాట ఇచ్చే ధైర్యం\nప్రపంచంలో మరేదీ ఇవ్వలేదు."
+      ]
     },
     hi: {
       title: "बस एक छोटा सा बोल…",
-      subtitle: "‘मैं हर कदम तुम्हारे साथ हूँ’",
-      text: ["रक्षाबंधन के इस पावन पर्व पर अपने भाई, बहन और परिवार से एक बात कहिए।", "किसी लंबे भाषण की ज़रूरत नहीं, बस दिल से कहिए:", "“मैं हमेशा तुम्हारे साथ हूँ।”", "विश्वास मानिए, यह एक छोटा सा वाक्य किसी के पूरे जीवन को जीने का संबल दे देता है।"]
+      subtitle: "‘मैं तुम्हारे साथ हूँ’",
+      text: [
+        "बस एक छोटा सा बोल…",
+        "ज़िंदगी में कभी भी...\nजब मुश्किल आए,\nडर लगे,\nया अकेलापन महसूस हो...\nतब एक-दूसरे की आँखों में देखकर कहा जाने वाला वह एक बोल:",
+        "“तुम डरो मत...\nमैं तुम्हारे साथ हूँ।”",
+        "वह एक वाक्य जो हौसला देता है,\nवह दुनिया में कोई और चीज़ नहीं दे सकती।"
+      ]
     },
     en: {
       title: "Just One Word…",
-      subtitle: "‘I will always stand by you’",
-      text: ["On this Raksha Bandhan, say one heartfelt thing to your sibling and family.", "It needs no grand speech, just a sincere assurance:", "“I am right here with you.”", "Sometimes, one gentle sentence gives enough courage to weather a lifetime."]
+      subtitle: "‘I will stand by you’",
+      text: [
+        "Just one word…",
+        "Whenever in life...\nWhen adversity strikes,\nWhen fear chills the heart,\nWhen loneliness lingers...\nLooking into each other’s eyes and whispering that single sentence:",
+        "“Do not be afraid...\nI am right here with you.”",
+        "The courage that one promise instills\nCannot be matched by anything else in this world."
+      ]
     }
   },
   {
@@ -1270,17 +1613,32 @@ const pages = [
     te: {
       title: "దూరంలో ఉన్నవారికి",
       subtitle: "దూరాలను గెలిచిన ప్రేమ",
-      text: ["మీ అన్నయ్య విదేశంలో ఉండవచ్చు, చెల్లి మరో నగరంలో ఉండవచ్చు.", "రాఖీని పోస్టులో పంపవచ్చు, వీడియో కాల్ చేయవచ్చు, లేదా కేవలం ఒక ఫోన్ కాల్ చేయవచ్చు.", "ఎందుకంటే రక్షాబంధన్ యొక్క అసలు విలువ దగ్గరగా ఉండటంలో కాదు, బంధాన్ని గుర్తు పెట్టుకోవడంలో ఉంది."]
+      text: [
+        "దూరంలో ఉన్నవారికి",
+        "ఈ రక్షాబంధన్ రోజున...\nఒకవేళ మీరు మీ సోదరుడికి లేదా సోదరికి దూరంగా ఉన్నా,\nఒకవేళ మీరు కలవలేకపోయినా...\nగుర్తుంచుకోండి:",
+        "దూరం అనేది కిలోమీటర్లలో మాత్రమే ఉంటుంది.\nమనసుల్లో కాదు.",
+        "ఒక చిన్న సందేశం,\nఒక ఆత్మీయమైన ఫోన్ కాల్...\nమీ బంధాన్ని ఎప్పటికీ సజీవంగా ఉంచుతుంది."
+      ]
     },
     hi: {
       title: "जो दूर हैं उनके लिए",
-      subtitle: "दूरियों पर विजयी प्रेम",
-      text: ["आपका भाई विदेश में हो सकता है, या बहन किसी दूसरे शहर में।", "डाक से राखी भेजिए, वीडियो कॉल कीजिए या बस एक फोन मिलाइए।", "क्योंकि रक्षाबंधन का असली सार साथ होने की दूरी में नहीं, दिलों की समीपता और याद रखने में है।"]
+      subtitle: "दूरियों को जीतता प्रेम",
+      text: [
+        "जो दूर हैं उनके लिए",
+        "इस रक्षाबंधन पर...\nयदि आप अपने भाई या बहन से दूर हैं,\nयदि आप मिल नहीं पा रहे हैं...\nतो याद रखिए:",
+        "दूरी केवल किलोमीटरों में होती है,\nदिलों में नहीं।",
+        "एक छोटा सा संदेश,\nएक आत्मीय फोन कॉल...\nआपके रिश्ते को हमेशा जीवंत बनाए रखता है।"
+      ]
     },
     en: {
       title: "For Those Far Away",
-      subtitle: "Love that conquers physical distance",
-      text: ["Your brother may be across the seas, your sister in another city.", "Send a rakhi by post, make a video call, or dial their number.", "For the real treasure of Raksha Bandhan lies not in physical proximity, but in keeping each other alive in the heart."]
+      subtitle: "Love that conquers distance",
+      text: [
+        "For those far away",
+        "On this Raksha Bandhan...\nEven if you are far from your brother or sister,\nEven if you cannot meet in person...\nRemember:",
+        "Distance exists only in kilometers.\nNever in hearts.",
+        "A thoughtful message,\nA heartfelt phone call...\nKeeps your sacred bond alive forever."
+      ]
     }
   },
   {
@@ -1290,17 +1648,32 @@ const pages = [
     te: {
       title: "చివరి ప్రశ్న",
       subtitle: "రక్షాబంధన్ ఎందుకు జరుపుకుంటాం?",
-      text: ["“రక్షాబంధన్ ఎందుకు జరుపుకుంటాం?” ఇప్పుడు సమాధానం మనకు స్పష్టంగా ఉంది.", "కేవలం రాఖీ కోసం కాదు, కేవలం బహుమతుల కోసం కాదు, కేవలం ఒక సంప్రదాయం కోసం కాదు.", "మన సంబంధాలను గుర్తు చేసుకోవడానికి, మన ప్రేమను వ్యక్తం చేయడానికి, మన బాధ్యతను గుర్తు చేసుకోవడానికి, మన కుటుంబాన్ని దగ్గర చేయడానికి, మరియు రక్షణ కోసం నిలబడే వారిని గుర్తు చేసుకోవడానికి."]
+      text: [
+        "చివరి ప్రశ్న",
+        "ఇప్పుడు చెప్పండి...\nరక్షాబంధన్ అంటే ఏమిటి?",
+        "కేవలం ఒక పండుగా?\nకేవలం ఒక సాంప్రదాయమా?\nకేవలం ఒక రాఖీ కట్టడమా?\nకాదు.",
+        "రక్షాబంధన్ అంటే —\nఒక మనిషి మరొక మనిషికి ఇచ్చే భరోసా.\n“నేను నీకు తోడుగా ఉన్నాను” అనే నమ్మకం."
+      ]
     },
     hi: {
       title: "अंतिम प्रश्न",
       subtitle: "हम रक्षाबंधन क्यों मनाते हैं?",
-      text: ["“हम रक्षाबंधन क्यों मनाते हैं?” अब उत्तर हमारे सामने निर्मल दर्पण की तरह स्पष्ट है।", "सिर्फ एक धागे के लिए नहीं, उपहारों या औपचारिकता के लिए नहीं।", "अपने पावन रिश्तों को सहेजने, प्रेम को व्यक्त करने, कर्तव्य को पहचानने, परिवार को जोड़ने और सीमा पर खड़े रक्षकों को नमन करने के लिए!"]
+      text: [
+        "अंतिम प्रश्न",
+        "अब बताइए...\nरक्षाबंधन क्या है?",
+        "क्या सिर्फ एक त्यौहार?\nसिर्फ एक परंपरा?\nया सिर्फ एक राखी बांधना?\nनहीं।",
+        "रक्षाबंधन यानी —\nएक इंसान का दूसरे इंसान को दिया गया अटूट भरोसा:\n“मैं हर कदम तुम्हारे साथ हूँ” का गहरा विश्वास।"
+      ]
     },
     en: {
-      title: "The Ultimate Question",
+      title: "The Final Question",
       subtitle: "Why do we celebrate Raksha Bandhan?",
-      text: ["“Why do we celebrate Raksha Bandhan?” The answer is now crystal clear.", "Not merely for the thread, the gifts, or customary routine.", "We celebrate to cherish our bonds, to express uninhibited love, to honor responsibility, to unite families, and to salute the brave guardians of our nation."]
+      text: [
+        "The final question",
+        "Now tell me...\nWhat is Raksha Bandhan?",
+        "Merely a festival?\nMerely a tradition?\nMerely tying a thread?\nNo.",
+        "Raksha Bandhan is —\nThe reassurance one soul gives to another:\nThe unshakeable faith of “I will always stand by you.”"
+      ]
     }
   },
   {
@@ -1310,17 +1683,35 @@ const pages = [
     te: {
       title: "ఒక దారం చెప్పే మాట",
       subtitle: "రక్షాబంధన్ శుభాకాంక్షలు",
-      text: ["రాఖీ మౌనంగా ఉంటుంది. అది మాట్లాడదు. కానీ మనం దానిని కట్టినప్పుడు... అది ఒక మాట చెబుతుంది.", "“నువ్వు ఒంటరిగా లేవు.”", "నీ ఆనందంలో నేను ఉంటాను. నీ బాధలో నేను ఉంటాను. నువ్వు దూరంగా ఉన్నా నిన్ను గుర్తు పెట్టుకుంటాను.", "తమ దేశం కోసం ప్రాణాలు అర్పించిన వారిని మేము ఎప్పటికీ మర్చిపోము.", "ఒక చిన్న దారం... ఒక పెద్ద బంధం. ఒక కుటుంబం... ఒక జ్ఞాపకం... ఒక బాధ్యత... ఒక దేశం పట్ల కృతజ్ఞత.", "ఇదే రక్షాబంధన్. “నేను నీకు తోడుగా ఉంటాను.”", "రక్షాబంధన్ శుభాకాంక్షలు. ❤️🇮🇳"]
+      text: [
+        "ఒక దారం చెప్పే మాట",
+        "ఒక చిన్న దారం...\nఒక పెద్ద బంధం.",
+        "ఒక కుటుంబం...\nఒక జ్ఞాపకం...\nఒక బాధ్యత...\nఒక దేశం పట్ల కృతజ్ఞత.",
+        "ఇదే రక్షాబంధన్.",
+        "రక్షాబంధన్ శుభాకాంక్షలు. ❤️🇮🇳"
+      ]
     },
     hi: {
       title: "एक धागे की बात",
       subtitle: "रक्षाबंधन की हार्दिक शुभकामनाएं",
-      text: ["राखी मौन रहती है, वह बोलती नहीं। लेकिन जब हम उसे कलाई पर बांधते हैं, तो वह धीरे से कहती है—", "“तुम कभी अकेले नहीं हो।”", "तुम्हारी खुशी में मैं हूँ, तुम्हारे गम में मैं हूँ। तुम दूर भी रहो, मैं तुम्हें याद रखूँगा।", "और अपने वतन पर कुर्बान होने वाले वीरों को हम कभी नहीं भूलेंगे।", "एक छोटा सा धागा... एक विराट संबंध। एक परिवार, एक याद, एक पावन ज़िम्मेदारी और देश के प्रति असीम कृतज्ञता।", "यही है सच्चा रक्षाबंधन: “मैं हर कदम तुम्हारे साथ हूँ।”", "रक्षाबंधन की हार्दिक शुभकामनाएं! ❤️🇮🇳"]
+      text: [
+        "एक धागे की बात",
+        "एक छोटा सा धागा...\nएक अटूट रिश्ता।",
+        "एक परिवार...\nएक पावन स्मृति...\nएक ज़िम्मेदारी...\nऔर देश के प्रति असीम कृतज्ञता।",
+        "यही है सच्चा रक्षाबंधन।",
+        "रक्षाबंधन की हार्दिक शुभकामनाएं! ❤️🇮🇳"
+      ]
     },
     en: {
       title: "What a Thread Says",
       subtitle: "Happy Raksha Bandhan",
-      text: ["A rakhi remains silent. It does not speak. Yet when tied upon the wrist, it whispers:", "“You are never alone.”", "In your joy, I will be there. In your sorrow, I will stand with you. However far you may be, you are in my heart.", "And those who laid down their lives for the nation shall never be forgotten.", "A humble thread... an infinite bond. One family, one memory, one sacred responsibility, and eternal gratitude to the motherland.", "This is Raksha Bandhan: “I will always stand by you.”", "Happy Raksha Bandhan! ❤️🇮🇳"]
+      text: [
+        "What a thread says",
+        "A humble thread...\nAn infinite bond.",
+        "A family...\nA treasured memory...\nA sacred responsibility...\nAnd eternal gratitude to the motherland.",
+        "This is Raksha Bandhan.",
+        "Happy Raksha Bandhan! ❤️🇮🇳"
+      ]
     }
   }
 ];
@@ -1609,11 +2000,20 @@ function render() {
   const langData = p[currentLang] || p.te || p.en;
   const ui = UI_STRINGS[currentLang] || UI_STRINGS.te;
 
+  // Format paragraphs with line breaks preserved
+  const paragraphsHtml = langData.text.map(x => {
+    const formatted = x.split('\n').join('<br />');
+    if (x.startsWith("“") || x.startsWith("‘") || x.includes("తోడుగా") || x.includes("साथ") || x.includes("stand by")) {
+      return `<div class="quote">${formatted}</div>`;
+    }
+    return `<p>${formatted}</p>`;
+  }).join("");
+
   $("text").innerHTML = `
     <div class="kicker">${ui.kickerPrefix} ${current + 1} / ${pages.length}</div>
     <h1>${langData.title}</h1>
     ${langData.subtitle ? `<div class="lead">${langData.subtitle}</div>` : ""}
-    ${langData.text.map(x => x.startsWith("“") || x.startsWith("‘") || x.includes("తోడుగా") || x.includes("साथ") || x.includes("stand by") ? `<div class="quote">${x}</div>` : `<p>${x}</p>`).join("")}
+    ${paragraphsHtml}
   `;
 
   // Scroll text back to top smoothly
