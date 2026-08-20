@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const PORT = 3000;
-const ROOT_DIR = 'D:\\book';
+const ROOT_DIR = __dirname;
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -32,7 +32,7 @@ const server = http.createServer((req, res) => {
   fs.stat(filePath, (err, stats) => {
     if (err || !stats.isFile()) {
       res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
-      return res.end('404 Not Forward: ' + reqUrl);
+      return res.end('404 Not Found: ' + reqUrl);
     }
 
     const ext = path.extname(filePath).toLowerCase();

@@ -1,7 +1,5 @@
 {
   "version": 2,
-  "name": "raksha-bandhan-storybook",
-  "cleanUrls": true,
   "headers": [
     {
       "source": "/(.*)",
