@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const PORT = process.env.PORT || 3000;
-const ROOT_DIR = path.resolve(__dirname);
+const ROOT_DIR = path.resolve(__dirname, '..');
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -22,7 +22,7 @@ const MIME_TYPES = {
   '.ogg': 'audio/ogg'
 };
 
-const handler = (req, res) => {
+const server = http.createServer((req, res) => {
   let reqUrl = decodeURIComponent((req.url || '/').split('?')[0]);
   if (reqUrl === '/' || reqUrl === '') reqUrl = '/index.html';
   
@@ -63,20 +63,14 @@ const handler = (req, res) => {
         'Content-Length': total,
         'Content-Type': contentType,
         'Accept-Ranges': 'bytes',
-        'Cache-Control': 'public, max-age=3600',
+        'Cache-Control': 'no-cache',
         'Access-Control-Allow-Origin': '*'
       });
       fs.createReadStream(filePath).pipe(res);
     }
   });
-};
+});
 
-const server = http.createServer(handler);
-
-if (require.main === module || !process.env.VERCEL) {
-  server.listen(PORT, '0.0.0.0', () => {
-    console.log(`Storybook server live at http://localhost:${PORT}/`);
-  });
-}
-
-module.exports = handler;
+server.listen(PORT, '0.0.0.0', () => {
+  console.log(`Storybook local server live at http://localhost:${PORT}/`);
+});
