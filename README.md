@@ -107,6 +107,6 @@ powershell -ExecutionPolicy Bypass -File .\build_package.ps1
 
 ## 👨‍💻 Author & Credits
 
-- **Story & Concept**: Suresh Thota (సురేష్ తోట)
+- **Story & Concept**: Suresh Thota (మీ సురేష్ తోట)
 - **Design & Experience**: 3D Cinematic Telugu Digital Storybook Engine
 - **Fonts**: *Noto Serif Telugu*, *Noto Sans Telugu*, *Cinzel*, *Outfit* (Google Fonts)
