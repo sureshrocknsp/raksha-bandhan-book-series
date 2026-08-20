@@ -746,7 +746,13 @@
 
   <!-- Main Responsive Grid -->
   <main class="content">
-    <section class="text" id="text" aria-live="polite"></section>
+    <section class="text" id="text" aria-live="polite">
+      <div class="kicker">రక్షాబంధన్ • అధ్యాయం 1 / 26</div>
+      <h1>రక్షాబంధన్</h1>
+      <div class="lead">ఒక దారం చెప్పే మాట</div>
+      <p>బంధం అంటే రక్షించడం మాత్రమే కాదు…</p>
+      <p>తోడుగా ఉండడం.</p>
+    </section>
     
     <section class="scene" id="sceneContainer">
       <img id="sceneImg" class="scene-img" src="assets/images/page_1.png" alt="3D Cinematic Animated Illustration" />
@@ -1382,19 +1388,35 @@ document.addEventListener("touchend", e => {
 }, { passive: true });
 
 // Ambient Gold Dust Particle Generation
-for (let i = 0; i < 35; i++) {
-  let d = document.createElement("span");
-  d.className = "particle";
-  d.style.left = Math.random() * 100 + "%";
-  d.style.top = Math.random() * 100 + "%";
-  d.style.animationDelay = Math.random() * 8 + "s";
-  d.style.animationDuration = 5 + Math.random() * 7 + "s";
-  $("particles").appendChild(d);
+try {
+  const particleContainer = $("particles");
+  if (particleContainer) {
+    for (let i = 0; i < 35; i++) {
+      let d = document.createElement("span");
+      d.className = "particle";
+      d.style.left = Math.random() * 100 + "%";
+      d.style.top = Math.random() * 100 + "%";
+      d.style.animationDelay = Math.random() * 8 + "s";
+      d.style.animationDuration = 5 + Math.random() * 7 + "s";
+      particleContainer.appendChild(d);
+    }
+  }
+} catch (e) {
+  console.warn("Particle creation error:", e);
 }
 
-// Boot Application
-initThreeEngine();
-render();
+// Boot Application (Render text immediately first, then initialize WebGL visuals)
+try {
+  render();
+} catch (err) {
+  console.error("Render error:", err);
+}
+
+try {
+  initThreeEngine();
+} catch (err) {
+  console.warn("Three.js engine initialization:", err);
+}
 </script>
 </body>
 </html>
