@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
   <title>రక్షాబంధన్ — ఒక దారం చెప్పే మాట | 3D సినిమాటిక్ కథా పుస్తకం</title>
   
-  <meta name="description" content="రక్షాబంధన్: ఒక దారం చెప్పే మాట — భావోద్వేగ 3D సినిమాటిక్ తెలుగు డిజిటల్ కథా పుస్తకం (రచన: సురేష్ తోట)." />
+  <meta name="description" content="రక్షాబంధన్: ఒక దారం చెప్పే మాట — భావోద్వేగ 3D సినిమాటిక్ తెలుగు / హిందీ / ఇంగ్లీష్ డిజిటల్ కథా పుస్తకం (రచన: సురేష్ తోట)." />
   <meta property="og:title" content="రక్షాబంధన్ — ఒక దారం చెప్పే మాట" />
-  <meta property="og:description" content="భావోద్వేగ 3D సినిమాటిక్ తెలుగు డిజిటల్ కథా పుస్తకం" />
+  <meta property="og:description" content="భావోద్వేగ 3D సినిమాటిక్ బహుభాషా డిజిటల్ కథా పుస్తకం" />
   <meta property="og:type" content="book" />
 
-  <!-- Google Fonts: Noto Serif Telugu, Noto Sans Telugu, Cinzel, Outfit -->
+  <!-- Google Fonts: Noto Serif / Sans (Telugu, Devanagari, Latin), Cinzel, Outfit -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Noto+Sans+Telugu:wght@400;500;600;700;800&family=Noto+Serif+Telugu:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Noto+Serif+Devanagari:wght@400;500;600;700;800&family=Noto+Sans+Telugu:wght@400;500;600;700;800&family=Noto+Serif+Telugu:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
   
   <!-- Three.js for Real-time 3D Particle & Parallax Cinema Engine -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -23,10 +23,10 @@
        CSS Variables & Design Tokens
        ========================================================================== */
     :root {
-      --font-serif: "Noto Serif Telugu", Georgia, serif;
-      --font-sans: "Noto Sans Telugu", -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-ui: "Outfit", "Noto Sans Telugu", sans-serif;
-      --font-display: "Cinzel", "Noto Serif Telugu", serif;
+      --font-serif: "Noto Serif Telugu", "Noto Serif Devanagari", Georgia, serif;
+      --font-sans: "Noto Sans Telugu", "Noto Sans Devanagari", -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-ui: "Outfit", "Noto Sans Telugu", "Noto Sans Devanagari", sans-serif;
+      --font-display: "Cinzel", "Noto Serif Telugu", "Noto Serif Devanagari", serif;
 
       --gold-primary: #f59e0b;
       --gold-light: #fef08a;
@@ -171,15 +171,51 @@
       flex-shrink: 0;
     }
 
+    /* Language Switcher Pill Group */
+    .lang-switcher-wrap {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: var(--radius-full);
+      padding: 3px;
+      gap: 3px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+    .lang-btn {
+      padding: 5px 11px;
+      border: none;
+      background: transparent;
+      color: #cbd5e1;
+      font-size: 0.8rem;
+      font-family: var(--font-ui), var(--font-sans);
+      font-weight: 600;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+    .lang-btn:hover {
+      color: #fef08a;
+      background: rgba(245, 158, 11, 0.15);
+      transform: none;
+    }
+    .lang-btn.active {
+      background: linear-gradient(135deg, var(--gold-primary), #d97706);
+      color: #1a0d00;
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.6);
+    }
+
     /* Universal Button Styles */
     button {
       border: 1px solid rgba(245, 158, 11, 0.3);
       background: rgba(20, 20, 25, 0.75);
       color: #fff;
-      padding: 9px 18px;
+      padding: 9px 16px;
       border-radius: var(--radius-full);
       font-family: var(--font-ui);
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       font-weight: 500;
       cursor: pointer;
       backdrop-filter: blur(12px);
@@ -222,7 +258,7 @@
       width: 100%;
     }
 
-    /* Left Column: Telugu Story Narrative */
+    /* Left Column: Story Narrative */
     .text {
       align-self: center;
       max-height: 75vh;
@@ -230,6 +266,8 @@
       padding-right: 2vw;
       scrollbar-width: thin;
       scrollbar-color: rgba(245, 158, 11, 0.3) transparent;
+      color: var(--text-primary);
+      z-index: 10;
     }
     .text::-webkit-scrollbar { width: 4px; }
     .text::-webkit-scrollbar-thumb { background: rgba(245, 158, 11, 0.3); border-radius: 4px; }
@@ -237,7 +275,7 @@
     .kicker {
       font-family: var(--font-ui);
       font-size: 0.88rem;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.12em;
       color: #f2c98c;
       text-transform: uppercase;
       margin-bottom: 0.8rem;
@@ -406,6 +444,7 @@
       font-family: var(--font-ui);
       letter-spacing: 0.5px;
       pointer-events: none;
+      white-space: nowrap;
     }
 
     /* ==========================================================================
@@ -536,117 +575,35 @@
     }
 
     /* ==========================================================================
-       RESPONSIVE BREAKPOINTS (Intentional Device Layouts)
+       RESPONSIVE BREAKPOINTS
        ========================================================================== */
-
-    /* 1. Large Desktop (1440px and above) */
-    @media (min-width: 1440px) {
-      .content {
-        grid-template-columns: 45% 55%;
-        gap: 4%;
-        padding-top: 3vh;
-        padding-bottom: 3vh;
-      }
-      .scene {
-        height: 76vh;
-        max-height: 720px;
-      }
-      .text {
-        max-height: 76vh;
-      }
-      h1 { font-size: 3.2rem; }
-      p { font-size: 1.18rem; line-height: 1.95; }
-    }
-
-    /* 2. Laptop (1024px to 1439px) */
-    @media (min-width: 1024px) and (max-width: 1439px) {
-      .content {
-        grid-template-columns: 47% 53%;
-        gap: 3%;
-      }
-      .scene {
-        height: 72vh;
-        min-height: 420px;
-      }
-      h1 { font-size: 2.5rem; }
-      p { font-size: 1.05rem; }
-    }
-
-    /* 3. Tablet Landscape (768px to 1023px) */
-    @media (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {
-      .content {
-        grid-template-columns: 46% 54%;
-        gap: 2.5%;
-        padding: 1vh calc(4vw + var(--sar)) 1vh calc(4vw + var(--sal));
-      }
-      .scene {
-        height: 70vh;
-        min-height: 380px;
-      }
-      .text {
-        max-height: 70vh;
-      }
-      h1 { font-size: 2rem; }
-      .lead { font-size: 1.15rem; }
-      p { font-size: 0.98rem; line-height: 1.75; }
-      .top-bar { padding-top: 8px; }
-      .nav { padding-bottom: 12px; }
-    }
-
-    /* 4. Tablet Portrait (600px to 767px or Portrait Tablet) */
-    @media (min-width: 600px) and (max-width: 1023px) and (orientation: portrait), (min-width: 600px) and (max-width: 767px) {
-      body { overflow-y: auto; }
-      .app { height: auto; min-height: 100vh; }
-      .content {
-        grid-template-columns: 1fr;
-        padding: 1.5vh calc(5vw + var(--sar)) 100px calc(5vw + var(--sal));
-        gap: 24px;
-      }
-      .scene {
-        height: 48vh;
-        min-height: 380px;
-        order: 1;
-      }
-      .text {
-        max-height: none;
-        order: 2;
-        padding-right: 0;
-      }
-      .hint { display: none; }
-      .nav {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: rgba(3, 7, 18, 0.88);
-        backdrop-filter: blur(16px);
-        padding: 12px calc(5vw + var(--sar)) calc(12px + var(--sab)) calc(5vw + var(--sal));
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-      }
-    }
-
-    /* 5. Mobile (390px to 599px) */
-    @media (max-width: 599px) {
-      body { overflow-y: auto; }
-      .app { height: auto; min-height: 100vh; }
-      
+    @media (max-width: 768px) {
       .top-bar {
-        padding: calc(10px + var(--sat)) calc(4vw + var(--sar)) 0 calc(4vw + var(--sal));
+        padding: calc(10px + var(--sat)) 16px 0 16px;
+        gap: 8px;
       }
       .brand-author { display: none; }
       .brand-title { font-size: 1rem; }
       .brand-icon { width: 26px; height: 26px; font-size: 13px; }
 
+      .lang-btn {
+        padding: 4px 8px;
+        font-size: 0.72rem;
+      }
+      button {
+        padding: 7px 12px;
+        font-size: 0.8rem;
+      }
+      .btn-text-full { display: none; }
+
       .content {
         grid-template-columns: 1fr;
-        padding: 1.5vh calc(4vw + var(--sar)) calc(90px + var(--sab)) calc(4vw + var(--sal));
+        padding: 1.5vh 16px calc(85px + var(--sab)) 16px;
         gap: 18px;
       }
-      
-      /* Mobile Story Order: Scene -> Title -> Story Text -> Bottom Nav */
       .scene {
-        height: 45vh;
-        min-height: 300px;
+        height: 44vh;
+        min-height: 280px;
         border-radius: 18px;
         order: 1;
       }
@@ -655,13 +612,6 @@
         order: 2;
         padding-right: 0;
       }
-
-      .kicker { font-size: 0.78rem; margin-bottom: 0.5rem; }
-      h1 { font-size: 1.8rem; line-height: 1.3; }
-      .lead { font-size: 1.15rem; margin: 0.4rem 0 0.9rem; }
-      p { font-size: 1rem; line-height: 1.8; margin: 0.4rem 0; }
-      .quote { font-size: 1.12rem; padding: 12px 14px; margin: 1rem 0; }
-
       .hint { display: none; }
 
       .nav {
@@ -669,56 +619,11 @@
         bottom: 0;
         left: 0;
         right: 0;
-        background: rgba(4, 6, 12, 0.9);
+        background: rgba(4, 6, 12, 0.92);
         backdrop-filter: blur(18px);
-        padding: 10px calc(4vw + var(--sar)) calc(10px + var(--sab)) calc(4vw + var(--sal));
+        padding: 10px 16px calc(10px + var(--sab)) 16px;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
       }
-      .nav button {
-        padding: 8px 14px;
-        font-size: 0.84rem;
-      }
-      .progress-track { margin: 0 10px; }
-      .page-indicator { font-size: 0.82rem; min-width: 70px; }
-
-      .toc-grid {
-        grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
-        gap: 10px;
-      }
-      .toc-item img { height: 80px; }
-    }
-
-    /* 6. Small Mobile (below 390px — e.g. iPhone SE 375px, Galaxy 360px) */
-    @media (max-width: 389px) {
-      .content {
-        padding: 1vh 3.5vw calc(85px + var(--sab)) 3.5vw;
-        gap: 14px;
-      }
-      .scene {
-        height: 40vh;
-        min-height: 260px;
-        border-radius: 14px;
-      }
-      h1 { font-size: 1.55rem; }
-      .lead { font-size: 1.05rem; }
-      p { font-size: 0.95rem; line-height: 1.75; }
-      .quote { font-size: 1rem; padding: 10px 12px; }
-
-      .top-actions button {
-        padding: 6px 10px;
-        font-size: 0.78rem;
-      }
-      .nav button {
-        padding: 7px 10px;
-        font-size: 0.78rem;
-      }
-      .page-indicator { font-size: 0.78rem; min-width: 62px; }
-    }
-
-    /* Accessibility: Reduced Motion */
-    @media (prefers-reduced-motion: reduce) {
-      .particle { animation: none; }
-      .scene-img, .progress-fill { transition: none; }
     }
   </style>
 </head>
@@ -733,13 +638,21 @@
     <div class="brand">
       <div class="brand-icon">✤</div>
       <div class="brand-title-group">
-        <span class="brand-title">రక్షాబంధన్</span>
-        <span class="brand-author">• ఒక దారం చెప్పే మాట</span>
+        <span class="brand-title" id="brandTitle">రక్షాబంధన్</span>
+        <span class="brand-author" id="brandSubtitle">• ఒక దారం చెప్పే మాట</span>
       </div>
     </div>
+
     <div class="top-actions">
-      <button onclick="toggleTOC()" aria-label="విషయ సూచిక చూడండి">📑 <span class="btn-text-full">విషయ సూచిక</span></button>
-      <button id="audioBtn" onclick="toggleAudio()" aria-label="సంగీతం ఆన్ లేదా ఆఫ్ చేయండి">🎵 <span class="btn-text-full">సంగీతం</span></button>
+      <!-- 🌐 Three-Language Switcher (Telugu, Hindi, English) -->
+      <div class="lang-switcher-wrap" id="langSwitcher" role="group" aria-label="భాషను ఎంచుకోండి / Select Language">
+        <button class="lang-btn active" id="btnLangTe" onclick="setLanguage('te')" title="తెలుగు (Telugu)">తెలుగు</button>
+        <button class="lang-btn" id="btnLangHi" onclick="setLanguage('hi')" title="हिन्दी (Hindi)">हिन्दी</button>
+        <button class="lang-btn" id="btnLangEn" onclick="setLanguage('en')" title="English (English)">English</button>
+      </div>
+
+      <button onclick="toggleTOC()" id="tocNavBtn" aria-label="విషయ సూచిక చూడండి">📑 <span class="btn-text-full" id="tocBtnLabel">విషయ సూచిక</span></button>
+      <button id="audioBtn" onclick="toggleAudio()" aria-label="సంగీతం ఆన్ లేదా ఆఫ్ చేయండి">🎵 <span class="btn-text-full" id="audioBtnLabel">సంగీతం</span></button>
       <button onclick="toggleFullscreen()" aria-label="పూర్తి స్క్రీన్">⛶</button>
     </div>
   </header>
@@ -747,9 +660,9 @@
   <!-- Main Responsive Grid -->
   <main class="content">
     <section class="text" id="text" aria-live="polite">
-      <div class="kicker">రక్షాబంధన్ • అధ్యాయం 1 / 26</div>
-      <h1>రక్షాబంధన్</h1>
-      <div class="lead">ఒక దారం చెప్పే మాట</div>
+      <div class="kicker" id="kickerStatic">రక్షాబంధన్ • అధ్యాయం 1 / 26</div>
+      <h1 id="titleStatic">రక్షాబంధన్</h1>
+      <div class="lead" id="leadStatic">ఒక దారం చెప్పే మాట</div>
       <p>బంధం అంటే రక్షించడం మాత్రమే కాదు…</p>
       <p>తోడుగా ఉండడం.</p>
     </section>
@@ -762,7 +675,7 @@
         <span class="badge-dot"></span>
         <span id="sceneLabel">3D సినిమాటిక్ దృశ్యం • పేజీ 1</span>
       </div>
-      <button class="prompt-btn" onclick="openPromptModal()" aria-label="3D AI ప్రాంప్ట్ చూడండి">✨ 3D ప్రాంప్ట్</button>
+      <button class="prompt-btn" id="promptModalBtn" onclick="openPromptModal()" aria-label="3D AI ప్రాంప్ట్ చూడండి">✨ 3D ప్రాంప్ట్</button>
     </section>
   </main>
 
@@ -776,14 +689,14 @@
     <button id="next" onclick="move(1)" aria-label="తర్వాతి పేజీ">తర్వాత →</button>
   </nav>
   
-  <div class="hint">← → keys / touch swipe to navigate pages</div>
+  <div class="hint" id="navHint">← → keys / touch swipe to navigate pages</div>
 </div>
 
 <!-- Table of Contents Modal -->
 <div class="modal-overlay" id="tocModal" role="dialog" aria-modal="true" aria-label="విషయ సూచిక">
   <div class="modal-card">
     <div class="modal-header">
-      <h3>📑 విషయ సూచిక (26 అధ్యాయాలు)</h3>
+      <h3 id="tocModalHeader">📑 విషయ సూచిక (26 అధ్యాయాలు)</h3>
       <button class="modal-close" onclick="toggleTOC()" aria-label="మూసివేయండి">✕</button>
     </div>
     <div class="modal-body">
@@ -802,16 +715,16 @@
     <div class="modal-body">
       <div class="prompt-box">
         <div class="prompt-header">
-          <span>3D సినిమాటిక్ ఇమేజ్ ప్రాంప్ట్ (Page Prompt)</span>
-          <button onclick="copyPrompt()">📋 కాపీ చేయండి</button>
+          <span id="lblPagePrompt">3D సినిమాటిక్ ఇమేజ్ ప్రాంప్ట్ (Page Prompt)</span>
+          <button onclick="copyPrompt()" id="copyPagePromptBtn">📋 కాపీ చేయండి</button>
         </div>
         <textarea class="prompt-textarea" id="promptText" rows="6" readonly></textarea>
       </div>
 
       <div class="prompt-box">
         <div class="prompt-header">
-          <span>గ్లోబల్ నెగెటివ్ ప్రాంప్ట్ (Negative Prompt)</span>
-          <button onclick="copyNegPrompt()">📋 కాపీ చేయండి</button>
+          <span id="lblNegPrompt">గ్లోబల్ నెగెటివ్ ప్రాంప్ట్ (Negative Prompt)</span>
+          <button onclick="copyNegPrompt()" id="copyNegPromptBtn">📋 కాపీ చేయండి</button>
         </div>
         <textarea class="prompt-textarea" id="negPromptText" rows="4" readonly></textarea>
       </div>
@@ -820,196 +733,636 @@
 </div>
 
 <script>
+// UI Localization Dictionary
+const UI_STRINGS = {
+  te: {
+    brandTitle: "రక్షాబంధన్",
+    brandSubtitle: "• ఒక దారం చెప్పే మాట",
+    tocBtn: "విషయ సూచిక",
+    audioBtn: "సంగీతం",
+    audioPlayingBtn: "అఖండ రాఖీ",
+    promptBtn: "✨ 3D ప్రాంప్ట్",
+    sceneLabelPrefix: "3D సినిమాటిక్ దృశ్యం • పేజీ",
+    prevBtn: "← ముందు",
+    nextBtn: "తర్వాత →",
+    pagePrefix: "పేజీ",
+    kickerPrefix: "రక్షాబంధన్ • అధ్యాయం",
+    tocTitle: "📑 విషయ సూచిక (26 అధ్యాయాలు)",
+    promptInspectorTitle: "✨ 3D AI ప్రాంప్ట్ ఇన్‌స్పెక్టర్",
+    pagePromptLabel: "3D సినిమాటిక్ ఇమేజ్ ప్రాంప్ట్ (Page Prompt)",
+    negPromptLabel: "గ్లోబల్ నెగెటివ్ ప్రాంప్ట్ (Negative Prompt)",
+    copyBtn: "📋 కాపీ చేయండి",
+    copiedAlert: "ప్రాంప్ట్ కాపీ చేయబడింది!",
+    swipeHint: "← → కీలు / స్వైప్ ద్వారా పేజీలు మార్చండి"
+  },
+  hi: {
+    brandTitle: "रक्षाबंधन",
+    brandSubtitle: "• एक धागे की बात",
+    tocBtn: "विषय सूची",
+    audioBtn: "संगीत",
+    audioPlayingBtn: "अखंड राखी",
+    promptBtn: "✨ 3D प्रॉम्प्ट",
+    sceneLabelPrefix: "3D सिनेमाई दृश्य • पृष्ठ",
+    prevBtn: "← पिछला",
+    nextBtn: "अगला →",
+    pagePrefix: "पृष्ठ",
+    kickerPrefix: "रक्षाबंधन • अध्याय",
+    tocTitle: "📑 विषय सूची (26 अध्याय)",
+    promptInspectorTitle: "✨ 3D AI प्रॉम्प्ट इंस्पेक्टर",
+    pagePromptLabel: "3D सिनेमाई इमेज प्रॉम्प्ट (Page Prompt)",
+    negPromptLabel: "ग्लोबल नेगेटिव प्रॉम्प्ट (Negative Prompt)",
+    copyBtn: "📋 कॉपी करें",
+    copiedAlert: "प्रॉम्प्ट कॉपी हो गया!",
+    swipeHint: "← → कीज / स्वाइप से पृष्ठ बदलें"
+  },
+  en: {
+    brandTitle: "Raksha Bandhan",
+    brandSubtitle: "• What a Thread Says",
+    tocBtn: "Contents",
+    audioBtn: "Music",
+    audioPlayingBtn: "Akhanda Rakhi",
+    promptBtn: "✨ 3D Prompt",
+    sceneLabelPrefix: "3D Cinematic Scene • Page",
+    prevBtn: "← Prev",
+    nextBtn: "Next →",
+    pagePrefix: "Page",
+    kickerPrefix: "Raksha Bandhan • Chapter",
+    tocTitle: "📑 Table of Contents (26 Chapters)",
+    promptInspectorTitle: "✨ 3D AI Prompt Inspector",
+    pagePromptLabel: "3D Cinematic Image Prompt (Page Prompt)",
+    negPromptLabel: "Global Negative Prompt",
+    copyBtn: "📋 Copy Prompt",
+    copiedAlert: "Prompt copied to clipboard!",
+    swipeHint: "← → keys / touch swipe to navigate pages"
+  }
+};
+
 const GLOBAL_NEGATIVE_PROMPT = "flat 2D illustration, cheap cartoon, anime, childish cartoon, plastic skin, deformed face, distorted eyes, bad anatomy, extra fingers, missing fingers, distorted hands, duplicate characters, inconsistent faces, inconsistent age, incorrect Indian clothing, incorrect cultural elements, blurry image, low resolution, oversaturated colors, excessive dramatic effects, war violence, blood, gore, graphic injury, political propaganda, text, letters, subtitles, watermark, logo";
 
+let currentLang = localStorage.getItem("storybook_lang") || "te";
+
+// Complete 26-Page Authentic Multilingual Dataset (Telugu, Hindi, English)
 const pages = [
   {
-    title: "రక్షాబంధన్",
-    subtitle: "ఒక దారం చెప్పే మాట",
-    text: ["బంధం అంటే రక్షించడం మాత్రమే కాదు…", "తోడుగా ఉండడం."],
+    id: 1,
     img: "assets/images/page_1.png",
-    prompt: "Premium cinematic 3D animated storybook scene of a young Indian brother and sister celebrating Raksha Bandhan inside a warm traditional Indian home. Sister holding a handmade rakhi, puja thali with flowers, kumkum, rice, sweets and diya, subtle marigold decorations, golden morning sunlight, realistic Indian characters, expressive faces, detailed clothing, volumetric light, cinematic depth of field, high-end animated feature film quality, 4K, no text, no watermark."
+    prompt: "Premium cinematic 3D animated storybook scene of a young Indian brother and sister celebrating Raksha Bandhan inside a warm traditional Indian home. Sister holding a handmade rakhi, puja thali with flowers, kumkum, rice, sweets and diya, subtle marigold decorations, golden morning sunlight, realistic Indian characters, expressive faces, detailed clothing, volumetric light, cinematic depth of field, high-end animated feature film quality, 4K, no text, no watermark.",
+    te: {
+      title: "రక్షాబంధన్",
+      subtitle: "ఒక దారం చెప్పే మాట",
+      text: ["బంధం అంటే రక్షించడం మాత్రమే కాదు…", "తోడుగా ఉండడం."]
+    },
+    hi: {
+      title: "रक्षाबंधन",
+      subtitle: "एक धागे की बात",
+      text: ["रिश्ता सिर्फ रक्षा करना ही नहीं…", "हर मोड़ पर साथ निभाना है।"]
+    },
+    en: {
+      title: "Raksha Bandhan",
+      subtitle: "What a Thread Says",
+      text: ["A bond is not just about protection…", "It is about standing beside each other."]
+    }
   },
   {
-    title: "రాఖీ కట్టిన తర్వాత ఏమవుతుంది?",
-    subtitle: "మన బాధ్యతను గుర్తు చేస్తుందా?",
-    text: ["రాఖీ కట్టారు.", "తిలకం పెట్టారు.", "మిఠాయి తినిపించారు.", "బహుమతులు ఇచ్చారు.", "ఫోటోలు తీసుకున్నారు.", "అందరూ నవ్వుకున్నారు.", "కానీ...", "రాఖీ కట్టిన తర్వాత ఆ దారం ఏం చేస్తుంది?", "అది నిజంగా ఎవరినైనా రక్షిస్తుందా?", "లేదా...", "మనకు మన బాధ్యతను గుర్తు చేస్తుందా?"],
+    id: 2,
     img: "assets/images/page_2.png",
-    prompt: "Close cinematic 3D shot of an Indian sister tying a colorful traditional rakhi around her older brother's wrist. Tilak, sweets, flowers, diya and family softly blurred behind. Focus on hands, rakhi and emotional faces, warm indoor light, realistic Indian family home, premium animated feature-film quality, 4K, no text."
+    prompt: "Close cinematic 3D shot of an Indian sister tying a colorful traditional rakhi around her older brother's wrist. Tilak, sweets, flowers, diya and family softly blurred behind. Focus on hands, rakhi and emotional faces, warm indoor light, realistic Indian family home, premium animated feature-film quality, 4K, no text.",
+    te: {
+      title: "రాఖీ కట్టిన తర్వాత ఏమవుతుంది?",
+      subtitle: "మన బాధ్యతను గుర్తు చేస్తుందా?",
+      text: ["రాఖీ కట్టారు.", "తిలకం పెట్టారు.", "మిఠాయి తినిపించారు.", "బహుమతులు ఇచ్చారు.", "ఫోటోలు తీసుకున్నారు.", "అందరూ నవ్వుకున్నారు.", "కానీ...", "రాఖీ కట్టిన తర్వాత ఆ దారం ఏం చేస్తుంది?", "అది నిజంగా ఎవరినైనా రక్షిస్తుందా?", "లేదా...", "మనకు మన బాధ్యతను గుర్తు చేస్తుందా?"]
+    },
+    hi: {
+      title: "राखी बांधने के बाद क्या होता है?",
+      subtitle: "क्या यह हमारी ज़िम्मेदारी याद दिलाती है?",
+      text: ["राखी बांधी गई।", "तिलक लगाया गया।", "मिठाई खिलाई गई।", "उपहार दिए गए।", "तस्वीरें खींची गईं।", "सब हंसे और मुस्कुराए।", "लेकिन...", "राखी बांधने के बाद वह धागा क्या करता है?", "क्या वह सच में किसी की रक्षा करता है?", "या फिर...", "वह हमें हमारी ज़िम्मेदारी की याद दिलाता है?"]
+    },
+    en: {
+      title: "What Happens After Tying the Rakhi?",
+      subtitle: "Does it remind us of our responsibility?",
+      text: ["The rakhi was tied.", "The tilak was applied.", "Sweets were shared.", "Gifts were exchanged.", "Photographs were taken.", "Everyone smiled and celebrated.", "But...", "What does that sacred thread do after it is tied?", "Does it physically protect anyone?", "Or...", "Does it awaken our sense of duty and responsibility?"]
+    }
   },
   {
-    title: "రక్షణ అంటే కేవలం కాపాడటమేనా?",
-    subtitle: "రక్షణ అంటే అండగా ఉండటం",
-    text: ["మన చిన్నతనంలో...", "“అన్నయ్య చెల్లిని కాపాడాలి”", "అని వింటూ పెరిగి ఉండవచ్చు.", "అది రక్షాబంధన్లోని ఒక సాంప్రదాయ భావన.", "కానీ మనం పెద్దవాళ్లమయ్యాక జీవితం మనకు మరో విషయం నేర్పుతుంది.", "కొన్నిసార్లు...", "అన్నయ్యకు చెల్లి అవసరం అవుతుంది.", "చెల్లికి అన్నయ్య అవసరం అవుతుంది.", "ఇద్దరికీ ఒకరి మాట మరొకరికి అవసరం అవుతుంది.", "అందుకే...", "రక్షణ అనేది కేవలం బలం కాదు.", "రక్షణ అంటే అండగా ఉండటం."],
+    id: 3,
     img: "assets/images/page_3.png",
-    prompt: "Emotional cinematic 3D scene showing an Indian brother and sister supporting each other equally. Brother gently supports sister while sister holds his hand and comforts him. Symbolic warm protective glow, traditional Indian home, sunset light, realistic expressive characters, premium cinematic 3D animation, 4K, no text."
+    prompt: "Emotional cinematic 3D scene showing an Indian brother and sister supporting each other equally. Brother gently supports sister while sister holds his hand and comforts him. Symbolic warm protective glow, traditional Indian home, sunset light, realistic expressive characters, premium cinematic 3D animation, 4K, no text.",
+    te: {
+      title: "రక్షణ అంటే కేవలం కాపాడటమేనా?",
+      subtitle: "రక్షణ అంటే అండగా ఉండటం",
+      text: ["మన చిన్నతనంలో...", "“అన్నయ్య చెల్లిని కాపాడాలి”", "అని వింటూ పెరిగి ఉండవచ్చు.", "అది రక్షాబంధన్లోని ఒక సాంప్రదాయ భావన.", "కానీ మనం పెద్దవాళ్లమయ్యాక జీవితం మనకు మరో విషయం నేర్పుతుంది.", "కొన్నిసార్లు...", "అన్నయ్యకు చెల్లి అవసరం అవుతుంది.", "చెల్లికి అన్నయ్య అవసరం అవుతుంది.", "ఇద్దరికీ ఒకరి మాట మరొకరికి అవసరం అవుతుంది.", "అందుకే...", "రక్షణ అనేది కేవలం బలం కాదు.", "రక్షణ అంటే అండగా ఉండటం."]
+    },
+    hi: {
+      title: "क्या रक्षा का मतलब सिर्फ बचाना है?",
+      subtitle: "रक्षा का सच्चा अर्थ है सहारा बनना",
+      text: ["बचपन में हमने सुना होगा...", "“भाई को बहन की रक्षा करनी चाहिए।”", "यह रक्षाबंधन की पारंपरिक सोच रही है।", "लेकिन बड़े होकर ज़िंदगी हमें एक नया सच सिखाती है।", "कभी-कभी...", "भाई को बहन के सहारे की ज़रूरत होती है।", "बहन को भाई के साथ की ज़रूरत होती है।", "दोनों को एक-दूसरे के प्यार भरे बोल की ज़रूरत होती है।", "इसलिए...", "रक्षा सिर्फ शारीरिक ताक़त नहीं है।", "रक्षा का सच्चा अर्थ एक-दूसरे का संबल बनना है।"]
+    },
+    en: {
+      title: "Is Protection Merely About Shielding?",
+      subtitle: "Protection means being each other’s pillar",
+      text: ["Growing up, we often heard...", "“A brother must protect his sister.”", "That has been the traditional thought.", "Yet as we grow older, life reveals a deeper truth.", "Sometimes...", "A brother needs his sister's strength.", "A sister needs her brother's comfort.", "Both need each other's reassuring words.", "Thus...", "Protection is not merely physical strength.", "Protection means being a pillar of support for one another."]
+    }
   },
   {
-    title: "చెల్లి కూడా రక్షించగలదు",
-    subtitle: "అతని కష్టంలో ధైర్యం చెప్పడం",
-    text: ["ఒక అన్నయ్య బయట ప్రపంచంతో పోరాడుతూ ఉండవచ్చు.", "కానీ ఇంటికి వచ్చినప్పుడు...", "తన చెల్లితో మాట్లాడవచ్చు.", "ఆమె మాట వినవచ్చు.", "తన బాధను పంచుకోవచ్చు.", "అలాగే...", "ఒక చెల్లి తన అన్నయ్య కష్టాల్లో ఉన్నప్పుడు అతనికి ధైర్యం చెప్పవచ్చు.", "అతని వైఫల్యంలో అతనితో ఉండవచ్చు.", "అతని విజయాన్ని తన విజయంలా ఆనందించవచ్చు.", "అది కూడా ఒక రకమైన రక్షణే."],
+    id: 4,
     img: "assets/images/page_4.png",
-    prompt: "Quiet emotional cinematic 3D animated scene inside an Indian home. Older brother returns after a difficult day and sits quietly; younger sister listens and gently places her hand on his shoulder. Warm evening light, family photographs, subtle expressions, realistic Indian characters, premium animated film quality, 4K, no text."
+    prompt: "Quiet emotional cinematic 3D animated scene inside an Indian home. Older brother returns after a difficult day and sits quietly; younger sister listens and gently places her hand on his shoulder. Warm evening light, family photographs, subtle expressions, realistic Indian characters, premium animated film quality, 4K, no text.",
+    te: {
+      title: "చెల్లి కూడా రక్షించగలదు",
+      subtitle: "అతని కష్టంలో ధైర్యం చెప్పడం",
+      text: ["ఒక అన్నయ్య బయట ప్రపంచంతో పోరాడుతూ ఉండవచ్చు.", "కానీ ఇంటికి వచ్చినప్పుడు...", "తన చెల్లితో మాట్లాడవచ్చు.", "ఆమె మాట వినవచ్చు.", "తన బాధను పంచుకోవచ్చు.", "అలాగే...", "ఒక చెల్లి తన అన్నయ్య కష్టాల్లో ఉన్నప్పుడు అతనికి ధైర్యం చెప్పవచ్చు.", "అతని వైఫల్యంలో అతనితో ఉండవచ్చు.", "అతని విజయాన్ని తన విజయంలా ఆనందించవచ్చు.", "అది కూడా ఒక రకమైన రక్షణే."]
+    },
+    hi: {
+      title: "बहन भी रक्षा कर सकती है",
+      subtitle: "कठिनाइयों में हौसला देना भी रक्षा है",
+      text: ["एक भाई बाहर की दुनिया से संघर्ष कर रहा हो सकता है।", "लेकिन घर लौटने पर...", "वह अपनी बहन से दिल की बात कह सकता है।", "उसकी बातें सुन सकता है, अपना दर्द बांट सकता है।", "वैसे ही...", "एक बहन अपने भाई के मुश्किल वक्त में उसे हिम्मत देती है।", "उसकी असफलताओं में उसके साथ खड़ी रहती है।", "उसकी जीत को अपनी जीत मानकर खुश होती है।", "यह आत्मीय सहारा भी एक अनमोल रक्षा ही है।"]
+    },
+    en: {
+      title: "A Sister Protects Too",
+      subtitle: "Offering courage in times of struggle",
+      text: ["A brother may battle the outside world all day.", "Yet upon returning home...", "He finds solace speaking with his sister.", "She listens to his unsaid pain.", "Likewise...", "A sister instills courage when her brother faces hardships.", "She stands steadfast by him in failures,", "And celebrates his victories as her own.", "That heartfelt emotional shelter is also a divine form of protection."]
+    }
   },
   {
-    title: "బంధం అంటే బాధ్యత",
-    subtitle: "బంధం యొక్క అసలు విలువ",
-    text: ["ప్రేమ అనేది ఒక భావన.", "కానీ బంధం...", "బాధ్యతను కూడా తీసుకువస్తుంది.", "“అతను నా అన్నయ్య.”", "“ఆమె నా చెల్లి.”", "అని చెప్పడం మాత్రమే కాదు.", "అవసరమైనప్పుడు:", "“నేను ఏమి చేయగలను?”", "అని ఆలోచించడం.", "అదే బంధం యొక్క అసలు విలువ."],
+    id: 5,
     img: "assets/images/page_5.png",
-    prompt: "Cinematic 3D scene of Indian brother and sister helping each other at home, communicating love, responsibility and trust. Authentic Indian interior, warm daylight, realistic clothing, detailed environment, premium animated movie quality, no text."
+    prompt: "Cinematic 3D scene of Indian brother and sister helping each other at home, communicating love, responsibility and trust. Authentic Indian interior, warm daylight, realistic clothing, detailed environment, premium animated movie quality, no text.",
+    te: {
+      title: "బంధం అంటే బాధ్యత",
+      subtitle: "బంధం యొక్క అసలు విలువ",
+      text: ["ప్రేమ అనేది ఒక భావన.", "కానీ బంధం...", "బాధ్యతను కూడా తీసుకువస్తుంది.", "“అతను నా అన్నయ్య.”", "“ఆమె నా చెల్లి.”", "అని చెప్పడం మాత్రమే కాదు.", "అవసరమైనప్పుడు:", "“నేను ఏమి చేయగలను?”", "అని ఆలోచించడం.", "అదే బంధం యొక్క అసలు విలువ."]
+    },
+    hi: {
+      title: "रिश्ता यानी ज़िम्मेदारी",
+      subtitle: "रिश्ते का असली मोल",
+      text: ["प्यार एक सुंदर अहसास है।", "लेकिन रिश्ता...", "अपने साथ ज़िम्मेदारी भी लाता है।", "सिर्फ यह कहना नहीं कि—", "“वह मेरा भाई है।” या “वह मेरी बहन है।”", "बल्कि ज़रूरत पड़ने पर यह सोचना:", "“मैं उनके लिए क्या कर सकता हूँ?”", "यही रिश्ते का सच्चा और गहरा मोल है।"]
+    },
+    en: {
+      title: "A Bond Means Responsibility",
+      subtitle: "The true value of relationships",
+      text: ["Love is a feeling.", "Yet a true bond...", "Brings commitment and responsibility.", "It is not just saying:", "“He is my brother” or “She is my sister.”", "It is asking in moments of need:", "“What can I do for them?”", "That proactive care is the profound essence of a relationship."]
+    }
   },
   {
-    title: "జీవితంలో దూరం వచ్చినప్పుడు",
-    subtitle: "దూరాలు దాటిన బాల్య బంధం",
-    text: ["ఒకప్పుడు అన్నాచెల్లెళ్లు ఒకే ఇంట్లో పెరిగారు.", "ఒకే గదిలో ఆడుకున్నారు.", "చిన్న విషయాల మీద గొడవపడ్డారు.", "ఒకరి వస్తువులు మరొకరు తీసుకున్నారు.", "అమ్మ దగ్గర ఒకరిపై ఒకరు ఫిర్యాదు చేశారు.", "తర్వాత...", "చదువు కోసం ఒకరు వేరే నగరానికి వెళ్లారు.", "ఉద్యోగం కోసం మరొకరు మరో నగరానికి వెళ్లారు.", "పెళ్లి తర్వాత ఇంకొకరు ఇంకో ఇంటికి వెళ్లారు.", "జీవితం అందరినీ వేర్వేరు దారుల్లోకి తీసుకెళ్లింది.", "కానీ...", "బాల్యంలో ఏర్పడిన బంధం మాత్రం మిగిలిపోయింది."],
+    id: 6,
     img: "assets/images/page_6.png",
-    prompt: "Cinematic split-scene 3D illustration of Indian brother and sister living in different cities, with soft childhood memories between them: playing, laughing, arguing, sharing food. A glowing golden thread connects them. Emotional premium animated-film quality, 4K, no text."
+    prompt: "Cinematic split-scene 3D illustration of Indian brother and sister living in different cities, with soft childhood memories between them: playing, laughing, arguing, sharing food. A glowing golden thread connects them. Emotional premium animated-film quality, 4K, no text.",
+    te: {
+      title: "జీవితంలో దూరం వచ్చినప్పుడు",
+      subtitle: "దూరాలు దాటిన బాల్య బంధం",
+      text: ["ఒకప్పుడు అన్నాచెల్లెళ్లు ఒకే ఇంట్లో పెరిగారు.", "ఒకే గదిలో ఆడుకున్నారు.", "చిన్న విషయాల మీద గొడవపడ్డారు.", "ఒకరి వస్తువులు మరొకరు తీసుకున్నారు.", "అమ్మ దగ్గర ఒకరిపై ఒకరు ఫిర్యాదు చేశారు.", "తర్వాత...", "చదువు కోసం ఒకరు వేరే నగరానికి వెళ్లారు.", "ఉద్యోగం కోసం మరొకరు మరో నగరానికి వెళ్లారు.", "పెళ్లి తర్వాత ఇంకొకరు ఇంకో ఇంటికి వెళ్లారు.", "జీవితం అందరినీ వేర్వేరు దారుల్లోకి తీసుకెళ్లింది.", "కానీ...", "బాల్యంలో ఏర్పడిన బంధం మాత్రం మిగిలిపోయింది."]
+    },
+    hi: {
+      title: "जब ज़िंदगी में दूरियां आ जाएं",
+      subtitle: "दूरियों से परे बचपन का रिश्ता",
+      text: ["कभी भाई-बहन एक ही छत के नीचे पले-बढ़े।", "एक ही कमरे में खेले, छोटी-छोटी बातों पर लड़े।", "एक-दूसरे की चीज़ें छीनीं, मां से शिकायतें कीं।", "फिर...", "पढ़ाई के लिए एक अलग शहर चला गया।", "नौकरी के लिए दूसरा कहीं और निकल गया।", "विवाह के बाद ज़िंदगी के रास्ते बदल गए।", "ज़िंदगी सबको अलग-अलग दिशाओं में ले गई,", "लेकिन बचपन में बंधी वह डोर हमेशा दिलों में बंधी रही।"]
+    },
+    en: {
+      title: "When Distance Enters Life",
+      subtitle: "A childhood bond beyond borders",
+      text: ["Once, siblings grew up under the same roof.", "Playing in the same room, squabbling over trivial toys,", "Tattling to mother with playful innocence.", "Then...", "Higher studies took one to a distant city,", "Careers led another to far-off horizons,", "Marriage ushered new homes and paths.", "Life led everyone in different directions,", "Yet the sacred bond forged in childhood remained unbreakable."]
+    }
   },
   {
-    title: "రాఖీ — ఒక రిమైండర్",
-    subtitle: "సంబంధాలకు సమయం & శ్రద్ధ",
-    text: ["ప్రతి సంవత్సరం రక్షాబంధన్ వచ్చి ఒక చిన్న ప్రశ్న అడుగుతుంది:", "“నువ్వు నీ వాళ్లను చివరిసారి ఎప్పుడు మాట్లాడావు?”", "కొన్నిసార్లు ఒక ఫోన్ కాల్ సరిపోతుంది.", "కొన్నిసార్లు ఒక చిన్న సందేశం.", "కొన్నిసార్లు కలిసి భోజనం చేయడం.", "మరికొన్నిసార్లు...", "ఏమీ చెప్పకుండా పక్కన కూర్చోవడం.", "రాఖీ మనకు గుర్తు చేసేది:", "సంబంధాలకు కూడా శ్రద్ధ అవసరం."],
+    id: 7,
     img: "assets/images/page_7.png",
-    prompt: "Warm cinematic 3D scene of Indian sister video-calling her brother during Raksha Bandhan. Decorated rakhi thali beside her, brother smiling from another city on smartphone, warm evening light, realistic Indian home, emotional connection, premium 3D animation, no text."
+    prompt: "Warm cinematic 3D scene of Indian sister video-calling her brother during Raksha Bandhan. Decorated rakhi thali beside her, brother smiling from another city on smartphone, warm evening light, realistic Indian home, emotional connection, premium 3D animation, no text.",
+    te: {
+      title: "రాఖీ — ఒక రిమైండర్",
+      subtitle: "సంబంధాలకు సమయం & శ్రద్ధ",
+      text: ["ప్రతి సంవత్సరం రక్షాబంధన్ వచ్చి ఒక చిన్న ప్రశ్న అడుగుతుంది:", "“నువ్వు నీ వాళ్లను చివరిసారి ఎప్పుడు మాట్లాడావు?”", "కొన్నిసార్లు ఒక ఫోన్ కాల్ సరిపోతుంది.", "కొన్నిసార్లు ఒక చిన్న సందేశం.", "కొన్నిసార్లు కలిసి భోజనం చేయడం.", "మరికొన్నిసార్లు...", "ఏమీ చెప్పకుండా పక్కన కూర్చోవడం.", "రాఖీ మనకు గుర్తు చేసేది:", "సంబంధాలకు కూడా శ్రద్ధ అవసరం."]
+    },
+    hi: {
+      title: "राखी — एक प्यारा स्मरण",
+      subtitle: "रिश्तों को समय और अपनत्व की ज़रूरत",
+      text: ["हर साल रक्षाबंधन आकर हमसे एक कोमल सवाल पूछता है:", "“तुमने अपने अपनों से पिछली बार कब बात की थी?”", "कभी-कभी बस एक फोन कॉल काफी होता है।", "कभी एक छोटा सा संदेश, कभी साथ बैठकर भोजन करना,", "और कभी बस चुपचाप पास बैठकर उनका हाथ थाम लेना।", "राखी हमें याद दिलाती है:", "रिश्तों को भी समय, संवार और अपनत्व की ज़रूरत होती है।"]
+    },
+    en: {
+      title: "Rakhi — A Gentle Reminder",
+      subtitle: "Relationships require time and care",
+      text: ["Every year, Raksha Bandhan arrives with a poignant question:", "“When did you last speak to your loved ones?”", "Sometimes, a single phone call is enough.", "Sometimes a brief message, or sharing a warm meal together.", "And sometimes, just sitting beside them in quiet solidarity.", "Rakhi reminds us:", "Relationships need intentional care and nurturing."]
+    }
   },
   {
-    title: "బహుమతి కంటే గొప్పది",
-    subtitle: "తోడుగా ఉన్న జ్ఞాపకం",
-    text: ["రాఖీ రోజు అన్నయ్య చెల్లికి బహుమతి ఇస్తాడు.", "బట్టలు కావచ్చు.", "డబ్బు కావచ్చు.", "ఇంకేదైనా కావచ్చు.", "కానీ సంవత్సరాలు గడిచిన తర్వాత...", "మనకు గుర్తుండిపోయేది బహుమతి విలువ కాదు.", "గుర్తుండేది...", "“ఆ రోజు అతను నా పక్కన ఉన్నాడు.”", "“ఆమె నన్ను గుర్తు పెట్టుకుంది.”", "“మేమంతా కలిసి కూర్చున్నాం.”", "అదే కుటుంబ జ్ఞాపకం."],
+    id: 8,
     img: "assets/images/page_8.png",
-    prompt: "Warm cinematic 3D animated Indian family sitting together around a dining table during Raksha Bandhan. Brother, sister, parents and grandparents, sweets and food, focus on togetherness rather than gifts. Golden indoor light, realistic characters, premium animated-film quality, 4K, no text."
+    prompt: "Warm cinematic 3D animated Indian family sitting together around a dining table during Raksha Bandhan. Brother, sister, parents and grandparents, sweets and food, focus on togetherness rather than gifts. Golden indoor light, realistic characters, premium animated-film quality, 4K, no text.",
+    te: {
+      title: "బహుమతి కంటే గొప్పది",
+      subtitle: "తోడుగా ఉన్న జ్ఞాపకం",
+      text: ["రాఖీ రోజు అన్నయ్య చెల్లికి బహుమతి ఇస్తాడు.", "బట్టలు కావచ్చు, డబ్బు కావచ్చు, ఇంకేదైనా కావచ్చు.", "కానీ సంవత్సరాలు గడిచిన తర్వాత...", "మనకు గుర్తుండిపోయేది బహుమతి విలువ కాదు.", "గుర్తుండేది...", "“ఆ రోజు అతను నా పక్కన ఉన్నాడు.”", "“ఆమె నన్ను గుర్తు పెట్టుకుంది.”", "“మేమంతా కలిసి కూర్చున్నాం.”", "అదే కుటుంబ జ్ఞాపకం."]
+    },
+    hi: {
+      title: "उपहार से भी अनमोल",
+      subtitle: "साथ बिताए पलों की अमिट यादें",
+      text: ["राखी पर भाई बहन को उपहार देता है—", "नए कपड़े, धन या कोई कीमती वस्तु।", "लेकिन वर्षों बाद जब हम मुड़कर देखते हैं...", "तो हमें उपहार का मोल नहीं, बल्कि वे पल याद रहते हैं:", "“उस दिन वह मेरे साथ खड़ा था।”", "“उसने मुझे दिल से याद रखा।”", "“हम सब एक साथ हंसे और बैठे थे।”", "यही परिवार की सबसे अनमोल धरोहर है।"]
+    },
+    en: {
+      title: "Greater Than Any Gift",
+      subtitle: "The enduring memory of togetherness",
+      text: ["On Rakhi, a brother presents a gift to his sister—", "Clothes, money, or treasured keepsakes.", "Yet as decades roll by...", "What lingers is never the price tag of the gift.", "What endures is:", "“He stood by me that day.”", "“She remembered me from her heart.”", "“We all gathered together as one family.”", "That shared warmth is the real treasure."]
+    }
   },
   {
-    title: "పిల్లలకు రక్షాబంధన్ ఎందుకు అవసరం?",
-    subtitle: "తరాల సంస్కృతి & విలువలు",
-    text: ["పిల్లలు పండుగలను కేవలం చూస్తూ నేర్చుకోరు.", "వారు చేస్తూ నేర్చుకుంటారు.", "రాఖీ కట్టేటప్పుడు...", "వారు ఒక ఆచారాన్ని చూస్తారు.", "మిఠాయి పంచేటప్పుడు...", "వారు పంచుకోవడం నేర్చుకుంటారు.", "అన్నాచెల్లెళ్లు ఒకరినొకరు ఆశీర్వదించేటప్పుడు...", "వారు బంధం విలువను నేర్చుకుంటారు.", "తాతయ్య, అమ్మమ్మ కథలు చెప్పేటప్పుడు...", "వారు తమ కుటుంబ చరిత్రను తెలుసుకుంటారు.", "అందుకే పండుగలు...", "ఒక తరం నుంచి మరో తరానికి విలువలను తీసుకెళ్లే మార్గాలు."],
+    id: 9,
     img: "assets/images/page_9.png",
-    prompt: "Beautiful 3D animated Indian grandparents teaching young children about Raksha Bandhan. Grandmother and grandfather tell stories, children listen with curiosity, rakhi, sweets and family photos nearby, warm traditional home, golden afternoon light, realistic expressive characters, premium animated film quality, 4K, no text."
+    prompt: "Beautiful 3D animated Indian grandparents teaching young children about Raksha Bandhan. Grandmother and grandfather tell stories, children listen with curiosity, rakhi, sweets and family photos nearby, warm traditional home, golden afternoon light, realistic expressive characters, premium animated film quality, 4K, no text.",
+    te: {
+      title: "పిల్లలకు రక్షాబంధన్ ఎందుకు అవసరం?",
+      subtitle: "తరాల సంస్కృతి & విలువలు",
+      text: ["పిల్లలు పండుగలను కేవలం చూస్తూ నేర్చుకోరు. వారు చేస్తూ నేర్చుకుంటారు.", "రాఖీ కట్టేటప్పుడు... వారు ఒక ఆచారాన్ని చూస్తారు.", "మిఠాయి పంచేటప్పుడు... వారు పంచుకోవడం నేర్చుకుంటారు.", "అన్నాచెల్లెళ్లు ఒకరినొకరు ఆశీర్వదించేటప్పుడు... వారు బంధం విలువను నేర్చుకుంటారు.", "తాతయ్య, అమ్మమ్మ కథలు చెప్పేటప్పుడు... వారు తమ కుటుంబ చరిత్రను తెలుసుకుంటారు.", "అందుకే పండుగలు... ఒక తరం నుంచి మరో తరానికి విలువలను తీసుకెళ్లే మార్గాలు."]
+    },
+    hi: {
+      title: "बच्चों के लिए रक्षाबंधन क्यों ज़रूरी है?",
+      subtitle: "पीढ़ियों के संस्कार और जीवन मूल्य",
+      text: ["बच्चे सिर्फ देखकर नहीं, अनुभव करके सीखते हैं।", "राखी बांधते समय वे अपनी समृद्ध संस्कृति को देखते हैं।", "मिठाई बांटते हुए वे साझेदारी और त्याग सीखते हैं।", "एक-दूसरे को दुआएं देते हुए वे रिश्तों का सम्मान सीखते हैं।", "दादा-दादी से कहानियां सुनते हुए वे अपनी जड़ों को पहचानते हैं।", "इसलिए ये त्यौहार एक पीढ़ी से दूसरी पीढ़ी तक संस्कार पहुंचाने के पावन सेतु हैं।"]
+    },
+    en: {
+      title: "Why Children Need Raksha Bandhan",
+      subtitle: "Passing culture and values across generations",
+      text: ["Children do not merely observe festivals; they absorb through participation.", "While tying the rakhi, they witness sacred tradition.", "While sharing sweets, they learn the beauty of giving.", "While blessing one another, they discover the sanctity of sibling bonds.", "While grandparents narrate timeless stories, they connect with their heritage.", "Festivals are bridges that transmit timeless values across generations."]
+    }
   },
   {
-    title: "రాఖీ కేవలం కుటుంబానికేనా?",
-    subtitle: "నమ్మకం, బాధ్యత, ఆప్యాయత",
-    text: ["మనము ఇప్పటివరకు కుటుంబం గురించి మాట్లాడుకున్నాం.", "కానీ భారతీయ సంప్రదాయంలో బంధం అనే భావన కొన్నిసార్లు కుటుంబ సరిహద్దులను దాటి వెళ్తుంది.", "ఒక రాఖీ...", "ఒక వ్యక్తిని “అన్నయ్య”గా గుర్తించవచ్చు.", "ఒక సంబంధాన్ని కొత్తగా నిర్వచించవచ్చు.", "ఒకరిపై ఒకరికి బాధ్యతను గుర్తు చేయవచ్చు.", "అందుకే...", "బంధం అంటే కేవలం రక్తం కాదు.", "నమ్మకం కూడా.", "బాధ్యత కూడా.", "ఆప్యాయత కూడా."],
+    id: 10,
     img: "assets/images/page_10.png",
-    prompt: "Cinematic 3D Indian community scene showing Raksha Bandhan beyond immediate family. A young girl respectfully ties a rakhi on a trusted community member while families and elders watch warmly. Authentic Indian neighborhood, warm sunlight, diverse generations, premium cinematic 3D animation, 4K, no text."
+    prompt: "Cinematic 3D Indian community scene showing Raksha Bandhan beyond immediate family. A young girl respectfully ties a rakhi on a trusted community member while families and elders watch warmly. Authentic Indian neighborhood, warm sunlight, diverse generations, premium cinematic 3D animation, 4K, no text.",
+    te: {
+      title: "రాఖీ కేవలం కుటుంబానికేనా?",
+      subtitle: "నమ్మకం, బాధ్యత, ఆప్యాయత",
+      text: ["మనము ఇప్పటివరకు కుటుంబం గురించి మాట్లాడుకున్నాం.", "కానీ భారతీయ సంప్రదాయంలో బంధం అనే భావన కొన్నిసార్లు కుటుంబ సరిహద్దులను దాటి వెళ్తుంది.", "ఒక రాఖీ... ఒక వ్యక్తిని “అన్నయ్య”గా గుర్తించవచ్చు.", "ఒక సంబంధాన్ని కొత్తగా నిర్వచించవచ్చు.", "ఒకరిపై ఒకరికి బాధ్యతను గుర్తు చేయవచ్చు.", "అందుకే... బంధం అంటే కేవలం రక్తం కాదు.", "నమ్మకం కూడా, బాధ్యత కూడా, ఆప్యాయత కూడా."]
+    },
+    hi: {
+      title: "क्या राखी सिर्फ परिवार तक सीमित है?",
+      subtitle: "विश्वास, कर्तव्य और अटूट स्नेह",
+      text: ["हमने अब तक परिवार की बात की।", "लेकिन भारतीय संस्कृति में रिश्ते की भावना चारदीवारी को लांघकर पूरे समाज को जोड़ती है।", "एक पवित्र राखी किसी को भी 'भाई' का सम्मान दे सकती है।", "एक नए रिश्ते को जन्म देकर कर्तव्यबोध जगा सकती है।", "इसलिए रिश्ता सिर्फ खून का नहीं होता—", "यह विश्वास, उत्तरदायित्व और निस्वार्थ प्रेम का पावन बंधन है।"]
+    },
+    en: {
+      title: "Is Rakhi Confined Only to the Family?",
+      subtitle: "Trust, responsibility, and pure affection",
+      text: ["We have spoken of the immediate family so far.", "Yet Indian tradition expands the concept of kinship beyond household walls.", "A rakhi can sanctify any trusted person as a brother.", "It can redefine relationships and awaken universal brotherhood.", "Thus, kinship is not defined by blood alone—", "It is built on trust, noble responsibility, and unconditional affection."]
+    }
   },
   {
-    title: "రక్షణకు మరో రూపం",
-    subtitle: "ఇంటి రక్షణ నుండి దేశ రక్షణ వరకు",
-    text: ["ఇప్పుడు...", "మన కుటుంబం బయటికి చూద్దాం.", "మన నగరాలు ప్రశాంతంగా ఉన్నాయి.", "మన పిల్లలు పాఠశాలకు వెళ్తున్నారు.", "మన కుటుంబాలు పండుగలు జరుపుకుంటున్నాయి.", "మన ఇళ్లలో దీపాలు వెలుగుతున్నాయి.", "కానీ...", "దేశం మరో చివరలో ఎవరో తమ విధిలో ఉన్నారు.", "వారికి పండుగ రోజు కూడా డ్యూటీ ఉంటుంది.", "వారికి కుటుంబం గుర్తొస్తుంది.", "కానీ బాధ్యత ముందుంటుంది.", "వారు మన భారత సైనికులు."],
+    id: 11,
     img: "assets/images/page_11.png",
-    prompt: "Cinematic transition from peaceful Indian family celebrating Raksha Bandhan at home to an Indian soldier standing on duty at a remote border. Warm family foreground transitions into vast landscape, respectful military portrayal, volumetric light, premium 3D animation, 4K, no text."
+    prompt: "Cinematic transition from peaceful Indian family celebrating Raksha Bandhan at home to an Indian soldier standing on duty at a remote border. Warm family foreground transitions into vast landscape, respectful military portrayal, volumetric light, premium 3D animation, 4K, no text.",
+    te: {
+      title: "రక్షణకు మరో రూపం",
+      subtitle: "ఇంటి రక్షణ నుండి దేశ రక్షణ వరకు",
+      text: ["ఇప్పుడు... మన కుటుంబం బయటికి చూద్దాం.", "మన నగరాలు ప్రశాంతంగా ఉన్నాయి. మన పిల్లలు పాఠశాలకు వెళ్తున్నారు.", "మన కుటుంబాలు పండుగలు జరుపుకుంటున్నాయి. మన ఇళ్లలో దీపాలు వెలుగుతున్నాయి.", "కానీ... దేశం మరో చివరలో ఎవరో తమ విధిలో ఉన్నారు.", "వారికి పండుగ రోజు కూడా డ్యూటీ ఉంటుంది.", "వారికి కుటుంబం గుర్తొస్తుంది, కానీ బాధ్యత ముందుంటుంది.", "వారు మన భారత సైనికులు."]
+    },
+    hi: {
+      title: "रक्षा का एक और विराट रूप",
+      subtitle: "घर की देहरी से लेकर देश की सीमा तक",
+      text: ["आइए अब अपनी घर की चौखट से बाहर झांकें।", "हमारे शहर शांत हैं, बच्चे सुरक्षित स्कूल जा रहे हैं,", "घरों में उत्सव की रोशनी है और परिवार मुस्कुरा रहे हैं।", "लेकिन देश के सुदूर छोर पर कोई अपने कर्तव्य पर डटा है।", "त्यौहार के दिन भी उनकी आंखों में मातृभूमि की सुरक्षा का पहरा है।", "उन्हें अपने घर की याद आती है, पर फर्ज सबसे पहले आता है—", "वे हैं हमारे वीर भारतीय सैनिक!"]
+    },
+    en: {
+      title: "Another Dimension of Protection",
+      subtitle: "From the hearth of home to the nation’s borders",
+      text: ["Now, let us gaze beyond our doorstep.", "Our cities thrive peacefully, our children attend schools safely,", "Festive lamps illuminate our homes, and families celebrate joyfully.", "Yet at the nation’s far-flung borders, brave souls stand vigil on duty.", "Even on festive days, duty takes precedence over celebration.", "They miss their families, yet the motherland comes first—", "They are our brave Indian soldiers."]
+    }
   },
   {
-    title: "పండుగ రోజున కూడా విధి",
-    subtitle: "సరిహద్దుల్లో కర్తవ్య దీక్ష",
-    text: ["ఒక సైనికుడికి రక్షాబంధన్ రోజు...", "ఇంట్లో ఉండి రాఖీ కట్టించుకునే రోజు కాకపోవచ్చు.", "అతను సరిహద్దులో ఉండవచ్చు.", "మంచుతో నిండిన ప్రాంతంలో ఉండవచ్చు.", "ఎడారి ప్రాంతంలో ఉండవచ్చు.", "సముద్రంలో ఉండవచ్చు.", "అత్యంత కఠినమైన పరిస్థితుల్లో విధి నిర్వహిస్తూ ఉండవచ్చు.", "అతని కుటుంబం మాత్రం...", "ఇంట్లో అతని కోసం ఎదురుచూస్తూ ఉండవచ్చు."],
+    id: 12,
     img: "assets/images/page_12.png",
-    prompt: "Powerful cinematic 3D scene of a young Indian soldier standing on duty in a remote snowy high-altitude border during Raksha Bandhan, holding a small family photograph. Snow mountains, gentle particles, realistic uniform, quiet emotion, no combat or violence, premium animated feature quality, 4K, no text."
+    prompt: "Powerful cinematic 3D scene of a young Indian soldier standing on duty in a remote snowy high-altitude border during Raksha Bandhan, holding a small family photograph. Snow mountains, gentle particles, realistic uniform, quiet emotion, no combat or violence, premium animated feature quality, 4K, no text.",
+    te: {
+      title: "పండుగ రోజున కూడా విధి",
+      subtitle: "సరిహద్దుల్లో కర్తవ్య దీక్ష",
+      text: ["ఒక సైనికుడికి రక్షాబంధన్ రోజు... ఇంట్లో ఉండి రాఖీ కట్టించుకునే రోజు కాకపోవచ్చు.", "అతను సరిహద్దులో ఉండవచ్చు, మంచుతో నిండిన ప్రాంతంలో ఉండవచ్చు,", "ఎడారి ప్రాంతంలో ఉండవచ్చు, సముద్రంలో ఉండవచ్చు.", "అత్యంత కఠినమైన పరిస్థితుల్లో విధి నిర్వహిస్తూ ఉండవచ్చు.", "అతని కుటుంబం మాత్రం... ఇంట్లో అతని కోసం ఎదురుచూస్తూ ఉండవచ్చు."]
+    },
+    hi: {
+      title: "त्यौहार के दिन भी कर्तव्य की वेदी पर",
+      subtitle: "सीमाओं पर सजग निष्ठा",
+      text: ["एक सैनिक के लिए रक्षाबंधन का दिन घर बैठकर राखी बंधवाने का दिन नहीं होता।", "वह सियाचिन की बर्फीली चोटियों पर हो सकता है,", "थार के तपते रेगिस्तान में या हिंद महासागर की लहरों पर।", "अत्यंत विषम परिस्थितियों में वह देश की ढाल बना खड़ा रहता है,", "जबकि उसका परिवार घर पर उसकी सलामती की राह देखता रहता है।"]
+    },
+    en: {
+      title: "Duty Even on Festive Days",
+      subtitle: "Vigilant devotion at the frontiers",
+      text: ["For a soldier, Raksha Bandhan may not be a day of resting at home.", "He stands guard on freezing Himalayan peaks,", "In scorching desert sands, or patrolling stormy ocean waves.", "Performing duty amidst the harshest trials,", "While back home, his family gazes at the doorway, praying for his safe return."]
+    }
   },
   {
-    title: "ఒక తల్లి ఎదురుచూపు",
-    subtitle: "మాతృ హృదయం",
-    text: ["ఒక తల్లి తన కొడుకు చేతికి ప్రతి సంవత్సరం రాఖీ కట్టేది.", "ఈ సంవత్సరం...", "ఆమె చేతిలో రాఖీ ఉంది.", "కానీ కొడుకు ఇంట్లో లేడు.", "ఆమె రాఖీని జాగ్రత్తగా ఉంచుతుంది.", "ఫోన్ చేస్తుంది.", "“జాగ్రత్తగా ఉండు బిడ్డా.”", "అని చెబుతుంది.", "ఆ ఒక్క వాక్యంలో...", "ఒక తల్లి ప్రేమ ఉంది.", "ఒక కుటుంబం భయం ఉంది.", "ఒక దేశం మీద నమ్మకం ఉంది."],
+    id: 13,
     img: "assets/images/page_13.png",
-    prompt: "Deeply emotional 3D scene inside an Indian home. Mother holds a rakhi and video-calls her soldier son. Son appears in military uniform on smartphone. Family photo and festive decorations nearby, warm evening light, realistic faces, premium cinematic animation, 4K, no text."
+    prompt: "Deeply emotional 3D scene inside an Indian home. Mother holds a rakhi and video-calls her soldier son. Son appears in military uniform on smartphone. Family photo and festive decorations nearby, warm evening light, realistic faces, premium cinematic animation, 4K, no text.",
+    te: {
+      title: "ఒక తల్లి ఎదురుచూపు",
+      subtitle: "మాతృ హృదయం",
+      text: ["ఒక తల్లి తన కొడుకు చేతికి ప్రతి సంవత్సరం రాఖీ కట్టేది.", "ఈ సంవత్సరం... ఆమె చేతిలో రాఖీ ఉంది. కానీ కొడుకు ఇంట్లో లేడు.", "ఆమె రాఖీని జాగ్రత్తగా ఉంచుతుంది. ఫోన్ చేస్తుంది.", "“జాగ్రత్తగా ఉండు బిడ్డా.” అని చెబుతుంది.", "ఆ ఒక్క వాక్యంలో... ఒక తల్లి ప్రేమ ఉంది. ఒక కుటుంబం భయం ఉంది. ఒక దేశం మీద నమ్మకం ఉంది."]
+    },
+    hi: {
+      title: "एक मां का इंतज़ार",
+      subtitle: "मातृ हृदय का मौन समर्पण",
+      text: ["एक मां हर साल अपने फौजी बेटे की कलाई पर राखी बांधा करती थी।", "इस साल हाथ में राखी है, पर बेटा सरहद पर तैनात है।", "वह उस राखी को संभालकर रखती है, फोन मिलाती है और बस कहती है:", "“अपना ध्यान रखना बेटा...”", "उस एक वाक्य में मां की असीम ममता, परिवार की चिंता और राष्ट्र के प्रति अटूट गौरव समाया है।"]
+    },
+    en: {
+      title: "A Mother’s Silent Vigil",
+      subtitle: "The boundless maternal heart",
+      text: ["Every year, a mother lovingly tied a rakhi upon her son's wrist.", "This year, the rakhi rests in her palms, but her son stands on the frontlines.", "She treasures the sacred thread, dials his number, and whispers:", "“Take care of yourself, my child.”", "In that single sentence resonates a mother’s infinite love, a family’s quiet anxiety, and an unwavering faith in the nation."]
+    }
   },
   {
-    title: "సరిహద్దులో ఒక రాఖీ",
-    subtitle: "కోట్లాది చెల్లెళ్ల రక్ష",
-    text: ["ఇంకో వైపు...", "ఒక సైనికుడి చేతికి ఒక రాఖీ కట్టబడుతోంది.", "అది అతని సొంత చెల్లి కట్టిన రాఖీ కాకపోవచ్చు.", "కానీ ఆ రాఖీ ఒక సందేశాన్ని తీసుకువస్తుంది:", "“మీరు మా కోసం నిలబడి ఉన్నారు.”", "“మేము మిమ్మల్ని మర్చిపోలేదు.”", "భారతదేశంలోని వివిధ ప్రాంతాల్లో రక్షాబంధన్ సందర్భంగా సైనికులు, సాయుధ దళాలు మరియు ఇతర భద్రతా సిబ్బందికి రాఖీలు కట్టే కార్యక్రమాలు నిర్వహించబడ్డాయి.", "ఇది కుటుంబ బంధాన్ని దేశ సేవతో ప్రతీకాత్మకంగా కలుపుతుంది."],
+    id: 14,
     img: "assets/images/page_14.png",
-    prompt: "Respectful cinematic 3D scene of Indian soldiers receiving handmade rakhis during a Raksha Bandhan event. Young Indian girl ties rakhi on a soldier's wrist, other soldiers smile warmly, Indian flag subtle in background, dignified and emotional, realistic uniforms, premium animated-film quality, 4K, no text."
+    prompt: "Respectful cinematic 3D scene of Indian soldiers receiving handmade rakhis during a Raksha Bandhan event. Young Indian girl ties rakhi on a soldier's wrist, other soldiers smile warmly, Indian flag subtle in background, dignified and emotional, realistic uniforms, premium animated-film quality, 4K, no text.",
+    te: {
+      title: "సరిహద్దులో ఒక రాఖీ",
+      subtitle: "కోట్లాది చెల్లెళ్ల రక్ష",
+      text: ["ఇంకో వైపు... ఒక సైనికుడి చేతికి ఒక రాఖీ కట్టబడుతోంది.", "అది అతని సొంత చెల్లి కట్టిన రాఖీ కాకపోవచ్చు.", "కానీ ఆ రాఖీ ఒక సందేశాన్ని తీసుకువస్తుంది:", "“మీరు మా కోసం నిలబడి ఉన్నారు. మేము మిమ్మల్ని మర్చిపోలేదు.”", "భారతదేశంలోని వివిధ ప్రాంతాల్లో సైనికులు, సాయుధ దళాలకు రాఖీలు కట్టే కార్యక్రమాలు కుటుంబ బంధాన్ని దేశ సేవతో కలుపుతాయి."]
+    },
+    hi: {
+      title: "सरहद पर एक राखी",
+      subtitle: "करोड़ों बहनों की दुआएं",
+      text: ["सरहद की चौकी पर एक जवान की कलाई पर राखी बांधी जा रही है।", "शायद यह उसकी अपनी सगी बहन की बांधी राखी न हो,", "लेकिन यह धागा पूरे देश का यह संदेश लेकर आया है:", "“आप हमारे लिए पहरा दे रहे हैं, हम आपको कभी नहीं भूले।”", "यह पावन दृश्य घरेलू प्रेम को राष्ट्र सेवा के महायज्ञ से जोड़ देता है।"]
+    },
+    en: {
+      title: "A Rakhi at the Border",
+      subtitle: "The blessings of millions of sisters",
+      text: ["At a forward military post, a rakhi is tied around a soldier’s wrist.", "It may not be tied by his biological sister,", "Yet that thread carries the heartfelt gratitude of an entire nation:", "“You stand guard for us; we have never forgotten you.”", "This bridges familial love with supreme national service."]
+    }
   },
   {
-    title: "కానీ ఒక రాఖీ వారి త్యాగాన్ని కొలవగలదా?",
-    subtitle: "నిస్వార్థ త్యాగం",
-    text: ["లేదు.", "ఒక రాఖీ...", "ఒక పుష్పగుచ్ఛం...", "ఒక ధన్యవాదం...", "వారి త్యాగం యొక్క పూర్తి విలువను కొలవలేవు.", "ఎందుకంటే ఒక సైనికుడి వెనుక...", "ఒక కుటుంబం ఉంటుంది.", "అతను విధిలో ఉన్నప్పుడు...", "తల్లి ఎదురుచూస్తుంది.", "తండ్రి ఎదురుచూస్తాడు.", "భార్య లేదా భర్త ఎదురుచూస్తారు.", "పిల్లలు ఎదురుచూస్తారు.", "అన్నాచెల్లెళ్లు ఎదురుచూస్తారు."],
+    id: 15,
     img: "assets/images/page_15.png",
-    prompt: "Quiet emotional 3D scene inside an Indian military family home. Rakhi, flowers and framed soldier photograph on wooden table, mother, father, spouse, child and sibling sitting quietly nearby. Soft sunlight, dignity, remembrance, no violence, premium cinematic 3D animation, 4K, no text."
+    prompt: "Quiet emotional 3D scene inside an Indian military family home. Rakhi, flowers and framed soldier photograph on wooden table, mother, father, spouse, child and sibling sitting quietly nearby. Soft sunlight, dignity, remembrance, no violence, premium cinematic 3D animation, 4K, no text.",
+    te: {
+      title: "కానీ ఒక రాఖీ వారి త్యాగాన్ని కొలవగలదా?",
+      subtitle: "నిస్వార్థ త్యాగం",
+      text: ["లేదు. ఒక రాఖీ... ఒక పుష్పగుచ్ఛం... ఒక ధన్యవాదం... వారి త్యాగం యొక్క పూర్తి విలువను కొలవలేవు.", "ఎందుకంటే ఒక సైనికుడి వెనుక ఒక కుటుంబం ఉంటుంది.", "అతను విధిలో ఉన్నప్పుడు... తల్లి ఎదురుచూస్తుంది, తండ్రి ఎదురుచూస్తాడు, భార్య లేదా భర్త ఎదురుచూస్తారు, పిల్లలు ఎదురుచూస్తారు, అన్నాచెల్లెళ్లు ఎదురుచూస్తారు."]
+    },
+    hi: {
+      title: "क्या एक राखी उनके बलिदान का मोल चुका सकती है?",
+      subtitle: "निस्वार्थ और असीम त्याग",
+      text: ["नहीं! कोई राखी, पुष्पगुच्छ या धन्यवाद उनके सर्वोच्च त्याग का मोल नहीं चुका सकते।", "क्योंकि हर वर्दीधारी के पीछे एक पूरा परिवार सांस लेता है।", "जब वह सीमा पर तैनात होता है, तब घर पर माता-पिता, जीवनसाथी, मासूम बच्चे और भाई-बहन हर पल उसकी राह तकते हैं।"]
+    },
+    en: {
+      title: "Can a Rakhi Measure Their Sacrifice?",
+      subtitle: "Selfless devotion beyond measure",
+      text: ["No single rakhi, floral tribute, or word of thanks can measure the depth of their sacrifice.", "Behind every soldier stands an entire family holding its breath.", "While he braves danger on duty, parents, spouses, children, and siblings wait with endless prayers."]
+    }
   },
   {
-    title: "కొందరు తిరిగి రారు",
-    subtitle: "అమరవీరుల స్మరణ",
-    text: ["ఇది రక్షాబంధన్ కథలో అత్యంత నిశ్శబ్దమైన భాగం.", "కొంతమంది సైనికులు...", "తమ కుటుంబాల దగ్గరకు తిరిగి రారు.", "వారి చివరి ప్రయాణం...", "ఒక కుటుంబం జీవితాన్ని శాశ్వతంగా మార్చేస్తుంది.", "ఒక తల్లి తన కొడుకును కోల్పోతుంది.", "ఒక చెల్లి తన అన్నయ్యను కోల్పోతుంది.", "ఒక భార్య తన భర్తను కోల్పోతుంది.", "ఒక పిల్లవాడు తన తండ్రిని కోల్పోతాడు.", "ఒక సైనికుడి త్యాగం...", "అతని కుటుంబం కూడా మోసే త్యాగమే."],
+    id: 16,
     img: "assets/images/page_16.png",
-    prompt: "Respectful memorial-style cinematic 3D scene of Indian military family remembering a fallen soldier. Mother, father, spouse, young child and sibling beside framed photograph, rakhi placed beside it, soft morning light, restrained grief, no graphic imagery, premium 3D animated storybook, 4K, no text."
+    prompt: "Respectful memorial-style cinematic 3D scene of Indian military family remembering a fallen soldier. Mother, father, spouse, young child and sibling beside framed photograph, rakhi placed beside it, soft morning light, restrained grief, no graphic imagery, premium 3D animated storybook, 4K, no text.",
+    te: {
+      title: "కొందరు తిరిగి రారు",
+      subtitle: "అమరవీరుల స్మరణ",
+      text: ["ఇది రక్షాబంధన్ కథలో అత్యంత నిశ్శబ్దమైన భాగం.", "కొంతమంది సైనికులు... తమ కుటుంబాల దగ్గరకు తిరిగి రారు.", "వారి చివరి ప్రయాణం ఒక కుటుంబం జీవితాన్ని శాశ్వతంగా మార్చేస్తుంది.", "ఒక తల్లి తన కొడుకును, ఒక చెల్లి తన అన్నయ్యను, ఒక భార్య తన భర్తను, ఒక పిల్లవాడు తన తండ్రిని కోల్పోతాడు.", "ఒక సైనికుడి త్యాగం... అతని కుటుంబం కూడా మోసే త్యాగమే."]
+    },
+    hi: {
+      title: "कुछ वीर कभी लौटकर नहीं आते",
+      subtitle: "अमर शहीदों को नमन",
+      text: ["यह रक्षाबंधन की गाथा का सबसे शांत और भावुक अध्याय है।", "कुछ वीर सपूत कभी अपने घर लौटकर नहीं आते।", "उनकी शहादत उस परिवार की दुनिया सदा के लिए बदल देती है।", "एक मां अपना लाल, एक बहन अपना प्यारा भाई, और एक बच्चा अपने पिता को खो देता है।", "सैनिक का बलिदान सिर्फ उसका नहीं, उसके पूरे परिवार का भी होता है।"]
+    },
+    en: {
+      title: "Some Never Return",
+      subtitle: "Remembering the immortal martyrs",
+      text: ["This is the most solemn chapter in the story of Raksha Bandhan.", "Some brave soldiers never return to their families.", "Their supreme martyrdom permanently alters the lives of their loved ones.", "A mother loses her son, a sister her brother, a child a father.", "A soldier’s sacrifice is borne silently by the entire family."]
+    }
   },
   {
-    title: "దేశం అంటే ఎవరు?",
-    subtitle: "మహా భారతం — జాతి సమైక్యత",
-    text: ["దేశం అంటే కేవలం ఒక మ్యాప్ కాదు.", "దేశం అంటే...", "మన ఇళ్లు.", "మన కుటుంబాలు.", "మన పిల్లలు.", "మన పాఠశాలలు.", "మన పొలాలు.", "మన నగరాలు.", "మన దేవాలయాలు, మసీదులు, చర్చిలు, గురుద్వారాలు.", "మన భాషలు.", "మన సంస్కృతులు.", "మన జ్ఞాపకాలు.", "ఈ జీవితం సురక్షితంగా కొనసాగేందుకు...", "ఎవరో తమ జీవితాన్ని బాధ్యతగా తీసుకుంటారు."],
+    id: 17,
     img: "assets/images/page_17.png",
-    prompt: "Epic cinematic panoramic 3D representation of India through everyday life: homes, families, children, schools, farms, cities, temples, mosques, churches, gurudwaras and diverse Indian cultures. Peaceful shared life, warm sunlight, realistic environments, premium animated feature quality, 4K, no text."
+    prompt: "Epic cinematic panoramic 3D representation of India through everyday life: homes, families, children, schools, farms, cities, temples, mosques, churches, gurudwaras and diverse Indian cultures. Peaceful shared life, warm sunlight, realistic environments, premium animated feature quality, 4K, no text.",
+    te: {
+      title: "దేశం అంటే ఎవరు?",
+      subtitle: "మహా భారతం — జాతి సమైక్యత",
+      text: ["దేశం అంటే కేవలం ఒక మ్యాప్ కాదు.", "దేశం అంటే మన ఇళ్లు, మన కుటుంబాలు, మన పిల్లలు, మన పాఠశాలలు, మన పొలాలు, మన నగరాలు.", "మన దేవాలయాలు, మసీదులు, చర్చిలు, గురుద్వారాలు. మన భాషలు, మన సంస్కృతులు, మన జ్ఞాపకాలు.", "ఈ జీవితం సురక్షితంగా కొనసాగేందుకు... ఎవరో తమ జీవితాన్ని బాధ్యతగా తీసుకుంటారు."]
+    },
+    hi: {
+      title: "राष्ट्र आखिर है कौन?",
+      subtitle: "अखंड भारत — राष्ट्रीय एकता",
+      text: ["देश केवल एक नक्शा या भूभाग नहीं है।", "देश है हमारे घर, हमारे आंगन, हंसते-खेलते बच्चे, हमारे खेत और जीवंत शहर।", "हमारे मंदिर, मस्जिद, गुरुद्वारे और चर्च; हमारी भाषाएं, संस्कृतियां और साझा यादें।", "ताकि यह जीवन निर्बाध महकता रहे, कोई सरहद पर अपनी जवानी न्योछावर कर रहा है।"]
+    },
+    en: {
+      title: "Who is the Nation?",
+      subtitle: "Great India — National unity and harmony",
+      text: ["A nation is not merely lines on a map.", "The nation is our homes, our families, our children, our schools, farms, and bustling cities.", "Our temples, mosques, churches, and gurudwaras; our languages, cultures, and shared memories.", "So that this life continues safely, noble sentinels shoulder the duty of vigilance."]
+    }
   },
   {
-    title: "“రక్ష” — ఒక కుటుంబం నుంచి ఒక దేశం వరకు",
-    subtitle: "అఖండ రక్షా ప్రవాహం",
-    text: ["ఒక చెల్లి:", "“నా అన్నయ్య సురక్షితంగా ఉండాలి.”", "అని కోరుతుంది.", "ఒక తల్లి:", "“నా బిడ్డ సురక్షితంగా ఉండాలి.”", "అని కోరుతుంది.", "ఒక కుటుంబం:", "“మా వాళ్లు సురక్షితంగా ఉండాలి.”", "అని కోరుతుంది.", "ఒక దేశం:", "“మన దేశం సురక్షితంగా ఉండాలి.”", "అని కోరుతుంది.", "ఇక్కడ...", "రక్ష అనే భావన కుటుంబం నుంచి దేశం వరకు విస్తరిస్తుంది."],
+    id: 18,
     img: "assets/images/page_18.png",
-    prompt: "Epic emotional 3D sequence: sister ties rakhi on brother, mother blesses child, family stands together, community helps one another, Indian soldier stands on duty. One glowing golden thread connects every scene, symbolizing Raksha from family to nation, premium cinematic 3D animation, 4K, no text."
+    prompt: "Epic emotional 3D sequence: sister ties rakhi on brother, mother blesses child, family stands together, community helps one another, Indian soldier stands on duty. One glowing golden thread connects every scene, symbolizing Raksha from family to nation, premium cinematic 3D animation, 4K, no text.",
+    te: {
+      title: "“రక్ష” — ఒక కుటుంబం నుంచి ఒక దేశం వరకు",
+      subtitle: "అఖండ రక్షా ప్రవాహం",
+      text: ["ఒక చెల్లి: “నా అన్నయ్య సురక్షితంగా ఉండాలి” అని కోరుతుంది.", "ఒక తల్లి: “నా బిడ్డ సురక్షితంగా ఉండాలి” అని కోరుతుంది.", "ఒక కుటుంబం: “మా వాళ్లు సురక్షితంగా ఉండాలి” అని కోరుతుంది.", "ఒక దేశం: “మన దేశం సురక్షితంగా ఉండాలి” అని కోరుతుంది.", "ఇక్కడ... రక్ష అనే భావన కుటుంబం నుంచి దేశం వరకు విస్తరిస్తుంది."]
+    },
+    hi: {
+      title: "“रक्षा” — एक परिवार से लेकर पूरे राष्ट्र तक",
+      subtitle: "अखंड रक्षा का पावन प्रवाह",
+      text: ["एक बहन कहती है: “मेरा भाई सुरक्षित रहे।”", "एक मां मनाती है: “मेरा बच्चा सलामत रहे।”", "एक परिवार चाहता है: “हमारे अपने खुशहाल रहें।”", "और एक राष्ट्र पुकारता है: “हमारा भारतवर्ष सुरक्षित रहे!”", "यही वह क्षण है जब रक्षा की भावना घर से निकलकर राष्ट्र-चेतना बन जाती है।"]
+    },
+    en: {
+      title: "“Raksha” — From a Single Family to the Entire Nation",
+      subtitle: "The luminous stream of universal protection",
+      text: ["A sister prays: “May my brother be safe.”", "A mother wishes: “May my child prosper.”", "A family hopes: “May our loved ones be protected.”", "The nation declares: “May our motherland remain invincible!”", "Here, the virtue of Raksha expands from personal love to national solidarity."]
+    }
   },
   {
-    title: "కానీ సైనికులు కూడా ఎవరికో సోదరులే",
-    subtitle: "యూనిఫాం వెనుక మనిషి",
-    text: ["ఇది మనం మర్చిపోకూడని విషయం.", "సైనికుడు ముందుగా...", "ఒక మనిషి.", "అతను ఎవరికో:", "అన్నయ్య.", "తమ్ముడు.", "కొడుకు.", "భర్త.", "తండ్రి.", "స్నేహితుడు.", "అతను యూనిఫాం వేసుకున్నప్పుడు మనం అతని బాధ్యతను చూస్తాం.", "కానీ అతని కుటుంబం...", "అతని మనసును చూస్తుంది.", "అందుకే సైనికుడి త్యాగాన్ని గుర్తు చేసుకోవడం అంటే...", "అతని కుటుంబాన్ని కూడా గుర్తు చేసుకోవడం."],
+    id: 19,
     img: "assets/images/page_19.png",
-    prompt: "Cinematic close-up of a young Indian soldier holding a family photograph showing sister, parents, spouse and child. Subtle memory scenes of sister tying rakhi and mother blessing him appear behind. Human emotion behind the uniform, warm soft light, realistic 3D animation, 4K, no text."
+    prompt: "Cinematic close-up of a young Indian soldier holding a family photograph showing sister, parents, spouse and child. Subtle memory scenes of sister tying rakhi and mother blessing him appear behind. Human emotion behind the uniform, warm soft light, realistic 3D animation, 4K, no text.",
+    te: {
+      title: "కానీ సైనికులు కూడా ఎవరికో సోదరులే",
+      subtitle: "యూనిఫాం వెనుక మనిషి",
+      text: ["ఇది మనం మర్చిపోకూడని విషయం. సైనికుడు ముందుగా... ఒక మనిషి.", "అతను ఎవరికో: అన్నయ్య, తమ్ముడు, కొడుకు, భర్త, తండ్రి, స్నేహితుడు.", "అతను యూనిఫాం వేసుకున్నప్పుడు మనం అతని బాధ్యతను చూస్తాం. కానీ అతని కుటుంబం అతని మనసును చూస్తుంది.", "అందుకే సైనికుడి త్యాగాన్ని గుర్తు చేసుకోవడం అంటే... అతని కుటుంబాన్ని కూడా గుర్తు చేసుకోవడం."]
+    },
+    hi: {
+      title: "सैनिक भी तो किसी के भाई हैं",
+      subtitle: "वर्दी के पीछे धड़कता इंसान",
+      text: ["हमें कभी नहीं भूलना चाहिए कि हर सैनिक सबसे पहले एक इंसान है।", "वह किसी का लाडला भाई, बेटा, पति, पिता और सच्चा दोस्त है।", "वर्दी में हम उसका अदम्य शौर्य देखते हैं, पर उसका परिवार उसका कोमल हृदय जानता है।", "इसलिए सैनिक के प्रति कृतज्ञता का अर्थ उसके परिवार के प्रति भी नतमस्तक होना है।"]
+    },
+    en: {
+      title: "Soldiers Are Someone’s Brothers Too",
+      subtitle: "The beating human heart behind the uniform",
+      text: ["We must never forget: a soldier is first and foremost a human being.", "He is someone’s brother, son, husband, father, and beloved friend.", "In uniform, we see his steely resolve, but his family knows his gentle soul.", "To honor a soldier is to honor the quiet resilience of his family."]
+    }
   },
   {
-    title: "నిజమైన కృతజ్ఞత",
-    subtitle: "సేవను గౌరవించడం",
-    text: ["రక్షాబంధన్ రోజున సైనికుడికి రాఖీ కట్టడం అందమైన సంప్రదాయం.", "కానీ నిజమైన కృతజ్ఞత...", "ఒక్కరోజు ఫోటోతో ముగియకూడదు.", "వారి సేవను గౌరవించడం.", "వారి కుటుంబాల త్యాగాన్ని గుర్తించడం.", "దేశ భద్రత కోసం పనిచేసే ప్రతి ఒక్కరి సేవను విలువైనదిగా చూడడం.", "అదే నిజమైన కృతజ్ఞత."],
+    id: 20,
     img: "assets/images/page_20.png",
-    prompt: "Heartwarming cinematic 3D scene of Indian citizens respectfully expressing gratitude to soldiers. Children, parents and elders offer handmade rakhis and flowers, soldiers respond humbly, subtle Indian flag, warm sunrise light, realistic characters, premium animated feature quality, 4K, no text."
+    prompt: "Heartwarming cinematic 3D scene of Indian citizens respectfully expressing gratitude to soldiers. Children, parents and elders offer handmade rakhis and flowers, soldiers respond humbly, subtle Indian flag, warm sunrise light, realistic characters, premium animated feature quality, 4K, no text.",
+    te: {
+      title: "నిజమైన కృతజ్ఞత",
+      subtitle: "సేవను గౌరవించడం",
+      text: ["రక్షాబంధన్ రోజున సైనికుడికి రాఖీ కట్టడం అందమైన సంప్రదాయం.", "కానీ నిజమైన కృతజ్ఞత... ఒక్కరోజు ఫోటోతో ముగియకూడదు.", "వారి సేవను గౌరవించడం, వారి కుటుంబాల త్యాగాన్ని గుర్తించడం,", "దేశ భద్రత కోసం పనిచేసే ప్రతి ఒక్కరి సేవను విలువైనదిగా చూడడం... అదే నిజమైన కృతజ్ఞత."]
+    },
+    hi: {
+      title: "सच्ची कृतज्ञता",
+      subtitle: "समर्पण और सेवा का वास्तविक सम्मान",
+      text: ["रक्षाबंधन पर सैनिकों को राखी भेजना एक सुंदर परंपरा है।", "लेकिन सच्ची कृतज्ञता एक दिन के फोटो और शुभकामनाओं से आगे जाती है।", "उनकी निष्ठा का आजीवन आदर करना, उनके परिवारों के त्याग को पहचानना,", "और राष्ट्र निर्माण में अपना योगदान देना—यही सच्ची कृतज्ञता है।"]
+    },
+    en: {
+      title: "True Gratitude",
+      subtitle: "Honoring lifelong devotion and service",
+      text: ["Tying a rakhi for soldiers on Raksha Bandhan is a beautiful ritual.", "Yet genuine gratitude must transcend a single day's photograph.", "Respecting their service year-round, cherishing their families' sacrifice,", "And standing united for the nation—that is true gratitude."]
+    }
   },
   {
-    title: "రాఖీ మనకు నేర్పేది",
-    subtitle: "5 దివ్య జీవన పాఠాలు",
-    text: ["రాఖీ మనకు ఐదు విషయాలు గుర్తు చేస్తుంది.", "1. ప్రేమను వ్యక్తం చేయాలి.", "మనసులో ప్రేమ ఉన్నా...", "దాన్ని చెప్పడం కూడా ముఖ్యం.", "2. సంబంధాలకు సమయం ఇవ్వాలి.", "బంధం స్వయంగా బలంగా ఉండదు.", "దాన్ని మనమే కాపాడాలి.", "3. బాధ్యత తీసుకోవాలి.", "మన వాళ్లు కష్టంలో ఉన్నప్పుడు...", "మన వంతు చేయాలి.", "4. దూరం బంధాన్ని ముగించదు.", "నగరం మారవచ్చు.", "దేశం మారవచ్చు.", "కానీ ప్రేమ కొనసాగవచ్చు.", "5. రక్షణ పరస్పరం.", "ఒకరు మాత్రమే కాదు...", "మనమంతా ఒకరికొకరం అండగా ఉండవచ్చు."],
+    id: 21,
     img: "assets/images/page_21.png",
-    prompt: "Elegant cinematic 3D composition representing five lessons of Raksha Bandhan through connected emotional moments: love, time, responsibility, distance, mutual protection. One glowing rakhi thread connects the scenes. Sophisticated cinematic storytelling, realistic Indian characters, warm light, premium 3D animation, 4K, no text."
+    prompt: "Elegant cinematic 3D composition representing five lessons of Raksha Bandhan through connected emotional moments: love, time, responsibility, distance, mutual protection. One glowing rakhi thread connects the scenes. Sophisticated cinematic storytelling, realistic Indian characters, warm light, premium 3D animation, 4K, no text.",
+    te: {
+      title: "రాఖీ మనకు నేర్పేది",
+      subtitle: "5 దివ్య జీవన పాఠాలు",
+      text: ["రాఖీ మనకు ఐదు విషయాలు గుర్తు చేస్తుంది:", "1. ప్రేమను వ్యక్తం చేయాలి.", "2. సంబంధాలకు సమయం ఇవ్వాలి.", "3. బాధ్యత తీసుకోవాలి.", "4. దూరం బంధాన్ని ముగించదు.", "5. రక్షణ పరస్పరం — మనమంతా ఒకరికొకరం అండగా ఉండాలి."]
+    },
+    hi: {
+      title: "राखी जो हमें सिखाती है",
+      subtitle: "जीवन के 5 दिव्य संदेश",
+      text: ["राखी हमें जीवन के 5 शाश्वत सत्य सिखाती है:", "1. प्रेम को अभिव्यक्त करें — मन के भावों को शब्दों में कहें।", "2. रिश्तों को समय दें — संबंध अपने आप नहीं टिकते, उन्हें सींचना पड़ता है।", "3. ज़िम्मेदारी निभाएं — अपनों के कठिन समय में ढाल बनें।", "4. दूरियां रिश्ते खत्म नहीं करतीं — सच्चा स्नेह सीमाओं से परे होता है।", "5. रक्षा परस्पर है — हम सब एक-दूसरे का संबल हैं।"]
+    },
+    en: {
+      title: "What Rakhi Teaches Us",
+      subtitle: "5 Divine Life Lessons",
+      text: ["Rakhi imparts five timeless principles:", "1. Express Love — articulate your affection without hesitation.", "2. Invest Time — bonds flourish only when nurtured with care.", "3. Take Responsibility — step forward when loved ones need you.", "4. Distance Never Ends Love — geography cannot sever genuine kinship.", "5. Protection is Mutual — we are all each other’s guardians."]
+    }
   },
   {
-    title: "రాఖీ తెగిపోతే?",
-    subtitle: "బంధం మనసులో ఉంది",
-    text: ["ఒక చిన్న ప్రయోగం.", "ఒక రాఖీని చేతిలో తీసుకోండి.", "దాన్ని లాగండి.", "అది తెగిపోవచ్చు.", "అప్పుడు మనం ఏమి కోల్పోతాం?", "ఒక దారం.", "అంతే.", "ఎందుకంటే...", "బంధం దారంలో లేదు.", "బంధం మనసులో ఉంది.", "రాఖీ ఒక గుర్తు మాత్రమే.", "ప్రేమే అసలు బంధం."],
+    id: 22,
     img: "assets/images/page_22.png",
-    prompt: "Extreme cinematic macro shot of a traditional rakhi gently breaking apart. As the thread breaks, glowing memories of Indian brother and sister appear behind: childhood laughter, festivals, shared meals, support. Broken thread transforms into glowing connection between hearts. Magical realism plus premium realistic 3D animation, 4K, no text."
+    prompt: "Extreme cinematic macro shot of a traditional rakhi gently breaking apart. As the thread breaks, glowing memories of Indian brother and sister appear behind: childhood laughter, festivals, shared meals, support. Broken thread transforms into glowing connection between hearts. Magical realism plus premium realistic 3D animation, 4K, no text.",
+    te: {
+      title: "రాఖీ తెగిపోతే?",
+      subtitle: "బంధం మనసులో ఉంది",
+      text: ["ఒక చిన్న ప్రయోగం. ఒక రాఖీని చేతిలో తీసుకోండి. దాన్ని లాగండి. అది తెగిపోవచ్చు.", "అప్పుడు మనం ఏమి కోల్పోతాం? ఒక దారం. అంతే.", "ఎందుకంటే... బంధం దారంలో లేదు, బంధం మనసులో ఉంది.", "రాఖీ ఒక గుర్తు మాత్రమే. ప్రేమే అసలు బంధం."]
+    },
+    hi: {
+      title: "अगर राखी टूट जाए तो?",
+      subtitle: "रिश्ता धागे में नहीं, दिल में धड़कता है",
+      text: ["एक छोटा सा विचार: एक राखी हाथ में लीजिए और खींचिए—वह टूट सकती है।", "तब हमने क्या खोया? सिर्फ रेशम का एक धागा, बस!", "क्योंकि रिश्ता उस सूत के धागे में नहीं, अंतरात्मा के विश्वास में बंधा है।", "राखी तो एक सुंदर प्रतीक है; प्रेम ही शाश्वत संबंध है।"]
+    },
+    en: {
+      title: "What If the Rakhi Breaks?",
+      subtitle: "The bond lives within the heart",
+      text: ["A gentle reflection: Take a thread of rakhi and pull it—it may snap.", "What have we lost? Merely a piece of string.", "Because the true bond does not reside in silk threads; it thrives within the heart.", "Rakhi is but a symbol; love is the eternal bond."]
+    }
   },
   {
-    title: "ఒక మాట…",
-    subtitle: "‘నేను నీకు తోడుగా ఉంటాను’",
-    text: ["రక్షాబంధన్ రోజున...", "మీ అన్నయ్యకు ఒక మాట చెప్పండి.", "మీ చెల్లికి ఒక మాట చెప్పండి.", "మీ కుటుంబానికి ఒక మాట చెప్పండి.", "అది పెద్ద ప్రసంగం కావాల్సిన అవసరం లేదు.", "కేవలం:", "“నేను నీకు తోడుగా ఉంటాను.”", "అంతే.", "కొన్నిసార్లు...", "ఒక చిన్న మాట...", "ఒక జీవితానికి ధైర్యం ఇస్తుంది."],
+    id: 23,
     img: "assets/images/page_23.png",
-    prompt: "Intimate cinematic 3D scene of Indian brother and sister sitting together during Raksha Bandhan. Sister has tied rakhi, brother gently holds her hand, sincere affectionate eye contact, warm golden light, festive background softly blurred, realistic faces and hands, premium animated feature quality, 4K, no text."
+    prompt: "Intimate cinematic 3D scene of Indian brother and sister sitting together during Raksha Bandhan. Sister has tied rakhi, brother gently holds her hand, sincere affectionate eye contact, warm golden light, festive background softly blurred, realistic faces and hands, premium animated feature quality, 4K, no text.",
+    te: {
+      title: "ఒక మాట…",
+      subtitle: "‘నేను నీకు తోడుగా ఉంటాను’",
+      text: ["రక్షాబంధన్ రోజున... మీ అన్నయ్యకు, చెల్లికి, కుటుంబానికి ఒక మాట చెప్పండి.", "అది పెద్ద ప్రసంగం కావాల్సిన అవసరం లేదు. కేవలం: “నేను నీకు తోడుగా ఉంటాను.”", "కొన్నిసార్లు ఒక చిన్న మాట ఒక జీవితానికి కొండంత ధైర్యం ఇస్తుంది."]
+    },
+    hi: {
+      title: "बस एक छोटा सा बोल…",
+      subtitle: "‘मैं हर कदम तुम्हारे साथ हूँ’",
+      text: ["रक्षाबंधन के इस पावन पर्व पर अपने भाई, बहन और परिवार से एक बात कहिए।", "किसी लंबे भाषण की ज़रूरत नहीं, बस दिल से कहिए:", "“मैं हमेशा तुम्हारे साथ हूँ।”", "विश्वास मानिए, यह एक छोटा सा वाक्य किसी के पूरे जीवन को जीने का संबल दे देता है।"]
+    },
+    en: {
+      title: "Just One Word…",
+      subtitle: "‘I will always stand by you’",
+      text: ["On this Raksha Bandhan, say one heartfelt thing to your sibling and family.", "It needs no grand speech, just a sincere assurance:", "“I am right here with you.”", "Sometimes, one gentle sentence gives enough courage to weather a lifetime."]
+    }
   },
   {
-    title: "దూరంలో ఉన్నవారికి",
-    subtitle: "దూరాలను గెలిచిన ప్రేమ",
-    text: ["మీ అన్నయ్య విదేశంలో ఉండవచ్చు.", "మీ చెల్లి మరో నగరంలో ఉండవచ్చు.", "మీ కుటుంబం వేరే రాష్ట్రంలో ఉండవచ్చు.", "రాఖీని పోస్టులో పంపవచ్చు.", "వీడియో కాల్ చేయవచ్చు.", "ఒక ఫోటో పంపవచ్చు.", "లేదా...", "కేవలం ఒక ఫోన్ కాల్ చేయవచ్చు.", "ఎందుకంటే రక్షాబంధన్ యొక్క అసలు విలువ...", "దగ్గరగా ఉండటంలో కాదు.", "బంధాన్ని గుర్తు పెట్టుకోవడంలో ఉంది."],
+    id: 24,
     img: "assets/images/page_24.png",
-    prompt: "Emotional modern 3D scene of Indian brother and sister living far apart. Sister in warm Indian home holding rakhi, brother on video call from another city or country, family photographs and festive decorations nearby, glowing golden thread connecting phone and rakhi, premium cinematic animation, 4K, no text."
+    prompt: "Emotional modern 3D scene of Indian brother and sister living far apart. Sister in warm Indian home holding rakhi, brother on video call from another city or country, family photographs and festive decorations nearby, glowing golden thread connecting phone and rakhi, premium cinematic animation, 4K, no text.",
+    te: {
+      title: "దూరంలో ఉన్నవారికి",
+      subtitle: "దూరాలను గెలిచిన ప్రేమ",
+      text: ["మీ అన్నయ్య విదేశంలో ఉండవచ్చు, చెల్లి మరో నగరంలో ఉండవచ్చు.", "రాఖీని పోస్టులో పంపవచ్చు, వీడియో కాల్ చేయవచ్చు, లేదా కేవలం ఒక ఫోన్ కాల్ చేయవచ్చు.", "ఎందుకంటే రక్షాబంధన్ యొక్క అసలు విలువ దగ్గరగా ఉండటంలో కాదు, బంధాన్ని గుర్తు పెట్టుకోవడంలో ఉంది."]
+    },
+    hi: {
+      title: "जो दूर हैं उनके लिए",
+      subtitle: "दूरियों पर विजयी प्रेम",
+      text: ["आपका भाई विदेश में हो सकता है, या बहन किसी दूसरे शहर में।", "डाक से राखी भेजिए, वीडियो कॉल कीजिए या बस एक फोन मिलाइए।", "क्योंकि रक्षाबंधन का असली सार साथ होने की दूरी में नहीं, दिलों की समीपता और याद रखने में है।"]
+    },
+    en: {
+      title: "For Those Far Away",
+      subtitle: "Love that conquers physical distance",
+      text: ["Your brother may be across the seas, your sister in another city.", "Send a rakhi by post, make a video call, or dial their number.", "For the real treasure of Raksha Bandhan lies not in physical proximity, but in keeping each other alive in the heart."]
+    }
   },
   {
-    title: "చివరి ప్రశ్న",
-    subtitle: "రక్షాబంధన్ ఎందుకు జరుపుకుంటాం?",
-    text: ["“రక్షాబంధన్ ఎందుకు జరుపుకుంటాం?”", "ఇప్పుడు సమాధానం మనకు కొంచెం స్పష్టంగా ఉంది.", "కేవలం రాఖీ కోసం కాదు.", "కేవలం బహుమతుల కోసం కాదు.", "కేవలం ఒక సంప్రదాయం కోసం కాదు.", "మన సంబంధాలను గుర్తు చేసుకోవడానికి.", "మన ప్రేమను వ్యక్తం చేయడానికి.", "మన బాధ్యతను గుర్తు చేసుకోవడానికి.", "మన కుటుంబాన్ని దగ్గర చేయడానికి.", "మరియు...", "రక్షణ కోసం నిలబడే వారిని గుర్తు చేసుకోవడానికి."],
+    id: 25,
     img: "assets/images/page_25.png",
-    prompt: "Epic cinematic 3D montage of the entire Raksha Bandhan journey: brother and sister, family, children, grandparents, distant siblings, soldiers, military families and peaceful India. One glowing golden thread connects every scene. Warm golden light, premium animated feature-film quality, 4K, no text."
+    prompt: "Epic cinematic 3D montage of the entire Raksha Bandhan journey: brother and sister, family, children, grandparents, distant siblings, soldiers, military families and peaceful India. One glowing golden thread connects every scene. Warm golden light, premium animated feature-film quality, 4K, no text.",
+    te: {
+      title: "చివరి ప్రశ్న",
+      subtitle: "రక్షాబంధన్ ఎందుకు జరుపుకుంటాం?",
+      text: ["“రక్షాబంధన్ ఎందుకు జరుపుకుంటాం?” ఇప్పుడు సమాధానం మనకు స్పష్టంగా ఉంది.", "కేవలం రాఖీ కోసం కాదు, కేవలం బహుమతుల కోసం కాదు, కేవలం ఒక సంప్రదాయం కోసం కాదు.", "మన సంబంధాలను గుర్తు చేసుకోవడానికి, మన ప్రేమను వ్యక్తం చేయడానికి, మన బాధ్యతను గుర్తు చేసుకోవడానికి, మన కుటుంబాన్ని దగ్గర చేయడానికి, మరియు రక్షణ కోసం నిలబడే వారిని గుర్తు చేసుకోవడానికి."]
+    },
+    hi: {
+      title: "अंतिम प्रश्न",
+      subtitle: "हम रक्षाबंधन क्यों मनाते हैं?",
+      text: ["“हम रक्षाबंधन क्यों मनाते हैं?” अब उत्तर हमारे सामने निर्मल दर्पण की तरह स्पष्ट है।", "सिर्फ एक धागे के लिए नहीं, उपहारों या औपचारिकता के लिए नहीं।", "अपने पावन रिश्तों को सहेजने, प्रेम को व्यक्त करने, कर्तव्य को पहचानने, परिवार को जोड़ने और सीमा पर खड़े रक्षकों को नमन करने के लिए!"]
+    },
+    en: {
+      title: "The Ultimate Question",
+      subtitle: "Why do we celebrate Raksha Bandhan?",
+      text: ["“Why do we celebrate Raksha Bandhan?” The answer is now crystal clear.", "Not merely for the thread, the gifts, or customary routine.", "We celebrate to cherish our bonds, to express uninhibited love, to honor responsibility, to unite families, and to salute the brave guardians of our nation."]
+    }
   },
   {
-    title: "ఒక దారం చెప్పే మాట",
-    subtitle: "రక్షాబంధన్ శుభాకాంక్షలు",
-    final: true,
-    text: ["రాఖీ మౌనంగా ఉంటుంది.", "అది మాట్లాడదు.", "కానీ మనం దానిని కట్టినప్పుడు...", "అది ఒక మాట చెబుతుంది.", "“నువ్వు ఒంటరిగా లేవు.”", "నీ ఆనందంలో...", "నేను ఉంటాను.", "నీ బాధలో...", "నేను ఉంటాను.", "నువ్వు దూరంగా ఉన్నా...", "నిన్ను గుర్తు పెట్టుకుంటాను.", "నువ్వు పడిపోయినా...", "నిన్ను లేపడానికి ప్రయత్నిస్తాను.", "నువ్వు ఇతరులను రక్షిస్తున్నప్పుడు...", "నీ సేవను మేము గుర్తు పెట్టుకుంటాం.", "మరియు...", "తమ దేశం కోసం ప్రాణాలు అర్పించిన వారిని...", "మేము ఎప్పటికీ మర్చిపోము.", "ఒక చిన్న దారం...", "ఒక పెద్ద బంధం.", "ఒక కుటుంబం...", "ఒక జ్ఞాపకం...", "ఒక బాధ్యత...", "ఒక దేశం పట్ల కృతజ్ఞత.", "ఇదే రక్షాబంధన్.", "“నేను నీకు తోడుగా ఉంటాను.”", "రక్షాబంధన్ శుభాకాంక్షలు. ❤️🇮🇳"],
+    id: 26,
     img: "assets/images/page_26.png",
-    prompt: "Breathtaking final cinematic 3D scene. Extreme close-up of a beautiful traditional rakhi floating in warm golden light, camera pulling backward as the glowing thread transforms into a luminous connection through brother and sister, family, children, grandparents, Indian communities, soldiers, military families and the peaceful landscape of India. The thread connects everyone, symbolizing love, support, responsibility, memory, sacrifice and gratitude. Warm golden light, subtle saffron-white-green accents, volumetric rays, floating dust, premium 3D animated feature-film quality, realistic Indian characters, cinematic depth of field, epic yet intimate, 4K, no text, no watermark."
+    prompt: "Breathtaking final cinematic 3D scene. Extreme close-up of a beautiful traditional rakhi floating in warm golden light, camera pulling backward as the glowing thread transforms into a luminous connection through brother and sister, family, children, grandparents, Indian communities, soldiers, military families and the peaceful landscape of India. The thread connects everyone, symbolizing love, support, responsibility, memory, sacrifice and gratitude. Warm golden light, subtle saffron-white-green accents, volumetric rays, floating dust, premium 3D animated feature-film quality, realistic Indian characters, cinematic depth of field, epic yet intimate, 4K, no text, no watermark.",
+    te: {
+      title: "ఒక దారం చెప్పే మాట",
+      subtitle: "రక్షాబంధన్ శుభాకాంక్షలు",
+      text: ["రాఖీ మౌనంగా ఉంటుంది. అది మాట్లాడదు. కానీ మనం దానిని కట్టినప్పుడు... అది ఒక మాట చెబుతుంది.", "“నువ్వు ఒంటరిగా లేవు.”", "నీ ఆనందంలో నేను ఉంటాను. నీ బాధలో నేను ఉంటాను. నువ్వు దూరంగా ఉన్నా నిన్ను గుర్తు పెట్టుకుంటాను.", "తమ దేశం కోసం ప్రాణాలు అర్పించిన వారిని మేము ఎప్పటికీ మర్చిపోము.", "ఒక చిన్న దారం... ఒక పెద్ద బంధం. ఒక కుటుంబం... ఒక జ్ఞాపకం... ఒక బాధ్యత... ఒక దేశం పట్ల కృతజ్ఞత.", "ఇదే రక్షాబంధన్. “నేను నీకు తోడుగా ఉంటాను.”", "రక్షాబంధన్ శుభాకాంక్షలు. ❤️🇮🇳"]
+    },
+    hi: {
+      title: "एक धागे की बात",
+      subtitle: "रक्षाबंधन की हार्दिक शुभकामनाएं",
+      text: ["राखी मौन रहती है, वह बोलती नहीं। लेकिन जब हम उसे कलाई पर बांधते हैं, तो वह धीरे से कहती है—", "“तुम कभी अकेले नहीं हो।”", "तुम्हारी खुशी में मैं हूँ, तुम्हारे गम में मैं हूँ। तुम दूर भी रहो, मैं तुम्हें याद रखूँगा।", "और अपने वतन पर कुर्बान होने वाले वीरों को हम कभी नहीं भूलेंगे।", "एक छोटा सा धागा... एक विराट संबंध। एक परिवार, एक याद, एक पावन ज़िम्मेदारी और देश के प्रति असीम कृतज्ञता।", "यही है सच्चा रक्षाबंधन: “मैं हर कदम तुम्हारे साथ हूँ।”", "रक्षाबंधन की हार्दिक शुभकामनाएं! ❤️🇮🇳"]
+    },
+    en: {
+      title: "What a Thread Says",
+      subtitle: "Happy Raksha Bandhan",
+      text: ["A rakhi remains silent. It does not speak. Yet when tied upon the wrist, it whispers:", "“You are never alone.”", "In your joy, I will be there. In your sorrow, I will stand with you. However far you may be, you are in my heart.", "And those who laid down their lives for the nation shall never be forgotten.", "A humble thread... an infinite bond. One family, one memory, one sacred responsibility, and eternal gratitude to the motherland.", "This is Raksha Bandhan: “I will always stand by you.”", "Happy Raksha Bandhan! ❤️🇮🇳"]
+    }
   }
 ];
 
 let current = 0;
 const $ = id => document.getElementById(id);
+
+// Language Switcher Handler
+function setLanguage(lang) {
+  if (!["te", "hi", "en"].includes(lang)) lang = "te";
+  currentLang = lang;
+  localStorage.setItem("storybook_lang", lang);
+
+  // Update active pill button state
+  document.querySelectorAll(".lang-btn").forEach(btn => btn.classList.remove("active"));
+  const activeBtn = $("btnLang" + lang.charAt(0).toUpperCase() + lang.slice(1));
+  if (activeBtn) activeBtn.classList.add("active");
+
+  // Update static UI Strings
+  const ui = UI_STRINGS[lang] || UI_STRINGS.te;
+  $("brandTitle").textContent = ui.brandTitle;
+  $("brandSubtitle").textContent = ui.brandSubtitle;
+  $("tocBtnLabel").textContent = ui.tocBtn;
+  if ($("audioBtnLabel")) $("audioBtnLabel").textContent = isPlayingAudio ? ui.audioPlayingBtn : ui.audioBtn;
+  $("promptModalBtn").textContent = ui.promptBtn;
+  $("prev").textContent = ui.prevBtn;
+  $("next").textContent = ui.nextBtn;
+  $("navHint").textContent = ui.swipeHint;
+  $("tocModalHeader").textContent = ui.tocTitle;
+  $("lblPagePrompt").textContent = ui.pagePromptLabel;
+  $("lblNegPrompt").textContent = ui.negPromptLabel;
+  $("copyPagePromptBtn").textContent = ui.copyBtn;
+  $("copyNegPromptBtn").textContent = ui.copyBtn;
+
+  // Re-render current page
+  render();
+
+  // If TOC modal is open, re-render TOC items
+  if ($("tocModal").classList.contains("active")) {
+    renderTOCItems();
+  }
+}
 
 // Adaptive Three.js 3D Viewport Engine
 let threeScene, threeCamera, threeRenderer, threeParticles, animId, resizeObserver;
@@ -1029,8 +1382,6 @@ function initThreeEngine() {
 
   threeScene = new THREE.Scene();
   threeCamera = new THREE.PerspectiveCamera(45, w / h, 0.1, 100);
-  
-  // Adjust camera distance based on aspect ratio to preserve characters
   updateCameraFraming(w, h);
 
   const maxDpr = isMobileView() ? 1.5 : 2;
@@ -1041,7 +1392,6 @@ function initThreeEngine() {
   container.innerHTML = "";
   container.appendChild(threeRenderer.domElement);
 
-  // Dynamic Particles (Adaptive Count: 320 for mobile, 750 for desktop)
   const count = isMobileView() ? 320 : 750;
   const geo = new THREE.BufferGeometry();
   const pos = new Float32Array(count * 3);
@@ -1071,7 +1421,6 @@ function initThreeEngine() {
   threeParticles = new THREE.Points(geo, mat);
   threeScene.add(threeParticles);
 
-  // Mouse / Touch Parallax Tracking
   window.addEventListener("mousemove", e => {
     const rect = container.getBoundingClientRect();
     if (rect.width === 0) return;
@@ -1079,7 +1428,6 @@ function initThreeEngine() {
     mouse.targetY = ((e.clientY - rect.top) / rect.height) * 2 - 1;
   });
 
-  // ResizeObserver for rock-solid responsive canvas scaling
   if (window.ResizeObserver) {
     resizeObserver = new ResizeObserver(entries => {
       for (let entry of entries) {
@@ -1103,10 +1451,8 @@ function updateCameraFraming(width, height) {
   if (!threeCamera) return;
   const aspect = width / height;
   if (aspect < 1) {
-    // Vertical mobile framing
     threeCamera.position.z = 6.2;
   } else {
-    // Landscape / widescreen framing
     threeCamera.position.z = 5.0;
   }
 }
@@ -1154,6 +1500,7 @@ function initBgAudio() {
 
 function toggleAudio() {
   initBgAudio();
+  const ui = UI_STRINGS[currentLang] || UI_STRINGS.te;
 
   if (isPlayingAudio) {
     isPlayingAudio = false;
@@ -1163,16 +1510,16 @@ function toggleAudio() {
       tanpuraOscs = [];
     }
     clearTimeout(fluteTimer);
-    $("audioBtn").innerHTML = `🎵 <span class="btn-text-full">సంగీతం</span>`;
+    $("audioBtn").innerHTML = `🎵 <span class="btn-text-full">${ui.audioBtn}</span>`;
     $("audioBtn").style.background = "";
   } else {
     isPlayingAudio = true;
-    $("audioBtn").innerHTML = `🔊 <span class="btn-text-full">అఖండ రాఖీ</span>`;
+    $("audioBtn").innerHTML = `🔊 <span class="btn-text-full">${ui.audioPlayingBtn}</span>`;
     $("audioBtn").style.background = "rgba(245, 158, 11, 0.35)";
 
     if (bgAudio) {
       bgAudio.play().catch(err => {
-        console.warn("HTML5 audio playback error, fallback to synth:", err);
+        console.warn("HTML5 audio fallback to synth:", err);
         startSynthAudio();
       });
     } else {
@@ -1259,14 +1606,17 @@ function playFlipSound() {
 
 function render() {
   const p = pages[current];
+  const langData = p[currentLang] || p.te || p.en;
+  const ui = UI_STRINGS[currentLang] || UI_STRINGS.te;
+
   $("text").innerHTML = `
-    <div class="kicker">రక్షాబంధన్ • అధ్యాయం ${current + 1} / ${pages.length}</div>
-    <h1>${p.title}</h1>
-    ${p.subtitle ? `<div class="lead">${p.subtitle}</div>` : ""}
-    ${p.text.map(x => x.startsWith("“") || x.startsWith("‘") || x.includes("నేను నీకు") ? `<div class="quote">${x}</div>` : `<p>${x}</p>`).join("")}
+    <div class="kicker">${ui.kickerPrefix} ${current + 1} / ${pages.length}</div>
+    <h1>${langData.title}</h1>
+    ${langData.subtitle ? `<div class="lead">${langData.subtitle}</div>` : ""}
+    ${langData.text.map(x => x.startsWith("“") || x.startsWith("‘") || x.includes("తోడుగా") || x.includes("साथ") || x.includes("stand by") ? `<div class="quote">${x}</div>` : `<p>${x}</p>`).join("")}
   `;
 
-  // Scroll text back to top smoothly on page change
+  // Scroll text back to top smoothly
   $("text").scrollTop = 0;
 
   // Update 3D Image
@@ -1277,8 +1627,8 @@ function render() {
     imgEl.onload = () => { imgEl.style.opacity = "1"; };
   }
 
-  $("sceneLabel").textContent = `3D సినిమాటిక్ దృశ్యం • పేజీ ${current + 1}`;
-  $("page").textContent = `పేజీ ${current + 1} / ${pages.length}`;
+  $("sceneLabel").textContent = `${ui.sceneLabelPrefix} ${current + 1}`;
+  $("page").textContent = `${ui.pagePrefix} ${current + 1} / ${pages.length}`;
   $("prev").disabled = current === 0;
   $("next").disabled = current === pages.length - 1;
   $("progress").style.width = ((current + 1) / pages.length * 100) + "%";
@@ -1319,14 +1669,22 @@ function toggleTOC() {
     modal.classList.remove("active");
   } else {
     modal.classList.add("active");
-    $("tocGrid").innerHTML = pages.map((p, idx) => `
-      <div class="toc-item ${idx === current ? 'active' : ''}" onclick="jumpToPage(${idx})">
-        <img src="${p.img}" alt="${p.title}" loading="lazy" />
-        <div class="toc-item-page">పేజీ ${idx + 1}</div>
-        <div class="toc-item-title">${p.title}</div>
-      </div>
-    `).join("");
+    renderTOCItems();
   }
+}
+
+function renderTOCItems() {
+  const ui = UI_STRINGS[currentLang] || UI_STRINGS.te;
+  $("tocGrid").innerHTML = pages.map((p, idx) => {
+    const l = p[currentLang] || p.te;
+    return `
+      <div class="toc-item ${idx === current ? 'active' : ''}" onclick="jumpToPage(${idx})">
+        <img src="${p.img}" alt="${l.title}" loading="lazy" />
+        <div class="toc-item-page">${ui.pagePrefix} ${idx + 1}</div>
+        <div class="toc-item-title">${l.title}</div>
+      </div>
+    `;
+  }).join("");
 }
 
 function jumpToPage(idx) {
@@ -1339,7 +1697,8 @@ function jumpToPage(idx) {
 // Prompt Modal
 function openPromptModal() {
   const p = pages[current];
-  $("promptModalTitle").textContent = `✨ 3D AI ప్రాంప్ట్ ఇన్‌స్పెక్టర్ — పేజీ ${current + 1}`;
+  const ui = UI_STRINGS[currentLang] || UI_STRINGS.te;
+  $("promptModalTitle").textContent = `${ui.promptInspectorTitle} — ${ui.pagePrefix} ${current + 1}`;
   $("promptText").value = p.prompt;
   $("negPromptText").value = GLOBAL_NEGATIVE_PROMPT;
   $("promptModal").classList.add("active");
@@ -1350,11 +1709,13 @@ function closePromptModal() {
 }
 
 function copyPrompt() {
-  navigator.clipboard.writeText(pages[current].prompt).then(() => alert("3D ప్రాంప్ట్ కాపీ చేయబడింది!"));
+  const ui = UI_STRINGS[currentLang] || UI_STRINGS.te;
+  navigator.clipboard.writeText(pages[current].prompt).then(() => alert(ui.copiedAlert));
 }
 
 function copyNegPrompt() {
-  navigator.clipboard.writeText(GLOBAL_NEGATIVE_PROMPT).then(() => alert("నెగెటివ్ ప్రాంప్ట్ కాపీ చేయబడింది!"));
+  const ui = UI_STRINGS[currentLang] || UI_STRINGS.te;
+  navigator.clipboard.writeText(GLOBAL_NEGATIVE_PROMPT).then(() => alert(ui.copiedAlert));
 }
 
 // Keyboard Navigation
@@ -1366,7 +1727,7 @@ document.addEventListener("keydown", e => {
   if (e.key === "Escape") { closePromptModal(); $("tocModal").classList.remove("active"); }
 });
 
-// Mobile & Tablet Touch Swipe Handling
+// Mobile Touch Swipe Handling
 let startX = 0, startY = 0;
 document.addEventListener("touchstart", e => {
   if (e.touches.length === 1) {
@@ -1380,7 +1741,6 @@ document.addEventListener("touchend", e => {
     const deltaX = e.changedTouches[0].clientX - startX;
     const deltaY = e.changedTouches[0].clientY - startY;
 
-    // Check horizontal swipe with vertical scroll tolerance
     if (Math.abs(deltaX) > Math.abs(deltaY) * 1.4 && Math.abs(deltaX) > 48) {
       move(deltaX < 0 ? 1 : -1);
     }
@@ -1405,11 +1765,12 @@ try {
   console.warn("Particle creation error:", e);
 }
 
-// Boot Application (Render text immediately first, then initialize WebGL visuals)
+// Boot Application
 try {
-  render();
+  setLanguage(currentLang);
 } catch (err) {
-  console.error("Render error:", err);
+  console.error("Language initialization error:", err);
+  render();
 }
 
 try {
