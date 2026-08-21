@@ -1,0 +1,9 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+Allow: /assets/
+Allow: /assets/images/
+Allow: /assets/audio/
+
+# Sitemaps
+Sitemap: https://raksha-bandhan-book-series.vercel.app/sitemap.xml
